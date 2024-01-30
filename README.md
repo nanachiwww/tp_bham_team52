@@ -10,6 +10,8 @@ This application was generated using JHipster 7.9.4, you can find documentation 
 
 - Robin Young (rxy177@student.bham.ac.uk)
 
+- Taaseen Ahmed (txa139@student.bham.ac.uk)
+
 - (insert the list of team mates)
 
 ## changes for Teamproject
