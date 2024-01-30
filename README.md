@@ -12,6 +12,8 @@ This application was generated using JHipster 7.9.4, you can find documentation 
 
 - Taaseen Ahmed (txa139@student.bham.ac.uk)
 
+- Mingyuan Zhou (mxz213@student.bham.ac.uk)
+
 - (insert the list of team mates)
 
 ## changes for Teamproject
