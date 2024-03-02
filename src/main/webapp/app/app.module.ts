@@ -23,13 +23,6 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
-import { MedicineComponent } from './medicine/medicine.component';
-import { SleepComponent } from './sleep/sleep.component';
-import { WorkoutsComponent } from './workouts/workouts.component';
-import { MentalhealthComponent } from './mentalhealth/mentalhealth.component';
-import { DietComponent } from './diet/diet.component';
-import { GoalsComponent } from './goals/goals.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -49,20 +42,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [
-    MainComponent,
-    NavbarComponent,
-    ErrorComponent,
-    PageRibbonComponent,
-    FooterComponent,
-    MedicineComponent,
-    SleepComponent,
-    WorkoutsComponent,
-    MentalhealthComponent,
-    DietComponent,
-    GoalsComponent,
-    DashboardComponent,
-  ],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {
