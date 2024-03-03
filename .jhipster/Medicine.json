@@ -1,0 +1,46 @@
+{
+  "applications": "*",
+  "changelogDate": "20240303180345",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "medicine",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "subjectiveEffect",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "supplementType",
+      "fieldType": "SupplementTypeEnum",
+      "fieldValues": "SUPPLEMENT,PRESCRIPTION,OTHER"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Medicine",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "medicines",
+      "relationshipName": "userProfile",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20240303180340",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "energy_intake_result",
+  "fields": [
+    {
+      "fieldName": "goalComplete",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "details",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "EnergyIntakeResult",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "energyIntakeResults",
+      "relationshipName": "userProfile",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "item",
+      "otherEntityRelationshipName": "energyIntakeResults",
+      "ownerSide": false,
+      "relationshipName": "items",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

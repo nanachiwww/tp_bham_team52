@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20240303180344",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "mindfulness_tip",
+  "fields": [
+    {
+      "fieldName": "createdDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "MindfulnessTip",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "mindfulnessPractice",
+      "otherEntityRelationshipName": "mindfulnessTip",
+      "relationshipName": "practice",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

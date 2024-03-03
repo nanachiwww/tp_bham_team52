@@ -1,0 +1,123 @@
+<div>
+  <h2 id="page-heading" data-cy="CompareResultHeading">
+    <span>Compare Results</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-compare-result"
+        [routerLink]="['/compare-result/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Compare Result </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="compareResults?.length === 0">
+    <span>No Compare Results found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="compareResults && compareResults.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="resultDetails">
+            <div class="d-flex">
+              <span>Result Details</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="timestamp">
+            <div class="d-flex">
+              <span>Timestamp</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dietaryGoalComplete">
+            <div class="d-flex">
+              <span>Dietary Goal Complete</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="moodGoalAchieved">
+            <div class="d-flex">
+              <span>Mood Goal Achieved</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="workoutGoalAchieved">
+            <div class="d-flex">
+              <span>Workout Goal Achieved</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sleepGoalAchieved">
+            <div class="d-flex">
+              <span>Sleep Goal Achieved</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let compareResult of compareResults; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/compare-result', compareResult.id, 'view']">{{ compareResult.id }}</a>
+          </td>
+          <td>{{ compareResult.resultDetails }}</td>
+          <td>{{ compareResult.timestamp | formatMediumDatetime }}</td>
+          <td>{{ compareResult.dietaryGoalComplete }}</td>
+          <td>{{ compareResult.moodGoalAchieved }}</td>
+          <td>{{ compareResult.workoutGoalAchieved }}</td>
+          <td>{{ compareResult.sleepGoalAchieved }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/compare-result', compareResult.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/compare-result', compareResult.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(compareResult)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

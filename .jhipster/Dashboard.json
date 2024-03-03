@@ -1,0 +1,21 @@
+{
+  "applications": "*",
+  "changelogDate": "20240303180349",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "dashboard",
+  "fields": [
+    {
+      "fieldName": "overview",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Dashboard",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

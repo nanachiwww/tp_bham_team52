@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity MindfulnessPractice.
+    -->
+    <changeSet id="20240303180343-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="mindfulness_tip_id"
+                                 baseTableName="mindfulness_practice"
+                                 constraintName="fk_mindfulness_practice__mindfulness_tip_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mindfulness_tip"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_profile_id"
+                                 baseTableName="mindfulness_practice"
+                                 constraintName="fk_mindfulness_practice__user_profile_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_profile"/>
+    </changeSet>
+</databaseChangeLog>

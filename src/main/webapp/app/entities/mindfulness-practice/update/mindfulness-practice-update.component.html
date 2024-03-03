@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-mindfulness-practice-heading" data-cy="MindfulnessPracticeCreateUpdateHeading">Create or edit a Mindfulness Practice</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_date">Date</label>
+          <div class="input-group">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="text"
+              class="form-control"
+              name="date"
+              ngbDatepicker
+              #dateDp="ngbDatepicker"
+              formControlName="date"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_activityType">Activity Type</label>
+          <select class="form-control" name="activityType" formControlName="activityType" id="field_activityType" data-cy="activityType">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let mindfulnessActivityType of mindfulnessActivityTypeValues" [value]="mindfulnessActivityType">
+              mindfulnessActivityType
+            </option>
+          </select>
+          <div
+            *ngIf="editForm.get('activityType')!.invalid && (editForm.get('activityType')!.dirty || editForm.get('activityType')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('activityType')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_duration">Duration</label>
+          <input type="number" class="form-control" name="duration" id="field_duration" data-cy="duration" formControlName="duration" />
+          <div *ngIf="editForm.get('duration')!.invalid && (editForm.get('duration')!.dirty || editForm.get('duration')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('duration')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('duration')?.errors?.min"> This field should be at least 1. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('duration')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_note">Note</label>
+          <textarea class="form-control" name="note" id="field_note" data-cy="note" formControlName="note"></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_mindfulnessTip">Mindfulness Tip</label>
+          <select
+            class="form-control"
+            id="field_mindfulnessTip"
+            data-cy="mindfulnessTip"
+            name="mindfulnessTip"
+            formControlName="mindfulnessTip"
+            [compareWith]="compareMindfulnessTip"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="mindfulnessTipOption" *ngFor="let mindfulnessTipOption of mindfulnessTipsSharedCollection">
+              {{ mindfulnessTipOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_userProfile">User Profile</label>
+          <select
+            class="form-control"
+            id="field_userProfile"
+            data-cy="userProfile"
+            name="userProfile"
+            formControlName="userProfile"
+            [compareWith]="compareUserProfile"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="userProfileOption" *ngFor="let userProfileOption of userProfilesSharedCollection">
+              {{ userProfileOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

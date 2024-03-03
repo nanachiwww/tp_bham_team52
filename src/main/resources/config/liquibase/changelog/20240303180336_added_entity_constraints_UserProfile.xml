@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity UserProfile.
+    -->
+    <changeSet id="20240303180336-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="dashboard_id"
+                                 baseTableName="user_profile"
+                                 constraintName="fk_user_profile__dashboard_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dashboard"/>
+
+        <addForeignKeyConstraint baseColumnNames="compare_result_id"
+                                 baseTableName="user_profile"
+                                 constraintName="fk_user_profile__compare_result_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="compare_result"/>
+    </changeSet>
+</databaseChangeLog>

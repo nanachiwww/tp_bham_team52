@@ -1,0 +1,171 @@
+entity UserProfile {
+    username String required unique,
+    email String required unique,
+    password String required,
+    name String,
+    age Integer,
+    gender Gender
+}
+
+enum Gender {
+    MALE,
+    FEMALE,
+    OTHER
+}
+
+// Workout Planner
+entity Workout {
+    name String required,
+    description String,
+    duration Integer,
+    intensityLevel IntensityLevelEnum
+}
+
+entity Exercise {
+    name String required,
+    description String,
+    reps Integer,
+    sets Integer,
+    category ExerciseCategoryEnum
+}
+
+enum IntensityLevelEnum {
+    LOW,
+    MODERATE,
+    HIGH
+}
+
+enum ExerciseCategoryEnum {
+    CARDIO,
+    STRENGTH,
+    FLEXIBILITY
+}
+
+// Dietary Log
+entity Item {
+    itemName String required,
+    category CategoriesEnum
+}
+
+entity EnergyIntakeResult {
+    goalComplete Boolean,
+    details String,
+    date LocalDate required
+}
+
+enum CategoriesEnum {
+    BREAKFAST,
+    LUNCH,
+    DINNER
+}
+
+// Mental Health Monitor
+enum Mood {
+    VERY_HAPPY,
+    HAPPY,
+    NEUTRAL,
+    SAD,
+    VERY_SAD
+}
+
+enum MindfulnessActivityType {
+    MEDITATION,
+    BREATHING_EXERCISES,
+    YOGA,
+    OTHER
+}
+
+entity MoodTracker {
+    date LocalDate required,
+    mood Mood required,
+    note TextBlob
+}
+
+entity StressTracker {
+    date LocalDate required,
+    level Integer required min(1) max(10),
+    note TextBlob
+}
+
+entity MindfulnessPractice {
+    date LocalDate required,
+    activityType MindfulnessActivityType required,
+    duration Integer required min(1),
+    note TextBlob
+}
+
+entity MindfulnessTip {
+    createdDate LocalDate required,
+    title String required,
+    content TextBlob required
+}
+
+// Supplement Tracking
+entity Medicine {
+    date LocalDate required
+    name String required,
+    description String,
+    subjectiveEffect String,
+    supplementType SupplementTypeEnum
+}
+
+enum SupplementTypeEnum {
+    SUPPLEMENT,
+    PRESCRIPTION,
+    OTHER
+}
+
+// Sleep Schedule
+entity SleepRecord {
+    startTime Instant required,
+    endTime Instant required,
+    rating Integer
+}
+
+// Goal Tracker
+entity CustomGoal {
+    name String required,
+    description String
+}
+
+entity CompareResult {
+    resultDetails String,
+    timestamp Instant,
+    dietaryGoalComplete Boolean,
+    moodGoalAchieved Boolean,
+    workoutGoalAchieved Boolean,
+    sleepGoalAchieved Boolean
+}
+
+
+// Dashboard
+entity Dashboard {
+    overview TextBlob
+}
+
+relationship OneToMany {
+    UserProfile{workouts} to Workout{userProfile},
+    UserProfile{moodTrackers} to MoodTracker{userProfile},
+    UserProfile{stressTrackers} to StressTracker{userProfile},
+    UserProfile{mindfulnessPractices} to MindfulnessPractice{userProfile},
+    UserProfile{medicines} to Medicine{userProfile},
+    UserProfile{sleepRecords} to SleepRecord{userProfile},
+    UserProfile{customGoals} to CustomGoal{userProfile},
+    UserProfile{items} to Item{userProfile},
+    UserProfile{energyIntakeResults} to EnergyIntakeResult{userProfile}
+}
+
+relationship ManyToOne {
+    Workout{exercises} to Exercise{workout},
+    MindfulnessPractice to MindfulnessTip{practice},
+}
+
+relationship OneToOne {
+    UserProfile{dashboard} to Dashboard
+    UserProfile{compareResult} to CompareResult{userProfile}
+}
+
+relationship ManyToMany {
+    Item{energyIntakeResults} to EnergyIntakeResult{items}
+}
+

@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20240303180341",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "mood_tracker",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "mood",
+      "fieldType": "Mood",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "VERY_HAPPY,HAPPY,NEUTRAL,SAD,VERY_SAD"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "MoodTracker",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "moodTrackers",
+      "relationshipName": "userProfile",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

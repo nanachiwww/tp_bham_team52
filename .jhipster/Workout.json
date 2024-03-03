@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20240303180337",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "workout",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "intensityLevel",
+      "fieldType": "IntensityLevelEnum",
+      "fieldValues": "LOW,MODERATE,HIGH"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Workout",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "exercise",
+      "otherEntityRelationshipName": "workout",
+      "relationshipName": "exercises",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "workouts",
+      "relationshipName": "userProfile",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

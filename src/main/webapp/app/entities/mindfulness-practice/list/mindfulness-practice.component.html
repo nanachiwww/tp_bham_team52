@@ -1,0 +1,133 @@
+<div>
+  <h2 id="page-heading" data-cy="MindfulnessPracticeHeading">
+    <span>Mindfulness Practices</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-mindfulness-practice"
+        [routerLink]="['/mindfulness-practice/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Mindfulness Practice </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="mindfulnessPractices?.length === 0">
+    <span>No Mindfulness Practices found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="mindfulnessPractices && mindfulnessPractices.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <div class="d-flex">
+              <span>Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="activityType">
+            <div class="d-flex">
+              <span>Activity Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="duration">
+            <div class="d-flex">
+              <span>Duration</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="note">
+            <div class="d-flex">
+              <span>Note</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="mindfulnessTip.id">
+            <div class="d-flex">
+              <span>Mindfulness Tip</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="userProfile.id">
+            <div class="d-flex">
+              <span>User Profile</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mindfulnessPractice of mindfulnessPractices; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/mindfulness-practice', mindfulnessPractice.id, 'view']">{{ mindfulnessPractice.id }}</a>
+          </td>
+          <td>{{ mindfulnessPractice.date | formatMediumDate }}</td>
+          <td>{{ mindfulnessPractice.activityType }}</td>
+          <td>{{ mindfulnessPractice.duration }}</td>
+          <td>{{ mindfulnessPractice.note }}</td>
+          <td>
+            <div *ngIf="mindfulnessPractice.mindfulnessTip">
+              <a [routerLink]="['/mindfulness-tip', mindfulnessPractice.mindfulnessTip.id, 'view']">{{
+                mindfulnessPractice.mindfulnessTip.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="mindfulnessPractice.userProfile">
+              <a [routerLink]="['/user-profile', mindfulnessPractice.userProfile.id, 'view']">{{ mindfulnessPractice.userProfile.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/mindfulness-practice', mindfulnessPractice.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/mindfulness-practice', mindfulnessPractice.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(mindfulnessPractice)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

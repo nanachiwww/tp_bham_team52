@@ -48,6 +48,33 @@ public class CacheConfiguration {
             createCache(cm, team.bham.domain.User.class.getName());
             createCache(cm, team.bham.domain.Authority.class.getName());
             createCache(cm, team.bham.domain.User.class.getName() + ".authorities");
+            createCache(cm, team.bham.domain.UserProfile.class.getName());
+            createCache(cm, team.bham.domain.UserProfile.class.getName() + ".workouts");
+            createCache(cm, team.bham.domain.UserProfile.class.getName() + ".moodTrackers");
+            createCache(cm, team.bham.domain.UserProfile.class.getName() + ".stressTrackers");
+            createCache(cm, team.bham.domain.UserProfile.class.getName() + ".mindfulnessPractices");
+            createCache(cm, team.bham.domain.UserProfile.class.getName() + ".medicines");
+            createCache(cm, team.bham.domain.UserProfile.class.getName() + ".sleepRecords");
+            createCache(cm, team.bham.domain.UserProfile.class.getName() + ".customGoals");
+            createCache(cm, team.bham.domain.UserProfile.class.getName() + ".items");
+            createCache(cm, team.bham.domain.UserProfile.class.getName() + ".energyIntakeResults");
+            createCache(cm, team.bham.domain.Workout.class.getName());
+            createCache(cm, team.bham.domain.Exercise.class.getName());
+            createCache(cm, team.bham.domain.Exercise.class.getName() + ".workouts");
+            createCache(cm, team.bham.domain.Item.class.getName());
+            createCache(cm, team.bham.domain.Item.class.getName() + ".energyIntakeResults");
+            createCache(cm, team.bham.domain.EnergyIntakeResult.class.getName());
+            createCache(cm, team.bham.domain.EnergyIntakeResult.class.getName() + ".items");
+            createCache(cm, team.bham.domain.MoodTracker.class.getName());
+            createCache(cm, team.bham.domain.StressTracker.class.getName());
+            createCache(cm, team.bham.domain.MindfulnessPractice.class.getName());
+            createCache(cm, team.bham.domain.MindfulnessTip.class.getName());
+            createCache(cm, team.bham.domain.MindfulnessTip.class.getName() + ".practices");
+            createCache(cm, team.bham.domain.Medicine.class.getName());
+            createCache(cm, team.bham.domain.SleepRecord.class.getName());
+            createCache(cm, team.bham.domain.CustomGoal.class.getName());
+            createCache(cm, team.bham.domain.CompareResult.class.getName());
+            createCache(cm, team.bham.domain.Dashboard.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

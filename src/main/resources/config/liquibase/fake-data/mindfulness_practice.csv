@@ -1,0 +1,11 @@
+id;date;activity_type;duration;note
+1;2024-03-03;MEDITATION;95082;../fake-data/blob/hipster.txt
+2;2024-03-03;OTHER;43670;../fake-data/blob/hipster.txt
+3;2024-03-03;OTHER;41337;../fake-data/blob/hipster.txt
+4;2024-03-03;BREATHING_EXERCISES;69975;../fake-data/blob/hipster.txt
+5;2024-03-03;YOGA;14080;../fake-data/blob/hipster.txt
+6;2024-03-03;MEDITATION;75282;../fake-data/blob/hipster.txt
+7;2024-03-02;BREATHING_EXERCISES;2477;../fake-data/blob/hipster.txt
+8;2024-03-03;YOGA;39532;../fake-data/blob/hipster.txt
+9;2024-03-02;YOGA;12706;../fake-data/blob/hipster.txt
+10;2024-03-03;MEDITATION;97652;../fake-data/blob/hipster.txt

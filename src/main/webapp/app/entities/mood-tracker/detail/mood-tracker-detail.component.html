@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="moodTracker">
+      <h2 data-cy="moodTrackerDetailsHeading"><span>Mood Tracker</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ moodTracker.id }}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+          <span>{{ moodTracker.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Mood</span></dt>
+        <dd>
+          <span>{{ moodTracker.mood }}</span>
+        </dd>
+        <dt><span>Note</span></dt>
+        <dd>
+          <span>{{ moodTracker.note }}</span>
+        </dd>
+        <dt><span>User Profile</span></dt>
+        <dd>
+          <div *ngIf="moodTracker.userProfile">
+            <a [routerLink]="['/user-profile', moodTracker.userProfile.id, 'view']">{{ moodTracker.userProfile.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/mood-tracker', moodTracker.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

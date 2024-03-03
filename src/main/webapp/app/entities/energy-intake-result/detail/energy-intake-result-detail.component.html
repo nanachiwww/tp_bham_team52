@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="energyIntakeResult">
+      <h2 data-cy="energyIntakeResultDetailsHeading"><span>Energy Intake Result</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ energyIntakeResult.id }}</span>
+        </dd>
+        <dt><span>Goal Complete</span></dt>
+        <dd>
+          <span>{{ energyIntakeResult.goalComplete }}</span>
+        </dd>
+        <dt><span>Details</span></dt>
+        <dd>
+          <span>{{ energyIntakeResult.details }}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+          <span>{{ energyIntakeResult.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span>User Profile</span></dt>
+        <dd>
+          <div *ngIf="energyIntakeResult.userProfile">
+            <a [routerLink]="['/user-profile', energyIntakeResult.userProfile.id, 'view']">{{ energyIntakeResult.userProfile.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/energy-intake-result', energyIntakeResult.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

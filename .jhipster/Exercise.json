@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20240303180338",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "exercise",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "reps",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "sets",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "category",
+      "fieldType": "ExerciseCategoryEnum",
+      "fieldValues": "CARDIO,STRENGTH,FLEXIBILITY"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Exercise",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "workout",
+      "otherEntityRelationshipName": "exercises",
+      "relationshipName": "workout",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

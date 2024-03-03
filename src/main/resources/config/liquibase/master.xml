@@ -17,7 +17,31 @@
     <property name="datetimeType" value="datetime" dbms="postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180336_added_entity_UserProfile.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180337_added_entity_Workout.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180338_added_entity_Exercise.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180339_added_entity_Item.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180340_added_entity_EnergyIntakeResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180341_added_entity_MoodTracker.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180342_added_entity_StressTracker.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180343_added_entity_MindfulnessPractice.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180344_added_entity_MindfulnessTip.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180345_added_entity_Medicine.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180346_added_entity_SleepRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180347_added_entity_CustomGoal.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180348_added_entity_CompareResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180349_added_entity_Dashboard.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20240303180336_added_entity_constraints_UserProfile.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180337_added_entity_constraints_Workout.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180339_added_entity_constraints_Item.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180340_added_entity_constraints_EnergyIntakeResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180341_added_entity_constraints_MoodTracker.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180342_added_entity_constraints_StressTracker.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180343_added_entity_constraints_MindfulnessPractice.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180345_added_entity_constraints_Medicine.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180346_added_entity_constraints_SleepRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240303180347_added_entity_constraints_CustomGoal.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

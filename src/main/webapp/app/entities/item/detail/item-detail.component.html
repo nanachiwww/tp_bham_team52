@@ -1,0 +1,49 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="item">
+      <h2 data-cy="itemDetailsHeading"><span>Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ item.id }}</span>
+        </dd>
+        <dt><span>Item Name</span></dt>
+        <dd>
+          <span>{{ item.itemName }}</span>
+        </dd>
+        <dt><span>Category</span></dt>
+        <dd>
+          <span>{{ item.category }}</span>
+        </dd>
+        <dt><span>Energy Intake Results</span></dt>
+        <dd>
+          <span *ngFor="let energyIntakeResults of item.energyIntakeResults; let last = last">
+            <a [routerLink]="['/energy-intake-result', energyIntakeResults.id, 'view']">{{ energyIntakeResults.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>User Profile</span></dt>
+        <dd>
+          <div *ngIf="item.userProfile">
+            <a [routerLink]="['/user-profile', item.userProfile.id, 'view']">{{ item.userProfile.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/item', item.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+{
+  "applications": "*",
+  "changelogDate": "20240303180336",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "user_profile",
+  "fields": [
+    {
+      "fieldName": "username",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "age",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Gender",
+      "fieldValues": "MALE,FEMALE,OTHER"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "UserProfile",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "dashboard",
+      "ownerSide": true,
+      "relationshipName": "dashboard",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "compareResult",
+      "otherEntityRelationshipName": "userProfile",
+      "ownerSide": true,
+      "relationshipName": "compareResult",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "workout",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "workouts",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "moodTracker",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "moodTrackers",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "stressTracker",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "stressTrackers",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "mindfulnessPractice",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "mindfulnessPractices",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "medicine",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "medicines",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "sleepRecord",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "sleepRecords",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "customGoal",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "customGoals",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "item",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "items",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "energyIntakeResult",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "energyIntakeResults",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

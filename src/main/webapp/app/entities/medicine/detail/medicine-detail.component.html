@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="medicine">
+      <h2 data-cy="medicineDetailsHeading"><span>Medicine</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ medicine.id }}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+          <span>{{ medicine.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ medicine.name }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ medicine.description }}</span>
+        </dd>
+        <dt><span>Subjective Effect</span></dt>
+        <dd>
+          <span>{{ medicine.subjectiveEffect }}</span>
+        </dd>
+        <dt><span>Supplement Type</span></dt>
+        <dd>
+          <span>{{ medicine.supplementType }}</span>
+        </dd>
+        <dt><span>User Profile</span></dt>
+        <dd>
+          <div *ngIf="medicine.userProfile">
+            <a [routerLink]="['/user-profile', medicine.userProfile.id, 'view']">{{ medicine.userProfile.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/medicine', medicine.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

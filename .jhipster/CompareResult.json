@@ -1,0 +1,48 @@
+{
+  "applications": "*",
+  "changelogDate": "20240303180348",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "compare_result",
+  "fields": [
+    {
+      "fieldName": "resultDetails",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "timestamp",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dietaryGoalComplete",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "moodGoalAchieved",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "workoutGoalAchieved",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "sleepGoalAchieved",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CompareResult",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "compareResult",
+      "ownerSide": false,
+      "relationshipName": "userProfile",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

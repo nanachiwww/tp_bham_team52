@@ -1,0 +1,51 @@
+{
+  "applications": "*",
+  "changelogDate": "20240303180343",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "mindfulness_practice",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "activityType",
+      "fieldType": "MindfulnessActivityType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MEDITATION,BREATHING_EXERCISES,YOGA,OTHER"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "MindfulnessPractice",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "mindfulnessTip",
+      "otherEntityRelationshipName": "practice",
+      "relationshipName": "mindfulnessTip",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "mindfulnessPractices",
+      "relationshipName": "userProfile",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

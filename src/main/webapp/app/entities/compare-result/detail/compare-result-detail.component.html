@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="compareResult">
+      <h2 data-cy="compareResultDetailsHeading"><span>Compare Result</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ compareResult.id }}</span>
+        </dd>
+        <dt><span>Result Details</span></dt>
+        <dd>
+          <span>{{ compareResult.resultDetails }}</span>
+        </dd>
+        <dt><span>Timestamp</span></dt>
+        <dd>
+          <span>{{ compareResult.timestamp | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Dietary Goal Complete</span></dt>
+        <dd>
+          <span>{{ compareResult.dietaryGoalComplete }}</span>
+        </dd>
+        <dt><span>Mood Goal Achieved</span></dt>
+        <dd>
+          <span>{{ compareResult.moodGoalAchieved }}</span>
+        </dd>
+        <dt><span>Workout Goal Achieved</span></dt>
+        <dd>
+          <span>{{ compareResult.workoutGoalAchieved }}</span>
+        </dd>
+        <dt><span>Sleep Goal Achieved</span></dt>
+        <dd>
+          <span>{{ compareResult.sleepGoalAchieved }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/compare-result', compareResult.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

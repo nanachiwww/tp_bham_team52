@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="mindfulnessPractice">
+      <h2 data-cy="mindfulnessPracticeDetailsHeading"><span>Mindfulness Practice</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ mindfulnessPractice.id }}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+          <span>{{ mindfulnessPractice.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Activity Type</span></dt>
+        <dd>
+          <span>{{ mindfulnessPractice.activityType }}</span>
+        </dd>
+        <dt><span>Duration</span></dt>
+        <dd>
+          <span>{{ mindfulnessPractice.duration }}</span>
+        </dd>
+        <dt><span>Note</span></dt>
+        <dd>
+          <span>{{ mindfulnessPractice.note }}</span>
+        </dd>
+        <dt><span>Mindfulness Tip</span></dt>
+        <dd>
+          <div *ngIf="mindfulnessPractice.mindfulnessTip">
+            <a [routerLink]="['/mindfulness-tip', mindfulnessPractice.mindfulnessTip.id, 'view']">{{
+              mindfulnessPractice.mindfulnessTip.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span>User Profile</span></dt>
+        <dd>
+          <div *ngIf="mindfulnessPractice.userProfile">
+            <a [routerLink]="['/user-profile', mindfulnessPractice.userProfile.id, 'view']">{{ mindfulnessPractice.userProfile.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/mindfulness-practice', mindfulnessPractice.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
