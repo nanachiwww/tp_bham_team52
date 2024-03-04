@@ -5,6 +5,13 @@ Main page styles
 
 .home {
   background-color: #fdf7df;
+  // center all the content
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  // set the font color
+  align-self: center;
 }
 .hipster {
   display: inline-block;

@@ -28,5 +28,6 @@
 
 .custom-navbar a.active,
 .custom-navbar a:hover {
-  border-bottom: 2px solid maroon; /* Underline effect for active/hover state */
+  color: red; /* Changes text color to red for active/hover state */
+  border-bottom: 2px solid red; /* Changes underline to red for active/hover state */
 }
