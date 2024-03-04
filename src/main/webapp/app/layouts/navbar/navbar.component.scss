@@ -39,10 +39,19 @@ Navbar
 Logo styles
 ========================================================================== */
 .logo-img {
-  height: 45px;
-  width: 45px;
+  height: 90px;
+  width: 90px;
   display: inline-block;
   vertical-align: middle;
   background: url('../../../content/images/logos/logo.png') no-repeat center center;
   background-size: contain;
+}
+
+.navbar-title {
+  font-size: 60px;
+  font-weight: 400;
+  color: black;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
 }

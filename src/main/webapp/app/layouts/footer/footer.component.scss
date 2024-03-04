@@ -1,7 +1,10 @@
-.footer {
-  background-color: #fdf7df;
+.footer p {
+  color: white;
 }
 
-.footer p {
-  color: black;
+.footer {
+  margin-top: auto; /* Pushes the footer to the bottom */
+  text-align: center;
+  padding: 15px 0; /* Adjust the padding as needed */
+  background: black; /* Background color for the footer */
 }

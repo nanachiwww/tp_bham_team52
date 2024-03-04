@@ -1,0 +1,42 @@
+.goal-container {
+  display: flex;
+  justify-content: space-around;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.category h3 {
+  text-align: center;
+  color: #333;
+}
+
+.category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.category li {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 5px 10px;
+  margin: 5px;
+  text-align: center;
+}
+
+.category .add-item {
+  background-color: #e0e0e0;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+input[type='text'] {
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+input[type='text']:focus {
+  outline: none;
+}

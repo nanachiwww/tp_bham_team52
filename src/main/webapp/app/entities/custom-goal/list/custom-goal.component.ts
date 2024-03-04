@@ -12,6 +12,7 @@ import { SortService } from 'app/shared/sort/sort.service';
 @Component({
   selector: 'jhi-custom-goal',
   templateUrl: './custom-goal.component.html',
+  styleUrls: ['./custom-goal.component.scss'],
 })
 export class CustomGoalComponent implements OnInit {
   customGoals?: ICustomGoal[];
