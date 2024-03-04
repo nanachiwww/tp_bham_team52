@@ -1,6 +1,7 @@
 <div class="home">
   <div class="row">
-    <nav class="custom-navbar">
+    <nav class="custom-navbar" *ngIf="account">
+      <!-- Nav bar will only show when a user is logged in -->
       <ul>
         <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
         <li><a routerLink="/sleep" routerLinkActive="active">Sleep</a></li>
@@ -13,9 +14,13 @@
     </nav>
 
     <div class="col-md-9">
-      <h1 class="display-4"><span>Welcome to health hive!</span></h1>
+      <h1 class="display-4"><span>Welcome to Health Hive!</span></h1>
 
-      <p class="lead">This is your homepage</p>
+      <p class="lead">
+        This is your Comprehensive Wellness Companion! HealthHive is your go-to web-based health and wellness application, meticulously
+        crafted to simplify your journey towards optimal well-being. Our platform integrates essential aspects of health management — Sleep,
+        Diet, Workouts, and Mental Health — into one seamless and user-friendly experience.
+      </p>
 
       <div [ngSwitch]="account !== null">
         <div class="alert alert-success" *ngSwitchCase="true">
@@ -23,12 +28,8 @@
         </div>
 
         <div class="alert alert-warning" *ngSwitchCase="false">
-          <span>If you want to </span>
-          <a class="alert-link" (click)="login()">sign in</a
-          ><span
-            >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-            password="user").</span
-          >
+          <span>Already have an account? </span>
+          <a class="alert-link" (click)="login()">Log in here!</a>
         </div>
 
         <div class="alert alert-warning" *ngSwitchCase="false">
@@ -37,26 +38,24 @@
         </div>
       </div>
 
-      <ul>
-        <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">JHipster homepage</a></li>
+      <p class="lead">Here is what Health Hive has to offer:</p>
+      <ul class="lead">
+        <li>Sleep Tracker: Monitor your sleep cycles, quality, and duration to optimize your rest and recovery process.</li>
         <li>
-          <a href="https://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster on Stack Overflow</a>
+          Dietary Log: Keep track of your meals, caloric intake, and nutritional content, aligning your eating habits with your health goals
+          effortlessly.
+        </li>
+        <li>Workout Planner: Personalized workout suggestions and tracking to keep you on the path to fitness success.</li>
+        <li>
+          Mental Health Monitor: Prioritize your mental well-being with tools to track mood patterns, stress levels, and mindfulness
+          practices. Select how you're feeling and monitor your progress.
         </li>
         <li>
-          <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer"
-            >JHipster bug tracker</a
-          >
+          Goal Setting and Target Tracker: Set specific targets, whether academic, financial, or personal, and track your progress towards
+          them.
         </li>
-        <li>
-          <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">JHipster public chat room</a>
-        </li>
-        <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">follow @jhipster on Twitter</a></li>
+        <li>Medication and Supplement Tracker: Keep track of your medication and supplement intake, ensuring you never miss a dose.</li>
       </ul>
-
-      <p>
-        <span>If you like JHipster, don't forget to give us a star on</span>
-        <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">GitHub</a>!
-      </p>
     </div>
   </div>
 </div>
