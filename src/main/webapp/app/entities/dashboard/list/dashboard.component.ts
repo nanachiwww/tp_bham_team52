@@ -13,6 +13,7 @@ import { SortService } from 'app/shared/sort/sort.service';
 @Component({
   selector: 'jhi-dashboard',
   templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
   dashboards?: IDashboard[];
@@ -20,6 +21,32 @@ export class DashboardComponent implements OnInit {
 
   predicate = 'id';
   ascending = true;
+  userMetrics = {
+    sleepData: {
+      totalHours: 8,
+      sleepQuality: 'Good',
+    },
+    dietaryData: {
+      caloriesConsumed: 2200,
+      caloriesGoal: 2500,
+    },
+    workoutData: {
+      activitiesCompleted: 5,
+      goalActivities: 7,
+    },
+    mentalHealthData: {
+      mood: 'Happy',
+      stressLevel: 'Low',
+    },
+    goalTrackingData: {
+      goalsSet: 3,
+      goalsAchieved: 2,
+    },
+    medicationData: {
+      supplementsTaken: 4,
+      supplementsTotal: 5,
+    },
+  };
 
   constructor(
     protected dashboardService: DashboardService,

@@ -1,7 +1,36 @@
 <div>
   <h2 id="page-heading" data-cy="MedicineHeading">
-    <span>What Supplements did you take today?</span>
+    <div class="page row">
+      <span class="page-title">What Supplements did you take today?</span>
 
+      <div class="medication-container">
+        <div class="category">
+          <h3>Supplements</h3>
+          <ul>
+            <li>L - Theanine</li>
+            <li>Lionsmane</li>
+            <li>Ginkgo Biloba</li>
+            <li class="add-item">+</li>
+          </ul>
+        </div>
+        <div class="category">
+          <h3>Prescription</h3>
+          <ul>
+            <li>Adderal</li>
+            <li class="add-item">+</li>
+          </ul>
+        </div>
+        <div class="category">
+          <h3>Other</h3>
+          <ul>
+            <li>Paracetamol</li>
+            <li>
+              <input type="text" placeholder="Enter Medication" />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>

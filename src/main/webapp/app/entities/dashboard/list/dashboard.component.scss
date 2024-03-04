@@ -1,0 +1,26 @@
+.dashboard-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates three columns with equal width */
+  gap: 20px; /* Space between grid items */
+  padding: 20px; /* Padding around the grid */
+  max-width: 1200px; /* Maximum width of the grid container */
+  margin: auto; /* Centers the grid horizontally */
+}
+
+.metric {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metric h2 {
+  text-align: center;
+}
+
+.metric p {
+  text-align: center;
+  margin: 5px 0; /* Adds vertical spacing between paragraphs */
+}

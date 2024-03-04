@@ -12,6 +12,7 @@ import { SortService } from 'app/shared/sort/sort.service';
 @Component({
   selector: 'jhi-medicine',
   templateUrl: './medicine.component.html',
+  styleUrls: ['./medicine.component.scss'],
 })
 export class MedicineComponent implements OnInit {
   medicines?: IMedicine[];
