@@ -40,3 +40,9 @@ Main page styles
   text-align: center;
   font-family: 'Roboto', sans-serif;
 }
+
+.alerts-container {
+  display: flex;
+  justify-content: center; /* This will place the two items apart if there's space */
+  align-items: center; /* This will vertically align items if they are not of equal height */
+}

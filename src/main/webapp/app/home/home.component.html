@@ -12,15 +12,16 @@
       <div class="alert alert-success" *ngSwitchCase="true">
         <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
       </div>
+      <div class="alerts-container">
+        <div class="alert alert-warning" *ngSwitchCase="false" style="margin-right: 12px">
+          <span>Already have an account? </span>
+          <a class="alert-link" (click)="login()">Log in here!</a>
+        </div>
 
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>Already have an account? </span>
-        <a class="alert-link" (click)="login()">Log in here!</a>
-      </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>You don't have an account yet?</span>&nbsp;
-        <a class="alert-link" routerLink="account/register">Register a new account</a>
+        <div class="alert alert-warning" *ngSwitchCase="false">
+          <span>You don't have an account yet?</span>&nbsp;
+          <a class="alert-link" routerLink="/register">Register a new account</a>
+        </div>
       </div>
     </div>
 
