@@ -24,6 +24,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { SectionbarComponent } from './layouts/sectionbar/sectionbar.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,15 @@ import { SectionbarComponent } from './layouts/sectionbar/sectionbar.component';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, SectionbarComponent],
+  declarations: [
+    MainComponent,
+    NavbarComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    FooterComponent,
+    SectionbarComponent,
+    AboutUsComponent,
+  ],
   bootstrap: [MainComponent],
 })
 export class AppModule {
