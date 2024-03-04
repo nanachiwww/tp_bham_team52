@@ -1,6 +1,39 @@
 <div>
   <h2 id="page-heading" data-cy="DashboardHeading">
-    <span>Dashboards</span>
+    <p class="page-title">Dashboard</p>
+
+    <div class="dashboard-container">
+      <div class="metric sleep-data">
+        <h2>Sleep Data</h2>
+        <p>Total Hours: {{ userMetrics.sleepData.totalHours }}</p>
+        <p>Sleep Quality: {{ userMetrics.sleepData.sleepQuality }}</p>
+      </div>
+      <div class="metric dietary-data">
+        <h2>Dietary Data</h2>
+        <p>Calories Consumed: {{ userMetrics.dietaryData.caloriesConsumed }}</p>
+        <p>Calories Goal: {{ userMetrics.dietaryData.caloriesGoal }}</p>
+      </div>
+      <div class="metric workout-data">
+        <h2>Workout Data</h2>
+        <p>Activities Completed: {{ userMetrics.workoutData.activitiesCompleted }}</p>
+        <p>Goal Activities: {{ userMetrics.workoutData.goalActivities }}</p>
+      </div>
+      <div class="metric mental-health-data">
+        <h2>Mental Health Data</h2>
+        <p>Mood: {{ userMetrics.mentalHealthData.mood }}</p>
+        <p>Stress Level: {{ userMetrics.mentalHealthData.stressLevel }}</p>
+      </div>
+      <div class="metric goal-tracking-data">
+        <h2>Goal Tracking</h2>
+        <p>Goals Set: {{ userMetrics.goalTrackingData.goalsSet }}</p>
+        <p>Goals Achieved: {{ userMetrics.goalTrackingData.goalsAchieved }}</p>
+      </div>
+      <div class="metric medication-data">
+        <h2>Medication Data</h2>
+        <p>Supplements Taken: {{ userMetrics.medicationData.supplementsTaken }}</p>
+        <p>Supplements Total: {{ userMetrics.medicationData.supplementsTotal }}</p>
+      </div>
+    </div>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
