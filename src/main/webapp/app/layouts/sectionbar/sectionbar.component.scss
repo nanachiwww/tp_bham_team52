@@ -1,0 +1,27 @@
+.custom-navbar {
+  background-color: #ffd700; /* Gold background */
+  padding: 0.5em 0; /* Padding around the navbar */
+}
+
+.custom-navbar ul {
+  list-style: none; /* Removes bullet points from the list */
+  display: flex; /* Display list items in a row */
+  justify-content: center; /* Center list items horizontally */
+  padding: 0; /* Removes default padding */
+  margin: 0; /* Removes default margin */
+}
+
+.custom-navbar li {
+  margin: 0 1em; /* Margin between list items */
+}
+
+.custom-navbar a {
+  text-decoration: none; /* Removes underline from links */
+  color: maroon; /* Sets the text color */
+  font-weight: bold; /* Makes the font bold */
+}
+
+.custom-navbar a.active,
+.custom-navbar a:hover {
+  border-bottom: 2px solid maroon; /* Underline effect for active/hover state */
+}
