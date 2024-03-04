@@ -26,7 +26,7 @@
             <column name="sets" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="category" type="varchar(255)">
+            <column name="muscle_group" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -54,7 +54,7 @@
             <column name="description" type="string"/>
             <column name="reps" type="numeric"/>
             <column name="sets" type="numeric"/>
-            <column name="category" type="string"/>
+            <column name="muscle_group" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -7,7 +7,7 @@ import { finalize } from 'rxjs/operators';
 import { ExerciseFormService, ExerciseFormGroup } from './exercise-form.service';
 import { IExercise } from '../exercise.model';
 import { ExerciseService } from '../service/exercise.service';
-import { ExerciseCategoryEnum } from 'app/entities/enumerations/exercise-category-enum.model';
+import { MuscleGroupEnum } from 'app/entities/enumerations/muscle-group-enum.model';
 
 @Component({
   selector: 'jhi-exercise-update',
@@ -16,7 +16,7 @@ import { ExerciseCategoryEnum } from 'app/entities/enumerations/exercise-categor
 export class ExerciseUpdateComponent implements OnInit {
   isSaving = false;
   exercise: IExercise | null = null;
-  exerciseCategoryEnumValues = Object.keys(ExerciseCategoryEnum);
+  muscleGroupEnumValues = Object.keys(MuscleGroupEnum);
 
   editForm: ExerciseFormGroup = this.exerciseFormService.createExerciseFormGroup();
 

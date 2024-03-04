@@ -26,7 +26,8 @@ entity Exercise {
     description String,
     reps Integer,
     sets Integer,
-    category ExerciseCategoryEnum
+    muscleGroup MuscleGroupEnum
+
 }
 
 enum IntensityLevelEnum {
@@ -35,10 +36,15 @@ enum IntensityLevelEnum {
     HIGH
 }
 
-enum ExerciseCategoryEnum {
+enum MuscleGroupEnum {
+    CHEST,
+    BACK,
+    LEGS,
+    ARMS,
+    SHOULDERS,
+    ABS,
     CARDIO,
-    STRENGTH,
-    FLEXIBILITY
+    OTHER
 }
 
 // Dietary Log

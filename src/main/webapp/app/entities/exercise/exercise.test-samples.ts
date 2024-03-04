@@ -1,4 +1,4 @@
-import { ExerciseCategoryEnum } from 'app/entities/enumerations/exercise-category-enum.model';
+import { MuscleGroupEnum } from 'app/entities/enumerations/muscle-group-enum.model';
 
 import { IExercise, NewExercise } from './exercise.model';
 
@@ -11,7 +11,7 @@ export const sampleWithPartialData: IExercise = {
   id: 22527,
   name: 'withdrawal',
   sets: 78452,
-  category: ExerciseCategoryEnum['FLEXIBILITY'],
+  muscleGroup: MuscleGroupEnum['CARDIO'],
 };
 
 export const sampleWithFullData: IExercise = {
@@ -20,7 +20,7 @@ export const sampleWithFullData: IExercise = {
   description: 'transmitting',
   reps: 44780,
   sets: 46527,
-  category: ExerciseCategoryEnum['STRENGTH'],
+  muscleGroup: MuscleGroupEnum['ARMS'],
 };
 
 export const sampleWithNewData: NewExercise = {

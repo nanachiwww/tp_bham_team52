@@ -42,12 +42,10 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_category">Category</label>
-          <select class="form-control" name="category" formControlName="category" id="field_category" data-cy="category">
+          <label class="form-label" for="field_muscleGroup">Muscle Group</label>
+          <select class="form-control" name="muscleGroup" formControlName="muscleGroup" id="field_muscleGroup" data-cy="muscleGroup">
             <option [ngValue]="null"></option>
-            <option *ngFor="let exerciseCategoryEnum of exerciseCategoryEnumValues" [value]="exerciseCategoryEnum">
-              exerciseCategoryEnum
-            </option>
+            <option *ngFor="let muscleGroupEnum of muscleGroupEnumValues" [value]="muscleGroupEnum">muscleGroupEnum</option>
           </select>
         </div>
       </div>

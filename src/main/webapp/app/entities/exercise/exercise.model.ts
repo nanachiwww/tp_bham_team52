@@ -1,4 +1,4 @@
-import { ExerciseCategoryEnum } from 'app/entities/enumerations/exercise-category-enum.model';
+import { MuscleGroupEnum } from 'app/entities/enumerations/muscle-group-enum.model';
 
 export interface IExercise {
   id: number;
@@ -6,7 +6,7 @@ export interface IExercise {
   description?: string | null;
   reps?: number | null;
   sets?: number | null;
-  category?: ExerciseCategoryEnum | null;
+  muscleGroup?: MuscleGroupEnum | null;
 }
 
 export type NewExercise = Omit<IExercise, 'id'> & { id: null };

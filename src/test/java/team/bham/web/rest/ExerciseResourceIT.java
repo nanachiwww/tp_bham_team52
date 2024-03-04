@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import team.bham.IntegrationTest;
 import team.bham.domain.Exercise;
-import team.bham.domain.enumeration.ExerciseCategoryEnum;
+import team.bham.domain.enumeration.MuscleGroupEnum;
 import team.bham.repository.ExerciseRepository;
 
 /**
@@ -42,8 +42,8 @@ class ExerciseResourceIT {
     private static final Integer DEFAULT_SETS = 1;
     private static final Integer UPDATED_SETS = 2;
 
-    private static final ExerciseCategoryEnum DEFAULT_CATEGORY = ExerciseCategoryEnum.CARDIO;
-    private static final ExerciseCategoryEnum UPDATED_CATEGORY = ExerciseCategoryEnum.STRENGTH;
+    private static final MuscleGroupEnum DEFAULT_MUSCLE_GROUP = MuscleGroupEnum.CHEST;
+    private static final MuscleGroupEnum UPDATED_MUSCLE_GROUP = MuscleGroupEnum.BACK;
 
     private static final String ENTITY_API_URL = "/api/exercises";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -74,7 +74,7 @@ class ExerciseResourceIT {
             .description(DEFAULT_DESCRIPTION)
             .reps(DEFAULT_REPS)
             .sets(DEFAULT_SETS)
-            .category(DEFAULT_CATEGORY);
+            .muscleGroup(DEFAULT_MUSCLE_GROUP);
         return exercise;
     }
 
@@ -90,7 +90,7 @@ class ExerciseResourceIT {
             .description(UPDATED_DESCRIPTION)
             .reps(UPDATED_REPS)
             .sets(UPDATED_SETS)
-            .category(UPDATED_CATEGORY);
+            .muscleGroup(UPDATED_MUSCLE_GROUP);
         return exercise;
     }
 
@@ -116,7 +116,7 @@ class ExerciseResourceIT {
         assertThat(testExercise.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testExercise.getReps()).isEqualTo(DEFAULT_REPS);
         assertThat(testExercise.getSets()).isEqualTo(DEFAULT_SETS);
-        assertThat(testExercise.getCategory()).isEqualTo(DEFAULT_CATEGORY);
+        assertThat(testExercise.getMuscleGroup()).isEqualTo(DEFAULT_MUSCLE_GROUP);
     }
 
     @Test
@@ -170,7 +170,7 @@ class ExerciseResourceIT {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].reps").value(hasItem(DEFAULT_REPS)))
             .andExpect(jsonPath("$.[*].sets").value(hasItem(DEFAULT_SETS)))
-            .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())));
+            .andExpect(jsonPath("$.[*].muscleGroup").value(hasItem(DEFAULT_MUSCLE_GROUP.toString())));
     }
 
     @Test
@@ -189,7 +189,7 @@ class ExerciseResourceIT {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.reps").value(DEFAULT_REPS))
             .andExpect(jsonPath("$.sets").value(DEFAULT_SETS))
-            .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()));
+            .andExpect(jsonPath("$.muscleGroup").value(DEFAULT_MUSCLE_GROUP.toString()));
     }
 
     @Test
@@ -216,7 +216,7 @@ class ExerciseResourceIT {
             .description(UPDATED_DESCRIPTION)
             .reps(UPDATED_REPS)
             .sets(UPDATED_SETS)
-            .category(UPDATED_CATEGORY);
+            .muscleGroup(UPDATED_MUSCLE_GROUP);
 
         restExerciseMockMvc
             .perform(
@@ -234,7 +234,7 @@ class ExerciseResourceIT {
         assertThat(testExercise.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testExercise.getReps()).isEqualTo(UPDATED_REPS);
         assertThat(testExercise.getSets()).isEqualTo(UPDATED_SETS);
-        assertThat(testExercise.getCategory()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testExercise.getMuscleGroup()).isEqualTo(UPDATED_MUSCLE_GROUP);
     }
 
     @Test
@@ -305,7 +305,7 @@ class ExerciseResourceIT {
         Exercise partialUpdatedExercise = new Exercise();
         partialUpdatedExercise.setId(exercise.getId());
 
-        partialUpdatedExercise.description(UPDATED_DESCRIPTION).category(UPDATED_CATEGORY);
+        partialUpdatedExercise.description(UPDATED_DESCRIPTION).muscleGroup(UPDATED_MUSCLE_GROUP);
 
         restExerciseMockMvc
             .perform(
@@ -323,7 +323,7 @@ class ExerciseResourceIT {
         assertThat(testExercise.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testExercise.getReps()).isEqualTo(DEFAULT_REPS);
         assertThat(testExercise.getSets()).isEqualTo(DEFAULT_SETS);
-        assertThat(testExercise.getCategory()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testExercise.getMuscleGroup()).isEqualTo(UPDATED_MUSCLE_GROUP);
     }
 
     @Test
@@ -343,7 +343,7 @@ class ExerciseResourceIT {
             .description(UPDATED_DESCRIPTION)
             .reps(UPDATED_REPS)
             .sets(UPDATED_SETS)
-            .category(UPDATED_CATEGORY);
+            .muscleGroup(UPDATED_MUSCLE_GROUP);
 
         restExerciseMockMvc
             .perform(
@@ -361,7 +361,7 @@ class ExerciseResourceIT {
         assertThat(testExercise.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testExercise.getReps()).isEqualTo(UPDATED_REPS);
         assertThat(testExercise.getSets()).isEqualTo(UPDATED_SETS);
-        assertThat(testExercise.getCategory()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testExercise.getMuscleGroup()).isEqualTo(UPDATED_MUSCLE_GROUP);
     }
 
     @Test

@@ -137,8 +137,8 @@ public class ExerciseResource {
                 if (exercise.getSets() != null) {
                     existingExercise.setSets(exercise.getSets());
                 }
-                if (exercise.getCategory() != null) {
-                    existingExercise.setCategory(exercise.getCategory());
+                if (exercise.getMuscleGroup() != null) {
+                    existingExercise.setMuscleGroup(exercise.getMuscleGroup());
                 }
 
                 return existingExercise;
