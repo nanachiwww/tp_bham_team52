@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,7 @@ import { SortService } from 'app/shared/sort/sort.service';
 @Component({
   selector: 'jhi-workout',
   templateUrl: './workout.component.html',
+  styleUrls: ['./workout.component.scss'],
 })
 export class WorkoutComponent implements OnInit {
   workouts?: IWorkout[];
@@ -27,6 +28,21 @@ export class WorkoutComponent implements OnInit {
     protected sortService: SortService,
     protected modalService: NgbModal
   ) {}
+  selectedGoals: string[] = [];
+
+  @Output() done = new EventEmitter<string[]>();
+
+  toggleGoal(goal: string) {
+    const index = this.selectedGoals.indexOf(goal);
+    if (index > -1) {
+      this.selectedGoals.splice(index, 1);
+    } else {
+      this.selectedGoals.push(goal);
+    }
+  }
+  completeSelection() {
+    this.done.emit(this.selectedGoals);
+  }
 
   trackId = (_index: number, item: IWorkout): number => this.workoutService.getWorkoutIdentifier(item);
 

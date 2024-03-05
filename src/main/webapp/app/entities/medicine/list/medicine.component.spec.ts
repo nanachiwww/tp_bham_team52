@@ -4,11 +4,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MedicineService } from '../service/medicine.service';
 
 import { MedicineComponent } from './medicine.component';
 
+import { NextButtonComponent } from 'app/layouts/next-button/next-button.component';
 describe('Medicine Management Component', () => {
   let comp: MedicineComponent;
   let fixture: ComponentFixture<MedicineComponent>;
@@ -16,8 +17,13 @@ describe('Medicine Management Component', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([{ path: 'medicine', component: MedicineComponent }]), HttpClientTestingModule],
+      imports: [
+        RouterTestingModule.withRoutes([{ path: 'medicine', component: MedicineComponent }]),
+        HttpClientTestingModule,
+        NextButtonComponent,
+      ],
       declarations: [MedicineComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         {
           provide: ActivatedRoute,

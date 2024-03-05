@@ -1,3 +1,5 @@
+@import '@fortawesome/fontawesome-free/css/all.css';
+
 .medication-container {
   display: flex;
   justify-content: space-around;
@@ -39,4 +41,26 @@ input[type='text'] {
 
 input[type='text']:focus {
   outline: none;
+}
+
+.btn-outline-secondary {
+  color: #000;
+  border-color: #f8f9fa;
+}
+
+.btn-outline-secondary:hover {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+/* Adjust padding and font size as needed */
+.btn {
+  padding: 5px 15px;
+  font-size: 16px;
+}
+
+/* Custom style for the icon to align with your design */
+.fa-arrow-right {
+  margin-left: 5px; /* space between text and icon */
 }

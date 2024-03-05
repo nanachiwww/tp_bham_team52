@@ -25,6 +25,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { SectionbarComponent } from './layouts/sectionbar/sectionbar.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { NextButtonComponent } from './layouts/next-button/next-button.component';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     FooterComponent,
     SectionbarComponent,
     AboutUsComponent,
+    NextButtonComponent,
   ],
   bootstrap: [MainComponent],
 })

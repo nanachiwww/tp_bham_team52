@@ -14,6 +14,21 @@ import { SortService } from 'app/shared/sort/sort.service';
   templateUrl: './sleep-record.component.html',
 })
 export class SleepRecordComponent implements OnInit {
+  sleepTimes = [
+    { start: '19:35', end: '7:31' },
+    { start: '15:35', end: '2:03' },
+    { start: '23:55', end: '12:11' },
+    { start: '22:09', end: '6:00' },
+  ];
+
+  // Methods to handle play and stop events
+  startRecording() {
+    // Implement start recording functionality
+  }
+
+  stopRecording() {
+    // Implement stop recording functionality
+  }
   sleepRecords?: ISleepRecord[];
   isLoading = false;
 

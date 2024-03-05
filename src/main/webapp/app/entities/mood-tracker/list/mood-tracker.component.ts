@@ -13,6 +13,7 @@ import { SortService } from 'app/shared/sort/sort.service';
 @Component({
   selector: 'jhi-mood-tracker',
   templateUrl: './mood-tracker.component.html',
+  styleUrls: ['./mood-tracker.component.scss'],
 })
 export class MoodTrackerComponent implements OnInit {
   moodTrackers?: IMoodTracker[];

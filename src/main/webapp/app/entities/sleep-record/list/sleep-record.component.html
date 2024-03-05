@@ -1,4 +1,25 @@
 <div>
+  <div class="container text-center">
+    <h1>Sleeping Time!</h1>
+    <p>Press "play" button to start recording sleeping time. Press "Stop" button to end recording.</p>
+
+    <div class="button-group">
+      <button class="btn btn-play">
+        <i class="fa fa-play"></i>
+      </button>
+      <button class="btn btn-stop">
+        <i class="fa fa-stop"></i>
+      </button>
+    </div>
+
+    <h2>Your sleeping time history</h2>
+    <div class="history-container">
+      <div class="history-entry" *ngFor="let time of sleepTimes">
+        <span>{{ time.start }} - {{ time.end }}</span>
+      </div>
+    </div>
+  </div>
+
   <h2 id="page-heading" data-cy="SleepRecordHeading">
     <span>Sleep Records</span>
 

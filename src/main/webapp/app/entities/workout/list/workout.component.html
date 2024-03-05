@@ -1,4 +1,17 @@
 <div>
+  <div class="container">
+    <h2>What are your top 3 goals?</h2>
+    <p>Select from options below to tailor our recommendations to your goals</p>
+    <div class="goals">
+      <button (click)="toggleGoal('Increase Endurance')">Increase Endurance</button>
+      <button (click)="toggleGoal('Relieve Stress')">Relieve Stress</button>
+      <button (click)="toggleGoal('Improve Fitness')">Improve Fitness</button>
+      <button (click)="toggleGoal('Gain Strength')">Gain Strength</button>
+      <button (click)="toggleGoal('Lose Weight')">Lose Weight</button>
+      <button (click)="toggleGoal('Gain Weight')">Gain Weight</button>
+    </div>
+    <button (click)="completeSelection()">Done</button>
+  </div>
   <h2 id="page-heading" data-cy="WorkoutHeading">
     <span>Workouts</span>
 

@@ -1,6 +1,54 @@
 <div>
+  <div class="dashboard-container">
+    <div class="mood-patterns">
+      <h2>Mood Patterns</h2>
+      <p>How are you feeling today?</p>
+      <div class="mood-buttons">
+        <!-- Replace with dynamic generation and event handling -->
+        <button class="mood-button">😐</button>
+        <button class="mood-button">😔</button>
+        <button class="mood-button">😊</button>
+      </div>
+      <div class="mood-chart">
+        <!-- Placeholder for mood chart -->
+        <p>Bar Chart - Mood</p>
+      </div>
+    </div>
+
+    <div class="stress-level">
+      <h2>Stress level</h2>
+      <p>What is your stress level now?</p>
+      <!-- Placeholder for stress level slider -->
+      <input type="range" min="1" max="10" value="6" />
+      <div class="stress-chart">
+        <!-- Placeholder for stress chart -->
+        <p>Stress level since the last 6 recording</p>
+      </div>
+    </div>
+
+    <div class="mindfulness-practice">
+      <h2>Mindfulness Practice</h2>
+      <p>
+        Take a moment to centre your thoughts with a guided mindfulness exercise. Reducing stress and improving focus can help enhance your
+        overall mental well being.
+      </p>
+      <div class="mindfulness-buttons">
+        <!-- Replace with dynamic generation and event handling -->
+        <button class="mindfulness-button">Guided meditation</button>
+        <button class="mindfulness-button">Breathing Exercises</button>
+        <button class="mindfulness-button">Mindfulness Tips</button>
+      </div>
+    </div>
+
+    <div class="progress-tracker">
+      <h2>Progress Tacker</h2>
+      <!-- Placeholder for progress tracker -->
+      <p>Your progress tracker content goes here</p>
+    </div>
+  </div>
+
   <h2 id="page-heading" data-cy="MoodTrackerHeading">
-    <span>Mood Trackers</span>
+    <span>Mood Tracker</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">

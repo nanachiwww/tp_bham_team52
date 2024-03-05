@@ -5,10 +5,12 @@
   padding: 20px; /* Padding around the grid */
   max-width: 1200px; /* Maximum width of the grid container */
   margin: auto; /* Centers the grid horizontally */
+  color: black; /* Add text color if needed */
 }
 
 .metric {
-  border: 1px solid #ccc;
+  border: 1px solid black;
+  background-color: #fff;
   border-radius: 8px;
   padding: 10px;
   display: flex;
