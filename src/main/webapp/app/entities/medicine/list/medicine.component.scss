@@ -87,6 +87,10 @@ input[type='text']:focus {
   position: relative;
   padding: 10px;
   overflow: hidden;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  width: 200px;
 }
 
 .supplement-name {
@@ -95,17 +99,31 @@ input[type='text']:focus {
 
 .action-buttons {
   position: absolute;
-  right: 10px;
-  top: 10px;
+
   display: none;
   z-index: 2;
   // center the buttons
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .list-item:hover .action-buttons {
-  display: block;
+  display: flex;
+  padding: 10px;
 }
 
 .supplement-item {
   width: 400px;
+}
+
+.title {
+  display: block;
+  text-align: center;
+}
+
+.interaction-item {
+  background-color: #f2f2f2; /* Different background color for distinction */
+  color: #333; /* Text color for interaction items */
+  /* Other styles as needed */
 }
