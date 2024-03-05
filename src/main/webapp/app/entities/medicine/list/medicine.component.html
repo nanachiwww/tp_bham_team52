@@ -7,21 +7,67 @@
         <div class="category">
           <h3>Supplements</h3>
           <ul>
-            <li>L - Theanine</li>
-            <li>Lionsmane</li>
-            <li>Ginkgo Biloba</li>
+            <li *ngFor="let supplement of supplements; let i = index" class="list-item supplement-item">
+              <span class="supplement-name">{{ supplement.name }}</span>
+              <div class="action-buttons">
+                <button type="button" class="btn btn-info btn-sm">View</button>
+                <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </li>
+            <button
+              id="jh-create-entity"
+              data-cy="entityCreateButton"
+              class="btn btn-primary jh-create-entity create-medicine add-button"
+              [routerLink]="['/medicine/new']"
+            >
+              <fa-icon icon="plus"></fa-icon>
+              <span> Create a new Medicine </span>
+            </button>
           </ul>
         </div>
         <div class="category">
           <h3>Prescription</h3>
           <ul>
-            <li>Adderal</li>
+            <li *ngFor="let prescription of prescriptions; let i = index" class="list-item supplement-item">
+              <span class="supplement-name">{{ prescription.name }}</span>
+              <div class="action-buttons">
+                <button type="button" class="btn btn-info btn-sm">View</button>
+                <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </li>
+            <button
+              id="jh-create-entity"
+              data-cy="entityCreateButton"
+              class="btn btn-primary jh-create-entity create-medicine add-button"
+              [routerLink]="['/medicine/new']"
+            >
+              <fa-icon icon="plus"></fa-icon>
+              <span> Create a new Medicine </span>
+            </button>
           </ul>
         </div>
         <div class="category">
           <h3>Other</h3>
           <ul>
-            <li>Paracetamol</li>
+            <li *ngFor="let other of others; let i = index" class="list-item supplement-item">
+              <span class="supplement-name">{{ other.name }}</span>
+              <div class="action-buttons">
+                <button type="button" class="btn btn-info btn-sm">View</button>
+                <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </li>
+            <button
+              id="jh-create-entity"
+              data-cy="entityCreateButton"
+              class="btn btn-primary jh-create-entity create-medicine add-button"
+              [routerLink]="['/medicine/new']"
+            >
+              <fa-icon icon="plus"></fa-icon>
+              <span> Create a new Medicine </span>
+            </button>
           </ul>
         </div>
       </div>
@@ -63,12 +109,12 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
+          <!-- <th scope="col" jhiSortBy="id">
             <div class="d-flex">
               <span>ID</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
-          </th>
+          </th> -->
           <th scope="col" jhiSortBy="date">
             <div class="d-flex">
               <span>Date</span>
@@ -99,30 +145,30 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="userProfile.id">
+          <!-- <th scope="col" jhiSortBy="userProfile.id">
             <div class="d-flex">
               <span>User Profile</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
-          </th>
+          </th> -->
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let medicine of medicines; trackBy: trackId" data-cy="entityTable">
-          <td>
+          <!-- <td>
             <a [routerLink]="['/medicine', medicine.id, 'view']">{{ medicine.id }}</a>
-          </td>
+          </td> -->
           <td>{{ medicine.date | formatMediumDate }}</td>
           <td>{{ medicine.name }}</td>
           <td>{{ medicine.description }}</td>
           <td>{{ medicine.subjectiveEffect }}</td>
           <td>{{ medicine.supplementType }}</td>
-          <td>
+          <!-- <td>
             <div *ngIf="medicine.userProfile">
               <a [routerLink]="['/user-profile', medicine.userProfile.id, 'view']">{{ medicine.userProfile.id }}</a>
             </div>
-          </td>
+          </td> -->
           <td class="text-end">
             <div class="btn-group">
               <button

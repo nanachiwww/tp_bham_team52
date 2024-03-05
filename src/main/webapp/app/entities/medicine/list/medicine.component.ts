@@ -16,6 +16,10 @@ import { SortService } from 'app/shared/sort/sort.service';
 })
 export class MedicineComponent implements OnInit {
   medicines?: IMedicine[];
+  supplements?: any[]; // Define the supplements property
+  prescriptions?: any[];
+  others?: any[];
+
   isLoading = false;
 
   predicate = 'id';
@@ -33,6 +37,24 @@ export class MedicineComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
+    this.supplements = [
+      { name: 'L - Theanine' },
+      { name: 'Lionsmane' },
+      { name: 'Ginkgo Biloba' },
+      // Add more supplements as needed
+    ];
+    this.prescriptions = [
+      { name: 'Adderall' },
+      { name: 'Ritalin' },
+      { name: 'Vyvanse' },
+      // Add more prescription drugs as needed
+    ];
+    this.others = [
+      { name: 'Caffeine' },
+      { name: 'Nicotine' },
+      { name: 'Modafinil' },
+      // Add more other drugs as needed
+    ];
   }
 
   delete(medicine: IMedicine): void {

@@ -7,6 +7,12 @@
   padding: 10px;
 }
 
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .category h3 {
   text-align: center;
   color: #333;
@@ -63,4 +69,43 @@ input[type='text']:focus {
 /* Custom style for the icon to align with your design */
 .fa-arrow-right {
   margin-left: 5px; /* space between text and icon */
+}
+
+.add-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Make the button full width to center it in the container */
+  margin-top: 10px; /* Optional: add some space above the button */
+}
+
+.category ul {
+  list-style-type: none;
+}
+
+.list-item {
+  position: relative;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.supplement-name {
+  z-index: 1;
+}
+
+.action-buttons {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: none;
+  z-index: 2;
+  // center the buttons
+}
+
+.list-item:hover .action-buttons {
+  display: block;
+}
+
+.supplement-item {
+  width: 400px;
 }
