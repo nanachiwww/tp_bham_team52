@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import team.bham.domain.enumeration.ExerciseCategoryEnum;
+import team.bham.domain.enumeration.MuscleGroupEnum;
 
 /**
  * A Exercise.
@@ -41,8 +41,8 @@ public class Exercise implements Serializable {
     private Integer sets;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "category")
-    private ExerciseCategoryEnum category;
+    @Column(name = "muscle_group")
+    private MuscleGroupEnum muscleGroup;
 
     @OneToMany(mappedBy = "exercises")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -116,17 +116,17 @@ public class Exercise implements Serializable {
         this.sets = sets;
     }
 
-    public ExerciseCategoryEnum getCategory() {
-        return this.category;
+    public MuscleGroupEnum getMuscleGroup() {
+        return this.muscleGroup;
     }
 
-    public Exercise category(ExerciseCategoryEnum category) {
-        this.setCategory(category);
+    public Exercise muscleGroup(MuscleGroupEnum muscleGroup) {
+        this.setMuscleGroup(muscleGroup);
         return this;
     }
 
-    public void setCategory(ExerciseCategoryEnum category) {
-        this.category = category;
+    public void setMuscleGroup(MuscleGroupEnum muscleGroup) {
+        this.muscleGroup = muscleGroup;
     }
 
     public Set<Workout> getWorkouts() {
@@ -188,7 +188,7 @@ public class Exercise implements Serializable {
             ", description='" + getDescription() + "'" +
             ", reps=" + getReps() +
             ", sets=" + getSets() +
-            ", category='" + getCategory() + "'" +
+            ", muscleGroup='" + getMuscleGroup() + "'" +
             "}";
     }
 }

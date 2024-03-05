@@ -23,9 +23,9 @@
       "fieldType": "Integer"
     },
     {
-      "fieldName": "category",
-      "fieldType": "ExerciseCategoryEnum",
-      "fieldValues": "CARDIO,STRENGTH,FLEXIBILITY"
+      "fieldName": "muscleGroup",
+      "fieldType": "MuscleGroupEnum",
+      "fieldValues": "CHEST,BACK,LEGS,ARMS,SHOULDERS,ABS,CARDIO,OTHER"
     }
   ],
   "fluentMethods": true,

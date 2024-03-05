@@ -22,7 +22,7 @@ type ExerciseFormGroupContent = {
   description: FormControl<IExercise['description']>;
   reps: FormControl<IExercise['reps']>;
   sets: FormControl<IExercise['sets']>;
-  category: FormControl<IExercise['category']>;
+  muscleGroup: FormControl<IExercise['muscleGroup']>;
 };
 
 export type ExerciseFormGroup = FormGroup<ExerciseFormGroupContent>;
@@ -48,7 +48,7 @@ export class ExerciseFormService {
       description: new FormControl(exerciseRawValue.description),
       reps: new FormControl(exerciseRawValue.reps),
       sets: new FormControl(exerciseRawValue.sets),
-      category: new FormControl(exerciseRawValue.category),
+      muscleGroup: new FormControl(exerciseRawValue.muscleGroup),
     });
   }
 

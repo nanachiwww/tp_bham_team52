@@ -24,7 +24,7 @@ describe('Exercise Form Service', () => {
             description: expect.any(Object),
             reps: expect.any(Object),
             sets: expect.any(Object),
-            category: expect.any(Object),
+            muscleGroup: expect.any(Object),
           })
         );
       });
@@ -39,7 +39,7 @@ describe('Exercise Form Service', () => {
             description: expect.any(Object),
             reps: expect.any(Object),
             sets: expect.any(Object),
-            category: expect.any(Object),
+            muscleGroup: expect.any(Object),
           })
         );
       });
