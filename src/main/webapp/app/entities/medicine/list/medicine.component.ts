@@ -15,14 +15,9 @@ import { SortService } from 'app/shared/sort/sort.service';
   styleUrls: ['./medicine.component.scss'],
 })
 export class MedicineComponent implements OnInit {
-  medicines: IMedicine[] = [];
-  supplements: IMedicine[] = [];
-  prescriptions: IMedicine[] = [];
-  otherItems: IMedicine[] = [];
-
-  interactions = [{ detail: 'Interaction 1 details here...' }, { detail: 'Interaction 2 details here...' }];
-
+  medicines?: IMedicine[];
   isLoading = false;
+
   predicate = 'id';
   ascending = true;
 
@@ -37,17 +32,7 @@ export class MedicineComponent implements OnInit {
   trackId = (_index: number, item: IMedicine): number => this.medicineService.getMedicineIdentifier(item);
 
   ngOnInit(): void {
-    this.loadItems();
     this.load();
-  }
-
-  loadItems() {
-    this.medicineService.getMedicines().subscribe(data => {
-      this.medicines = data;
-      this.supplements = this.medicines.filter(medicine => medicine.supplementType === 'SUPPLEMENT');
-      this.prescriptions = this.medicines.filter(medicine => medicine.supplementType === 'PRESCRIPTION');
-      this.otherItems = this.medicines.filter(medicine => medicine.supplementType === 'OTHER');
-    });
   }
 
   delete(medicine: IMedicine): void {

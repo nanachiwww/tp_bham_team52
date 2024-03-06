@@ -1,61 +1,43 @@
 <div>
-  <div class="page row">
-    <h2 id="page-heading" data-cy="MedicineHeading">
-      <span class="title">What Supplements did you take today?</span>
-    </h2>
+  <h2 id="page-heading" data-cy="MedicineHeading">
+    <div class="page row">
+      <span class="page-title">What Supplements did you take today?</span>
 
-    <div class="d-flex justify-content-around">
-      <!-- Supplements Section -->
-      <div class="category">
-        <h3>Supplements</h3>
-        <ul>
-          <li *ngFor="let item of supplements; let i = index" class="list-item supplement-item">
-            <span class="supplement-name">{{ item.name }}</span>
-            <div class="action-buttons">
-              <button type="button" class="btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">View</button>
-              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">Edit</button>
-              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)">Delete</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Prescriptions Section -->
-      <div class="category">
-        <h3>Prescriptions</h3>
-        <ul>
-          <li *ngFor="let item of prescriptions; let i = index" class="list-item supplement-item">
-            <span class="prescription-name">{{ item.name }}</span>
-            <div class="action-buttons">
-              <button type="button" class="btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">View</button>
-              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">Edit</button>
-              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)">Delete</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Other Items Section -->
-      <div class="category">
-        <h3>Other Items</h3>
-        <ul>
-          <li *ngFor="let item of otherItems; let i = index" class="list-item supplement-item">
-            <span class="other-item-name">{{ item.name }}</span>
-            <div class="action-buttons">
-              <button type="button" class="btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">View</button>
-              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">Edit</button>
-              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)">Delete</button>
-            </div>
-          </li>
-        </ul>
+      <div class="medication-container">
+        <div class="category">
+          <h3>Supplements</h3>
+          <ul>
+            <li>L - Theanine</li>
+            <li>Lionsmane</li>
+            <li>Ginkgo Biloba</li>
+          </ul>
+        </div>
+        <div class="category">
+          <h3>Prescription</h3>
+          <ul>
+            <li>Adderal</li>
+          </ul>
+        </div>
+        <div class="category">
+          <h3>Other</h3>
+          <ul>
+            <li>Paracetamol</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div class="d-flex justify-content-center">
-      <!-- <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button type="button" class="btn btn-outline-secondary" routerLink="/workout">
+        Track Workouts <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span>Refresh list</span>
-      </button> -->
+      </button>
 
       <button
         id="jh-create-entity"
@@ -67,26 +49,17 @@
         <span> Create a new Medicine </span>
       </button>
     </div>
-    <div class="category">
-      <h3>Interactions</h3>
-      <ul>
-        <li *ngFor="let interaction of interactions; let i = index" class="list-item interaction-item">
-          <span class="interaction-detail">{{ interaction.detail }}</span>
-        </li>
-      </ul>
-    </div>
+  </h2>
 
-    <div class="d-flex justify-content-center">
-      <button type="button" class="btn btn-outline-secondary" routerLink="/workout">
-        Track Workouts <i class="fa fa-arrow-right"></i>
-      </button>
-    </div>
+  <jhi-alert-error></jhi-alert-error>
 
-    <jhi-alert-error></jhi-alert-error>
+  <jhi-alert></jhi-alert>
 
-    <jhi-alert></jhi-alert>
+  <div class="alert alert-warning" id="no-result" *ngIf="medicines?.length === 0">
+    <span>No Medicines found</span>
+  </div>
 
-    <!-- <div class="table-responsive table-entities" id="entities" *ngIf="medicines && medicines.length > 0">
+  <div class="table-responsive table-entities" id="entities" *ngIf="medicines && medicines.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
@@ -181,6 +154,5 @@
         </tr>
       </tbody>
     </table>
-  </div> -->
   </div>
 </div>

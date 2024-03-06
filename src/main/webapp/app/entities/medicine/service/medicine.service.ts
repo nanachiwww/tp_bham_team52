@@ -97,10 +97,6 @@ export class MedicineService {
     return medicineCollection;
   }
 
-  getMedicines(): Observable<IMedicine[]> {
-    return this.http.get<IMedicine[]>('/api/medicines');
-  }
-
   protected convertDateFromClient<T extends IMedicine | NewMedicine | PartialUpdateMedicine>(medicine: T): RestOf<T> {
     return {
       ...medicine,
