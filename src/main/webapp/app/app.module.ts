@@ -26,6 +26,7 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { SectionbarComponent } from './layouts/sectionbar/sectionbar.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { NextButtonComponent } from './layouts/next-button/next-button.component';
+import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { NextButtonComponent } from './layouts/next-button/next-button.component
     SectionbarComponent,
     AboutUsComponent,
     NextButtonComponent,
+    CookiePopupComponent,
   ],
   bootstrap: [MainComponent],
 })

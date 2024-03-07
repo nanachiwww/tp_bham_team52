@@ -1,0 +1,10 @@
+<div *ngIf="popupVisible">
+  <div class="cookie">
+    <p>Our website uses cookies to improve your browsing experience.</p>
+    <p>Do you agree to use cookies?</p>
+    <div>
+      <button (click)="acceptCookies()" class="button">agree</button>
+      <button (click)="rejectCookies()" class="button">reject</button>
+    </div>
+  </div>
+</div>
