@@ -1,21 +1,28 @@
 <div>
   <div class="container text-center">
     <h1>Sleeping Time!</h1>
-    <p>Press "play" button to start recording sleeping time. Press "Stop" button to end recording.</p>
-
     <div class="button-group">
-      <button class="btn btn-play">
-        <i class="fa fa-play"></i>
-      </button>
-      <button class="btn btn-stop">
-        <i class="fa fa-stop"></i>
-      </button>
-    </div>
-
-    <h2>Your sleeping time history</h2>
-    <div class="history-container">
-      <div class="history-entry" *ngFor="let time of sleepTimes">
-        <span>{{ time.start }} - {{ time.end }}</span>
+      <div *ngIf="play">
+        <button class="btn btn-play" (click)="startRecording()">
+          <i class="fa fa-play"
+            ><svg version="1.1" viewBox="0 0 512 512" height="500" width="500" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="255.77" cy="256.2" rx="256.31" ry="255.94" style="fill-rule: evenodd; fill: #099" />
+              <path
+                transform="matrix(1.0793 0 0 1.0745 -28.476 -12.959)"
+                d="m149.33 418.72 0.3782-170.61 0.3782-170.61 295.12 171.26-147.94 84.976z"
+                style="fill: #e6e6e6"
+              /></svg
+          ></i>
+        </button>
+      </div>
+      <div *ngIf="!play">
+        <button class="btn btn-stop" (click)="stopRecording()">
+          <i class="fa fa-stop"
+            ><svg version="1.1" viewBox="0 0 512 512" height="500" width="500" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="255.77" cy="256.2" rx="256.31" ry="255.94" style="fill-rule: evenodd; fill: #099" />
+              <rect x="89.851" y="89.708" width="330.97" height="333.58" style="fill: #e6e6e6; stroke-width: 1.3439" /></svg
+          ></i>
+        </button>
       </div>
     </div>
   </div>
