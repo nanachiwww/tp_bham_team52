@@ -3,6 +3,9 @@ import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+// Import the dumbbell icon
+import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
+
 import { IExercise } from '../exercise.model';
 import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, ExerciseService } from '../service/exercise.service';
@@ -12,6 +15,7 @@ import { SortService } from 'app/shared/sort/sort.service';
 @Component({
   selector: 'jhi-exercise',
   templateUrl: './exercise.component.html',
+  styleUrls: ['./exercise.component.scss'],
 })
 export class ExerciseComponent implements OnInit {
   exercises?: IExercise[];
@@ -19,6 +23,9 @@ export class ExerciseComponent implements OnInit {
 
   predicate = 'id';
   ascending = true;
+
+  // Assign the imported icon to a variable
+  faDumbbell = faDumbbell;
 
   constructor(
     protected exerciseService: ExerciseService,

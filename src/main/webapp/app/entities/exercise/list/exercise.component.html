@@ -1,7 +1,7 @@
 <div>
   <h2 id="page-heading" data-cy="ExerciseHeading" style="text-align: center">
     <p>Exercises</p>
-    <p>Here is all of the exercises to choose from</p>
+    <p>Here are all of the exercises to choose from</p>
     <p>Don't see an exercise? Go ahead and add it!</p>
     <div class="d-flex justify-content-center">
       <button class="btn custom-button-class2 me-2" (click)="load()" [disabled]="isLoading">
@@ -18,6 +18,13 @@
         <fa-icon icon="plus"></fa-icon>
         <span> Create a new Exercise </span>
       </button>
+
+      <button id="workouts-button" class="btn custom-button-class2 jh-create-entity create-exercise workouts-button" routerLink="/workout">
+        <fa-icon [icon]="faDumbbell"></fa-icon>
+        <!-- Use the Font Awesome dumbbell icon -->
+        <!-- Remove the text "Go to Workouts" -->
+        Go to workouts
+      </button>
     </div>
   </h2>
 
@@ -29,80 +36,39 @@
     <span>No Exercises found</span>
   </div>
 
-  <div class="table-responsive table-entities" id="entities" *ngIf="exercises && exercises.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="name">
-            <div class="d-flex">
-              <span>Name</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="description">
-            <div class="d-flex">
-              <span>Description</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="reps">
-            <div class="d-flex">
-              <span>Reps</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="sets">
-            <div class="d-flex">
-              <span>Sets</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="muscleGroup">
-            <div class="d-flex">
-              <span>Muscle Group</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let exercise of exercises; trackBy: trackId" data-cy="entityTable">
-          <td>{{ exercise.name }}</td>
-          <td>{{ exercise.description }}</td>
-          <td>{{ exercise.reps }}</td>
-          <td>{{ exercise.sets }}</td>
-          <td>{{ exercise.muscleGroup }}</td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/exercise', exercise.id, 'view']"
-                class="btn custom-button-class1 btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">View</span>
-              </button>
+  <div class="exercise-card-container" *ngIf="exercises && exercises.length > 0">
+    <div class="exercise-card" *ngFor="let exercise of exercises; trackBy: trackId" data-cy="entityCard">
+      <div><strong>Name:</strong> {{ exercise.name }}</div>
+      <div><strong>Description:</strong> {{ exercise.description }}</div>
+      <div><strong>Reps:</strong> {{ exercise.reps }}</div>
+      <div><strong>Sets:</strong> {{ exercise.sets }}</div>
+      <div><strong>Muscle Group:</strong> {{ exercise.muscleGroup }}</div>
+      <div class="text-end button-container">
+        <button
+          type="submit"
+          [routerLink]="['/exercise', exercise.id, 'view']"
+          class="btn custom-button-class1 btn-sm"
+          data-cy="entityDetailsButton"
+        >
+          <fa-icon icon="eye"></fa-icon>
+          <span class="d-none d-md-inline">View</span>
+        </button>
 
-              <button
-                type="submit"
-                [routerLink]="['/exercise', exercise.id, 'edit']"
-                class="btn custom-button-class2 btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Edit</span>
-              </button>
+        <button
+          type="submit"
+          [routerLink]="['/exercise', exercise.id, 'edit']"
+          class="btn custom-button-class2 btn-sm"
+          data-cy="entityEditButton"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>
+          <span class="d-none d-md-inline">Edit</span>
+        </button>
 
-              <button type="submit" (click)="delete(exercise)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <button type="submit" (click)="delete(exercise)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+          <fa-icon icon="times"></fa-icon>
+          <span class="d-none d-md-inline">Delete</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
