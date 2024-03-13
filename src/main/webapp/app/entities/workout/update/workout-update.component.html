@@ -46,7 +46,9 @@
             data-cy="intensityLevel"
           >
             <option [ngValue]="null"></option>
-            <option *ngFor="let intensityLevelEnum of intensityLevelEnumValues" [value]="intensityLevelEnum">intensityLevelEnum</option>
+            <option *ngFor="let intensityLevelEnum of intensityLevelEnumValues" [value]="intensityLevelEnum">
+              {{ intensityLevelEnum }}
+            </option>
           </select>
         </div>
 
