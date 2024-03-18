@@ -1,4 +1,8 @@
 <div>
+  <div>
+    <jhi-energy-intake-result></jhi-energy-intake-result>
+  </div>
+  <h2>Custom goal</h2>
   <h2 id="page-heading" data-cy="CustomGoalHeading">
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
@@ -21,7 +25,6 @@
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
-
   <div class="alert alert-warning" id="no-result" *ngIf="customGoals?.length === 0">
     <span>No Custom Goals found</span>
   </div>

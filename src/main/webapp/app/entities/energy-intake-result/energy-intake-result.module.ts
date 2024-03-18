@@ -14,5 +14,6 @@ import { EnergyIntakeResultRoutingModule } from './route/energy-intake-result-ro
     EnergyIntakeResultUpdateComponent,
     EnergyIntakeResultDeleteDialogComponent,
   ],
+  exports: [EnergyIntakeResultComponent],
 })
 export class EnergyIntakeResultModule {}

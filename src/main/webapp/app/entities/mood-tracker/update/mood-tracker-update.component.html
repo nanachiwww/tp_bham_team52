@@ -35,7 +35,7 @@
           <label class="form-label" for="field_mood">Mood</label>
           <select class="form-control" name="mood" formControlName="mood" id="field_mood" data-cy="mood">
             <option [ngValue]="null"></option>
-            <option *ngFor="let mood of moodValues" [value]="mood">mood</option>
+            <option *ngFor="let mood of moodValues" [value]="mood">{{ mood }}</option>
           </select>
           <div *ngIf="editForm.get('mood')!.invalid && (editForm.get('mood')!.dirty || editForm.get('mood')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('mood')?.errors?.required"> This field is required. </small>
