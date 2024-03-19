@@ -1,5 +1,7 @@
 .container {
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .goals button {
@@ -9,4 +11,50 @@
   padding-right: 20px;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+.card {
+  flex: 0 0 calc(50% - 20px); /* Each card takes up 50% width with 20px spacing between */
+  margin-right: 20px; /* Add space between cards */
+  margin-bottom: 20px; /* Add space below cards */
+}
+
+.card:last-child {
+  margin-right: 0; /* Remove margin-right for the last card in each row */
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 0 0 calc(100% - 20px); /* Each card takes up 100% width on smaller screens */
+    margin-right: 0; /* Remove margin-right for smaller screens */
+  }
+}
+
+.card-title {
+  font-size: 1.25rem; /* Increase the font size of the card title */
+  margin-bottom: 0.5rem; /* Add some space below the card title */
+}
+
+.card-text {
+  margin-bottom: 0.5rem; /* Add some space below the card text */
+}
+
+.card-buttons {
+  display: flex; /* Arrange buttons in a row */
+  justify-content: space-between; /* Distribute buttons evenly */
+  margin-top: 1rem; /* Add some space above the buttons */
+}
+
+.btn {
+  cursor: pointer; /* Change cursor to pointer on buttons */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Set primary button background color */
+  border-color: #007bff; /* Set primary button border color */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darken primary button background color on hover */
+  border-color: #0056b3; /* Darken primary button border color on hover */
 }
