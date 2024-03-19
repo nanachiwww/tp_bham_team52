@@ -1,34 +1,50 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-custom-goal-heading" data-cy="CustomGoalCreateUpdateHeading">Create or edit a Custom Goal</h2>
+    <form name="editForm" role="form" *ngIf="getSelectedValue() === 'Value1'" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-sleeping-goal-heading" data-cy="CustomGoalCreateUpdateHeading">Create or edit a sleeping time goal</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
 
         <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          <label class="form-label" for="sleep_id">ID</label>
+          <input type="number" class="form-control" name="id" id="sleep_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_name">Name</label>
-          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <label class="form-label" for="field_name">Start time</label>
+          <input
+            type="datetime-local"
+            placeholder="YYYY-MM-DD HH:mm"
+            class="form-control"
+            name="name"
+            id="field_name"
+            data-cy="name"
+            formControlName="name"
+          />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="form-label" for="field_name">End time</label>
+          <input
+            type="datetime-local"
+            placeholder="YYYY-MM-DD HH:mm"
+            class="form-control"
+            name="name"
+            id="field_time"
+            data-cy="name"
+            formControlName="name"
+          />
           <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            name="description"
-            id="field_description"
-            data-cy="description"
-            formControlName="description"
-          />
+          <label class="form-label" for="field_rating">Rating</label>
+          <input type="number" class="form-control" name="rating" id="field_rating" data-cy="rating" formControlName="rating" />
         </div>
 
         <div class="row mb-3">
@@ -63,6 +79,110 @@
         >
           <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
         </button>
+      </div>
+    </form>
+    <form name="editForm" role="form" *ngIf="getSelectedValue() === 'Value2'" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-diet-goal-heading" data-cy="CustomGoalCreateUpdateHeading">Create or edit a calorie intake goal for a day</h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+        <label class="form-label" for="diet_id">ID</label>
+        <input type="number" class="form-control" name="id" id="diet_id" data-cy="id" formControlName="id" [readonly]="true" />
+      </div>
+      <div class="row mb-3">
+        <label class="form-label" for="field_name">Calorie intake</label>
+        <input type="number" class="form-control" name="name" id="diet_intake" data-cy="name" formControlName="name" />
+        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+        </div>
+        <label class="form-label" for="field_name">Date</label>
+        <input type="date" class="form-control" name="name" id="diet_date" data-cy="name" formControlName="name" />
+        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+      <div>
+        <button type="button" id="cancel-save-diet" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity-diet"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+
+    <form name="editForm" role="form" *ngIf="getSelectedValue() === 'Value3'" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-mood-goal-heading" data-cy="CustomGoalCreateUpdateHeading">Create or edit a mood goal</h2>
+
+      <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+        <label class="form-label" for="field_id">ID</label>
+        <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+      </div>
+
+      <div class="row mb-3">
+        <label class="form-label" for="field_name">Date</label>
+        <input type="date" class="form-control" name="name" id="mood_date" data-cy="name" formControlName="name" />
+        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="form-label" for="field_mood">Mood</label>
+        <select class="form-control" name="mood" formControlName="mood" id="field_mood" data-cy="mood">
+          <option [ngValue]="null"></option>
+          <option *ngFor="let mood of moodValues" [value]="mood">{{ mood }}</option>
+        </select>
+        <div *ngIf="editForm.get('mood')!.invalid && (editForm.get('mood')!.dirty || editForm.get('mood')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('mood')?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save-mood" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity-mood"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+    <form name="editForm" role="form" *ngIf="getSelectedValue() === 'Value4'" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      >
+      <h2 id="jhi-custom-goal-heading" data-cy="CustomGoalCreateUpdateHeading">Create or edit custom goal</h2>
+      <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+        <label class="form-label" for="sleep_id">ID</label>
+        <input type="number" class="form-control" name="id" id="custom-goal_id" data-cy="id" formControlName="id" [readonly]="true" />
+      </div>
+
+      <div class="row mb-3">
+        <label class="form-label" for="field_name">Name</label>
+        <input type="text" class="form-control" name="name" id="custom_name" data-cy="name" formControlName="name" />
+        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="form-label" for="field_name">Description</label>
+        <input type="text" class="form-control" name="description" id="custom_description" data-cy="name" formControlName="name" />
+        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+        </div>
       </div>
     </form>
   </div>

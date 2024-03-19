@@ -1,4 +1,22 @@
-.goal-container {
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.category button {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 800px;
+  height: 70px;
+  font-size: 25px;
+}
+.container.text-center {
+  margin-bottom: 50px; /* Set the spacing at the bottom of the header to 20 pixels */
+}
+
+/*.goal-container {
   display: flex;
   justify-content: space-around;
   border-radius: 10px;
@@ -39,4 +57,4 @@ input[type='text'] {
 
 input[type='text']:focus {
   outline: none;
-}
+}*/

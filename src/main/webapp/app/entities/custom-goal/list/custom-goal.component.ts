@@ -7,6 +7,7 @@ import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/conf
 import { EntityArrayResponseType, CustomGoalService } from '../service/custom-goal.service';
 import { CustomGoalDeleteDialogComponent } from '../delete/custom-goal-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
+import { SharedDataService } from 'app/shared/data/shared-data.service';
 
 @Component({
   selector: 'jhi-custom-goal',
@@ -25,8 +26,12 @@ export class CustomGoalComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected sortService: SortService,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private sharedDataService: SharedDataService
   ) {}
+  updateSelectedValue(value: string): void {
+    this.sharedDataService.setSelectedValue(value);
+  }
 
   trackId = (_index: number, item: ICustomGoal): number => this.customGoalService.getCustomGoalIdentifier(item);
 

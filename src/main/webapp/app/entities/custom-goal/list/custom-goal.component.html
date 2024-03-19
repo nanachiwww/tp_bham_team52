@@ -1,4 +1,14 @@
-<div>
+<h2 class="container text-center">Setting your goal(s)!</h2>
+<div class="d-flex justify-content-around">
+  <div class="category">
+    <button (click)="updateSelectedValue('Value1')" [routerLink]="['/custom-goal/new']">Sleep time</button>
+    <button (click)="updateSelectedValue('Value2')" [routerLink]="['/custom-goal/new']">Calorie intake goal for a day</button>
+    <button (click)="updateSelectedValue('Value3')" [routerLink]="['/custom-goal/new']">Today's mood</button>
+    <button (click)="updateSelectedValue('Value4')" [routerLink]="['/custom-goal/new']">Custom goal</button>
+  </div>
+</div>
+
+<!--<div>
   <div>
     <jhi-energy-intake-result></jhi-energy-intake-result>
   </div>
@@ -105,3 +115,4 @@
     </table>
   </div>
 </div>
+-->

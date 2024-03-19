@@ -9,6 +9,9 @@ import { ICustomGoal } from '../custom-goal.model';
 import { CustomGoalService } from '../service/custom-goal.service';
 import { IUserProfile } from 'app/entities/user-profile/user-profile.model';
 import { UserProfileService } from 'app/entities/user-profile/service/user-profile.service';
+import { SharedDataService } from 'app/shared/data/shared-data.service';
+import { Mood } from 'app/entities/enumerations/mood.model';
+import { IMoodTracker } from '../../mood-tracker/mood-tracker.model';
 
 @Component({
   selector: 'jhi-custom-goal-update',
@@ -16,7 +19,10 @@ import { UserProfileService } from 'app/entities/user-profile/service/user-profi
 })
 export class CustomGoalUpdateComponent implements OnInit {
   isSaving = false;
+
   customGoal: ICustomGoal | null = null;
+  moodTracker: IMoodTracker | null = null;
+  moodValues = Object.keys(Mood);
 
   userProfilesSharedCollection: IUserProfile[] = [];
 
@@ -26,8 +32,13 @@ export class CustomGoalUpdateComponent implements OnInit {
     protected customGoalService: CustomGoalService,
     protected customGoalFormService: CustomGoalFormService,
     protected userProfileService: UserProfileService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private sharedDataService: SharedDataService
   ) {}
+
+  getSelectedValue(): string {
+    return this.sharedDataService.getSelectedValue();
+  }
 
   compareUserProfile = (o1: IUserProfile | null, o2: IUserProfile | null): boolean => this.userProfileService.compareUserProfile(o1, o2);
 

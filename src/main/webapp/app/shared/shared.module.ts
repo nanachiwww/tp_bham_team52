@@ -11,6 +11,7 @@ import { SortByDirective } from './sort/sort-by.directive';
 import { SortDirective } from './sort/sort.directive';
 import { ItemCountComponent } from './pagination/item-count.component';
 import { FilterComponent } from './filter/filter.component';
+import { SharedDataService } from './data/shared-data.service';
 
 @NgModule({
   imports: [SharedLibsModule],
@@ -39,5 +40,6 @@ import { FilterComponent } from './filter/filter.component';
     ItemCountComponent,
     FilterComponent,
   ],
+  providers: [SharedDataService],
 })
 export class SharedModule {}
