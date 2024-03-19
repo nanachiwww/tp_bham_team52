@@ -1,5 +1,5 @@
 <div>
-  <div class="container">
+  <!-- <div class="container">
     <h2>What are your top 3 goals?</h2>
     <p>Select from options below to tailor our recommendations to your goals</p>
     <div class="goals">
@@ -11,7 +11,7 @@
       <button (click)="toggleGoal('Gain Weight')">Gain Weight</button>
     </div>
     <button (click)="completeSelection()">Done</button>
-  </div>
+  </div> -->
   <h2 id="page-heading" data-cy="WorkoutHeading">
     <span>Workouts</span>
 
@@ -41,104 +41,21 @@
     <span>No Workouts found</span>
   </div>
 
-  <div class="table-responsive table-entities" id="entities" *ngIf="workouts && workouts.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
-            <div class="d-flex">
-              <span>ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="name">
-            <div class="d-flex">
-              <span>Name</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="description">
-            <div class="d-flex">
-              <span>Description</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="duration">
-            <div class="d-flex">
-              <span>Duration</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="intensityLevel">
-            <div class="d-flex">
-              <span>Intensity Level</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="exercises.id">
-            <div class="d-flex">
-              <span>Exercises</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="userProfile.id">
-            <div class="d-flex">
-              <span>User Profile</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let workout of workouts; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/workout', workout.id, 'view']">{{ workout.id }}</a>
-          </td>
-          <td>{{ workout.name }}</td>
-          <td>{{ workout.description }}</td>
-          <td>{{ workout.duration }}</td>
-          <td>{{ workout.intensityLevel }}</td>
-          <td>
-            <div *ngIf="workout.exercises">
-              <a [routerLink]="['/exercise', workout.exercises.id, 'view']">{{ workout.exercises.id }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="workout.userProfile">
-              <a [routerLink]="['/user-profile', workout.userProfile.id, 'view']">{{ workout.userProfile.id }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/workout', workout.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">View</span>
-              </button>
-
-              <button
-                type="submit"
-                [routerLink]="['/workout', workout.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Edit</span>
-              </button>
-
-              <button type="submit" (click)="delete(workout)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="container" *ngIf="workouts && workouts.length > 0">
+    <div class="card" *ngFor="let workout of workouts; trackBy: trackId" data-cy="entityTable">
+      <div class="card-body">
+        <h5 class="card-title">{{ workout.name }}</h5>
+        <p class="card-text">{{ workout.description }}</p>
+        <p class="card-text">
+          <small class="text-muted">Duration: {{ workout.duration }}</small>
+        </p>
+        <p class="card-text">
+          <small class="text-muted">Intensity Level: {{ workout.intensityLevel }}</small>
+        </p>
+        <a [routerLink]="['/workout', workout.id, 'view']" class="btn btn-primary">View</a>
+        <a [routerLink]="['/workout', workout.id, 'edit']" class="btn btn-primary">Edit</a>
+        <button (click)="delete(workout)" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
   </div>
 </div>
