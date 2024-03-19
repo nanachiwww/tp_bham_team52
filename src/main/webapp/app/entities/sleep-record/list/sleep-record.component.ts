@@ -12,20 +12,42 @@ import { SortService } from 'app/shared/sort/sort.service';
 @Component({
   selector: 'jhi-sleep-record',
   templateUrl: './sleep-record.component.html',
+  styleUrls: ['./sleep-record.component.scss'],
 })
 export class SleepRecordComponent implements OnInit {
   newrecord = { start: new Date(), end: new Date() };
   // Methods to handle play and stop events
   play: boolean = true;
+  timeing: string = '';
+  timerId: ReturnType<typeof setInterval> | undefined;
   startRecording() {
     // Implement start recording functionality
     this.play = false;
+    this.newrecord.start = new Date();
+    this.timerId = setInterval(() => {
+      this.updatetimer();
+    }, 1000);
   }
 
   stopRecording() {
     // Implement stop recording functionality
     this.play = true;
+    clearInterval(this.timerId);
+    this.newrecord.end = new Date();
+    //submit:
   }
+
+  updatetimer() {
+    var diffinseconds: number = (Date.now() - this.newrecord.start.getTime()) / 1000;
+    this.timeing =
+      'Hours: ' +
+      Math.floor(diffinseconds / (60 * 60)) +
+      ' Minutes: ' +
+      Math.floor((diffinseconds / 60) % (60 * 60)) +
+      ' Seconds: ' +
+      Math.floor(diffinseconds % 60);
+  }
+
   sleepRecords?: ISleepRecord[];
   isLoading = false;
 
