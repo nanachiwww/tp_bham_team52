@@ -95,26 +95,35 @@ input[type='text']:focus {
 
 .supplement-name {
   z-index: 1;
+  font-weight: bold;
+}
+
+.supplement-date {
+  z-index: 1;
+  padding-bottom: 12px;
+}
+.supplement-description {
+  z-index: 1;
+  padding-bottom: 12px;
 }
 
 .action-buttons {
-  position: absolute;
-
-  display: none;
+  display: flex;
   z-index: 2;
-  // center the buttons
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // alight horizontally center
+  justify-content: center;
+}
+.action-buttons button:not(:last-child) {
+  margin-right: 8px; /* Adjust the pixel value as needed */
 }
 
-.list-item:hover .action-buttons {
-  display: flex;
-  padding: 10px;
+.green-btn {
+  background-color: #28a745;
 }
 
 .supplement-item {
   width: 400px;
+  height: auto;
 }
 
 .title {
@@ -126,4 +135,26 @@ input[type='text']:focus {
   background-color: #f2f2f2; /* Different background color for distinction */
   color: #333; /* Text color for interaction items */
   /* Other styles as needed */
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.interactions-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.parent-container {
+  /* Replace with the actual parent class or use a relevant selector */
+  display: flex;
+  justify-content: center; /* Centers child horizontally */
+  align-items: center; /* Centers child vertically if you want */
+  /* Ensure it takes the full width if it's not already full width */
+  width: 100%;
 }

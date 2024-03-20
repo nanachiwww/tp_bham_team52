@@ -1,117 +1,115 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-medicine-heading" data-cy="MedicineCreateUpdateHeading">Create or edit a Medicine</h2>
+<div class="parent-container">
+  <div class="medicine-container">
+    <div class="d-flex justify-content-center">
+      <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+          <h2 id="jhi-medicine-heading" data-cy="MedicineCreateUpdateHeading">Create or edit a Medicine</h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+          <div>
+            <jhi-alert-error></jhi-alert-error>
+            <div class="row mb-3">
+              <label class="form-label" for="field_date">Date</label>
+              <div class="input-group">
+                <input
+                  id="field_date"
+                  data-cy="date"
+                  type="text"
+                  class="form-control"
+                  name="date"
+                  ngbDatepicker
+                  #dateDp="ngbDatepicker"
+                  formControlName="date"
+                />
+                <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+              </div>
+              <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required"> This field is required. </small>
+              </div>
+            </div>
 
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" for="field_name">Name</label>
+              <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+              <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+              </div>
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_date">Date</label>
-          <div class="input-group">
-            <input
-              id="field_date"
-              data-cy="date"
-              type="text"
-              class="form-control"
-              name="date"
-              ngbDatepicker
-              #dateDp="ngbDatepicker"
-              formControlName="date"
-            />
-            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            <div class="row mb-3">
+              <label class="form-label" for="field_description">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                name="description"
+                id="field_description"
+                data-cy="description"
+                formControlName="description"
+              />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" for="field_subjectiveEffect">Subjective Effect</label>
+              <input
+                type="text"
+                class="form-control"
+                name="subjectiveEffect"
+                id="field_subjectiveEffect"
+                data-cy="subjectiveEffect"
+                formControlName="subjectiveEffect"
+              />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" for="field_supplementType">Supplement Type</label>
+              <select
+                class="form-control"
+                name="supplementType"
+                formControlName="supplementType"
+                id="field_supplementType"
+                data-cy="supplementType"
+              >
+                <option [ngValue]="null"></option>
+                <option *ngFor="let supplementTypeEnum of supplementTypeEnumValues" [value]="supplementTypeEnum">
+                  {{ supplementTypeEnum }}
+                </option>
+              </select>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" for="field_userProfile">User Profile</label>
+              <select
+                class="form-control"
+                id="field_userProfile"
+                data-cy="userProfile"
+                name="userProfile"
+                formControlName="userProfile"
+                [compareWith]="compareUserProfile"
+              >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userProfileOption" *ngFor="let userProfileOption of userProfilesSharedCollection">
+                  {{ userProfileOption.id }}
+                </option>
+              </select>
+            </div>
           </div>
-          <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required"> This field is required. </small>
+
+          <div>
+            <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+            </button>
+
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving"
+              class="btn btn-primary"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+            </button>
           </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_name">Name</label>
-          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
-          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            name="description"
-            id="field_description"
-            data-cy="description"
-            formControlName="description"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_subjectiveEffect">Subjective Effect</label>
-          <input
-            type="text"
-            class="form-control"
-            name="subjectiveEffect"
-            id="field_subjectiveEffect"
-            data-cy="subjectiveEffect"
-            formControlName="subjectiveEffect"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_supplementType">Supplement Type</label>
-          <select
-            class="form-control"
-            name="supplementType"
-            formControlName="supplementType"
-            id="field_supplementType"
-            data-cy="supplementType"
-          >
-            <option [ngValue]="null"></option>
-            <option *ngFor="let supplementTypeEnum of supplementTypeEnumValues" [value]="supplementTypeEnum">
-              {{ supplementTypeEnum }}
-            </option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_userProfile">User Profile</label>
-          <select
-            class="form-control"
-            id="field_userProfile"
-            data-cy="userProfile"
-            name="userProfile"
-            formControlName="userProfile"
-            [compareWith]="compareUserProfile"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="userProfileOption" *ngFor="let userProfileOption of userProfilesSharedCollection">
-              {{ userProfileOption.id }}
-            </option>
-          </select>
-        </div>
+        </form>
       </div>
-
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
-        </button>
-
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

@@ -27,7 +27,7 @@ import { SectionbarComponent } from './layouts/sectionbar/sectionbar.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { NextButtonComponent } from './layouts/next-button/next-button.component';
 import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   imports: [
     BrowserModule,
@@ -39,6 +39,7 @@ import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
     HttpClientModule,
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
+    FontAwesomeModule,
   ],
   providers: [
     Title,

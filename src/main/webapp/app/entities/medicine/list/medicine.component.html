@@ -10,11 +10,20 @@
         <h3>Supplements</h3>
         <ul>
           <li *ngFor="let item of supplements; let i = index" class="list-item supplement-item">
-            <span class="supplement-name">{{ item.name }}</span>
+            <div class="info">
+              <span class="supplement-name">{{ item.name }}</span>
+              <span class="supplement-date">{{ item.date }}</span>
+              <span class="supplement-description">{{ item.description }}</span>
+            </div>
+
             <div class="action-buttons">
-              <button type="button" class="btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">View</button>
-              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">Edit</button>
-              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)">Delete</button>
+              <button type="button" class="green-btn btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">
+                <fa-icon icon="eye"></fa-icon> View
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">
+                <fa-icon icon="pencil"></fa-icon> Edit
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><fa-icon icon="times"></fa-icon> Delete</button>
             </div>
           </li>
         </ul>
@@ -25,11 +34,20 @@
         <h3>Prescriptions</h3>
         <ul>
           <li *ngFor="let item of prescriptions; let i = index" class="list-item supplement-item">
-            <span class="prescription-name">{{ item.name }}</span>
+            <div class="info">
+              <span class="supplement-name">{{ item.name }}</span>
+              <span class="supplement-date">{{ item.date }}</span>
+              <span class="supplement-description">{{ item.description }}</span>
+            </div>
+
             <div class="action-buttons">
-              <button type="button" class="btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">View</button>
-              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">Edit</button>
-              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)">Delete</button>
+              <button type="button" class="green-btn btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">
+                <fa-icon icon="eye"></fa-icon> View
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">
+                <fa-icon icon="pencil"></fa-icon> Edit
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><fa-icon icon="times"></fa-icon> Delete</button>
             </div>
           </li>
         </ul>
@@ -40,11 +58,20 @@
         <h3>Other Items</h3>
         <ul>
           <li *ngFor="let item of otherItems; let i = index" class="list-item supplement-item">
-            <span class="other-item-name">{{ item.name }}</span>
+            <div class="info">
+              <span class="supplement-name">{{ item.name }}</span>
+              <span class="supplement-date">{{ item.date }}</span>
+              <span class="supplement-description">{{ item.description }}</span>
+            </div>
+
             <div class="action-buttons">
-              <button type="button" class="btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">View</button>
-              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">Edit</button>
-              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)">Delete</button>
+              <button type="button" class="green-btn btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">
+                <fa-icon icon="eye"></fa-icon> View
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">
+                <fa-icon icon="pencil"></fa-icon> Edit
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><fa-icon icon="times"></fa-icon> Delete</button>
             </div>
           </li>
         </ul>
@@ -68,12 +95,17 @@
       </button>
     </div>
     <div class="category">
-      <h3>Interactions</h3>
-      <ul>
+      <h3 class="interactions-title">Interactions</h3>
+      <h4>Interactions with other medicines</h4>
+      <div>
+        <span>No interactions found</span>
+      </div>
+
+      <!-- <ul>
         <li *ngFor="let interaction of interactions; let i = index" class="list-item interaction-item">
           <span class="interaction-detail">{{ interaction.detail }}</span>
         </li>
-      </ul>
+      </ul> -->
     </div>
 
     <div class="d-flex justify-content-center">

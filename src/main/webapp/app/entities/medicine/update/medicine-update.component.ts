@@ -14,6 +14,7 @@ import { SupplementTypeEnum } from 'app/entities/enumerations/supplement-type-en
 @Component({
   selector: 'jhi-medicine-update',
   templateUrl: './medicine-update.component.html',
+  styleUrls: ['./medicine-update.component.scss'],
 })
 export class MedicineUpdateComponent implements OnInit {
   isSaving = false;

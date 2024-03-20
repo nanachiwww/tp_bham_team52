@@ -1,0 +1,41 @@
+.title-container {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  text-align: center; /* Ensure text is centered if it wraps */
+  width: 100%; /* Full width to ensure centering within its container */
+}
+
+.title-container h1 {
+  margin: 0; /* Removes default margin */
+  color: black;
+  font-weight: bold;
+  width: 100%; /* Ensures the h1 takes full width for text centering */
+}
+.parent-container {
+  /* Replace with the actual parent class or use a relevant selector */
+  display: flex;
+  justify-content: center; /* Centers child horizontally */
+  align-items: center; /* Centers child vertically if you want */
+  /* Ensure it takes the full width if it's not already full width */
+  width: 100%;
+}
+
+.medicine-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 800px;
+}
+
+.info-items {
+  // center the items in column
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+@import '~@fortawesome/fontawesome-free/css/all.css';

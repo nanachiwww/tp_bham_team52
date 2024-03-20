@@ -6,6 +6,7 @@ import { IMedicine } from '../medicine.model';
 @Component({
   selector: 'jhi-medicine-detail',
   templateUrl: './medicine-detail.component.html',
+  styleUrls: ['./medicine-detail.component.scss'],
 })
 export class MedicineDetailComponent implements OnInit {
   medicine: IMedicine | null = null;
