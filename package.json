@@ -88,6 +88,7 @@
     "@popperjs/core": "2.11.6",
     "bootstrap": "5.2.0",
     "bootswatch": "5.2.0",
+    "chart.js": "^4.4.2",
     "dayjs": "1.11.5",
     "ngx-infinite-scroll": "14.0.0",
     "ngx-webstorage": "10.0.1",
