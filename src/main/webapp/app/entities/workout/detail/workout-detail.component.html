@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
+<div class="container">
+  <div class="workout-details">
     <div *ngIf="workout">
-      <h2 data-cy="workoutDetailsHeading"><span>Workout</span></h2>
+      <h2 data-cy="workoutDetailsHeading" class="workout-details"><span>Workout Details</span></h2>
 
       <hr />
 
@@ -9,40 +9,36 @@
 
       <jhi-alert></jhi-alert>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span>ID</span></dt>
-        <dd>
-          <span>{{ workout.id }}</span>
-        </dd>
-        <dt><span>Name</span></dt>
-        <dd>
-          <span>{{ workout.name }}</span>
-        </dd>
-        <dt><span>Description</span></dt>
-        <dd>
-          <span>{{ workout.description }}</span>
-        </dd>
-        <dt><span>Duration</span></dt>
-        <dd>
-          <span>{{ workout.duration }}</span>
-        </dd>
-        <dt><span>Intensity Level</span></dt>
-        <dd>
-          <span>{{ workout.intensityLevel }}</span>
-        </dd>
-        <dt><span>Exercises</span></dt>
-        <dd>
-          <div *ngIf="workout.exercises">
-            <a [routerLink]="['/exercise', workout.exercises.id, 'view']">{{ workout.exercises.id }}</a>
+      <div class="workout-info">
+        <div class="info-item">
+          <span class="info-label">Name:</span>
+          <span class="info-value">{{ workout.name }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">Description:</span>
+          <span class="info-value">{{ workout.description }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">Duration:</span>
+          <span class="info-value">{{ workout.duration }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">Intensity Level:</span>
+          <span class="info-value">{{ workout.intensityLevel }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">Exercises:</span>
+          <div class="exercise-list">
+            <div *ngIf="workout.exercises">
+              <a [routerLink]="['/exercise', workout.exercises.id, 'view']">{{ workout.exercises.id }}</a>
+            </div>
           </div>
-        </dd>
-        <dt><span>User Profile</span></dt>
-        <dd>
-          <div *ngIf="workout.userProfile">
-            <a [routerLink]="['/user-profile', workout.userProfile.id, 'view']">{{ workout.userProfile.id }}</a>
-          </div>
-        </dd>
-      </dl>
+        </div>
+      </div>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>

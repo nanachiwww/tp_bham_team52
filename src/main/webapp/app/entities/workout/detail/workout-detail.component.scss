@@ -1,0 +1,68 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.workout-details {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.workout-heading {
+  margin-top: 0;
+}
+
+.alert-section {
+  margin-bottom: 20px;
+}
+
+.workout-info {
+  margin-bottom: 20px;
+}
+
+.info-item {
+  margin-bottom: 10px;
+}
+
+.info-label {
+  font-weight: bold;
+}
+
+.info-value {
+  margin-left: 10px;
+}
+
+.exercise-list {
+  margin-left: 10px;
+}
+
+.user-profile {
+  margin-left: 10px;
+}
+
+.button-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-back {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-edit {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
