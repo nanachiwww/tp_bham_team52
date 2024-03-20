@@ -1,50 +1,43 @@
 <div>
   <div class="dashboard-container">
-    <div class="mood-patterns">
+    <section class="mood-patterns">
       <h2>Mood Patterns</h2>
       <p>How are you feeling today?</p>
       <div class="mood-buttons">
-        <!-- Replace with dynamic generation and event handling -->
-        <button class="mood-button">😐</button>
-        <button class="mood-button">😔</button>
-        <button class="mood-button">😊</button>
+        <button
+          *ngFor="let mood of moods; let i = index"
+          (click)="recordMood(mood, i)"
+          [ngClass]="{ selected: selectedMoodIndex === i }"
+          class="mood-button"
+        >
+          {{ mood.emoji }}
+        </button>
       </div>
-      <div class="mood-chart">
-        <!-- Placeholder for mood chart -->
-        <p>Bar Chart - Mood</p>
-      </div>
-    </div>
 
-    <div class="stress-level">
-      <h2>Stress level</h2>
+      <canvas id="moodChart"></canvas>
+    </section>
+
+    <section class="stress-level">
+      <h2>Stress Level</h2>
       <p>What is your stress level now?</p>
-      <!-- Placeholder for stress level slider -->
-      <input type="range" min="1" max="10" value="6" />
-      <div class="stress-chart">
-        <!-- Placeholder for stress chart -->
-        <p>Stress level since the last 6 recording</p>
-      </div>
-    </div>
+      <input type="range" min="1" max="10" [(ngModel)]="currentStressLevel" />
+      <canvas id="stressChart"></canvas>
+    </section>
 
-    <div class="mindfulness-practice">
+    <section class="mindfulness-practice">
       <h2>Mindfulness Practice</h2>
-      <p>
-        Take a moment to centre your thoughts with a guided mindfulness exercise. Reducing stress and improving focus can help enhance your
-        overall mental well being.
-      </p>
+      <p>Take a moment to center your thoughts with a guided mindfulness exercise.</p>
       <div class="mindfulness-buttons">
-        <!-- Replace with dynamic generation and event handling -->
-        <button class="mindfulness-button">Guided meditation</button>
-        <button class="mindfulness-button">Breathing Exercises</button>
-        <button class="mindfulness-button">Mindfulness Tips</button>
+        <button *ngFor="let activity of mindfulnessActivities" (click)="startActivity(activity)" class="mindfulness-button">
+          {{ activity.name }}
+        </button>
       </div>
-    </div>
+    </section>
 
-    <div class="progress-tracker">
-      <h2>Progress Tacker</h2>
-      <!-- Placeholder for progress tracker -->
-      <p>Your progress tracker content goes here</p>
-    </div>
+    <section class="progress-tracker">
+      <h2>Progress Tracker</h2>
+      <p>Mindfulness Progress: {{ userProgressData.progress }}%</p>
+    </section>
   </div>
 
   <h2 id="page-heading" data-cy="MoodTrackerHeading">
