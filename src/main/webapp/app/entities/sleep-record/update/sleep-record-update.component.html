@@ -11,46 +11,37 @@
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_startTime">Start Time</label>
-          <div class="d-flex">
-            <input
-              id="field_startTime"
-              data-cy="startTime"
-              type="datetime-local"
-              class="form-control"
-              name="startTime"
-              formControlName="startTime"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
-          </div>
-          <div *ngIf="editForm.get('startTime')!.invalid && (editForm.get('startTime')!.dirty || editForm.get('startTime')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('startTime')?.errors?.required"> This field is required. </small>
-            <small class="form-text text-danger" [hidden]="!editForm.get('startTime')?.errors?.datetimelocal">
-              This field should be a date and time.
-            </small>
-          </div>
+        <input
+          [hidden]="true"
+          id="field_startTime"
+          data-cy="startTime"
+          type="datetime-local"
+          class="form-control"
+          name="startTime"
+          formControlName="startTime"
+          placeholder="YYYY-MM-DD HH:mm"
+        />
+        <div *ngIf="editForm.get('startTime')!.invalid && (editForm.get('startTime')!.dirty || editForm.get('startTime')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('startTime')?.errors?.required"> This field is required. </small>
+          <small class="form-text text-danger" [hidden]="!editForm.get('startTime')?.errors?.datetimelocal">
+            This field should be a date and time.
+          </small>
         </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_endTime">End Time</label>
-          <div class="d-flex">
-            <input
-              id="field_endTime"
-              data-cy="endTime"
-              type="datetime-local"
-              class="form-control"
-              name="endTime"
-              formControlName="endTime"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
-          </div>
-          <div *ngIf="editForm.get('endTime')!.invalid && (editForm.get('endTime')!.dirty || editForm.get('endTime')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('endTime')?.errors?.required"> This field is required. </small>
-            <small class="form-text text-danger" [hidden]="!editForm.get('endTime')?.errors?.datetimelocal">
-              This field should be a date and time.
-            </small>
-          </div>
+        <input
+          [hidden]="true"
+          id="field_endTime"
+          data-cy="endTime"
+          type="datetime-local"
+          class="form-control"
+          name="endTime"
+          formControlName="endTime"
+          placeholder="YYYY-MM-DD HH:mm"
+        />
+        <div *ngIf="editForm.get('endTime')!.invalid && (editForm.get('endTime')!.dirty || editForm.get('endTime')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('endTime')?.errors?.required"> This field is required. </small>
+          <small class="form-text text-danger" [hidden]="!editForm.get('endTime')?.errors?.datetimelocal">
+            This field should be a date and time.
+          </small>
         </div>
 
         <div class="row mb-3">

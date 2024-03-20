@@ -18,6 +18,7 @@ export class SleepRecordComponent implements OnInit {
   newrecord = { start: new Date(), end: new Date() };
   // Methods to handle play and stop events
   play: boolean = true;
+  rating: boolean = false;
   timeing: string = '';
   timerId: ReturnType<typeof setInterval> | undefined;
   startRecording() {
@@ -35,6 +36,8 @@ export class SleepRecordComponent implements OnInit {
     clearInterval(this.timerId);
     this.newrecord.end = new Date();
     //submit:
+    this.rating = true;
+    this.router.navigate(['/sleep-record/new', this.newrecord]);
   }
 
   updatetimer() {
