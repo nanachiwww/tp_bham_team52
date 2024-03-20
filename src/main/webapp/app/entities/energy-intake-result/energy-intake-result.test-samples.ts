@@ -5,11 +5,13 @@ import { IEnergyIntakeResult, NewEnergyIntakeResult } from './energy-intake-resu
 export const sampleWithRequiredData: IEnergyIntakeResult = {
   id: 32720,
   date: dayjs('2024-03-03'),
+  details: 'food',
 };
 
 export const sampleWithPartialData: IEnergyIntakeResult = {
   id: 43347,
   date: dayjs('2024-03-03'),
+  details: 'food',
 };
 
 export const sampleWithFullData: IEnergyIntakeResult = {

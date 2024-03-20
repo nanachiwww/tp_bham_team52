@@ -1,4 +1,53 @@
 <div>
+  <div>
+    <h2 class="text-center">What did you eat today?</h2>
+
+    <div class="d-flex justify-content-around">
+      <!-- Breakfast Section -->
+      <div class="category">
+        <h3>Breakfast</h3>
+        <label class="form-label" for="breakfast_name"></label>
+        <input type="text" class="form-control" name="name" id="breakfast_name" data-cy="name" formControlName="name" />
+        <label class="form-label" for="breakfast_name2"></label>
+        <input type="text" class="form-control" name="name" id="breakfast_name2" data-cy="name" formControlName="name" />
+        <label class="form-label" for="breakfast_name3"></label>
+        <input type="text" class="form-control" name="name" id="breakfast_name3" data-cy="name" formControlName="name" />
+      </div>
+
+      <!-- Lunch Section -->
+      <div class="category">
+        <h3>Lunch</h3>
+        <label class="form-label" for="lunch_name1"></label>
+        <input type="text" class="form-control" name="name" id="lunch_name1" data-cy="name" formControlName="name" />
+
+        <label class="form-label" for="lunch_name2"></label>
+        <input type="text" class="form-control" name="name" id="lunch_name2" data-cy="name" formControlName="name" />
+
+        <label class="form-label" for="lunch_name3"></label>
+        <input type="text" class="form-control" name="name" id="lunch_name3" data-cy="name" formControlName="name" />
+      </div>
+
+      <!-- Dinner Section -->
+      <div class="category">
+        <h3>Dinner</h3>
+        <label class="form-label" for="dinner_name1"></label>
+        <input type="text" class="form-control" name="name" id="dinner_name1" data-cy="name" formControlName="name" />
+        <label class="form-label" for="dinner_name2"></label>
+        <input type="text" class="form-control" name="name" id="dinner_name2" data-cy="name" formControlName="name" />
+        <label class="form-label" for="dinner_name3"></label>
+        <input type="text" class="form-control" name="name" id="dinner_name3" data-cy="name" formControlName="name" />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center button">
+      <button class="btn btn-primary" [routerLink]="['/energy-intake-result/new']">View dietary recommendation for you</button>
+    </div>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <!--<div>
   <h2 id="page-heading" data-cy="EnergyIntakeResultHeading">
     <span>Energy Intake Results</span>
 
@@ -109,5 +158,7 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div> -->
   </div>
 </div>

@@ -8,12 +8,17 @@ import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/conf
 import { EntityArrayResponseType, EnergyIntakeResultService } from '../service/energy-intake-result.service';
 import { EnergyIntakeResultDeleteDialogComponent } from '../delete/energy-intake-result-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
+import { IMedicine } from '../../medicine/medicine.model';
 
 @Component({
   selector: 'jhi-energy-intake-result',
   templateUrl: './energy-intake-result.component.html',
 })
 export class EnergyIntakeResultComponent implements OnInit {
+  breakfast: IEnergyIntakeResult[] = [];
+  lunch: IEnergyIntakeResult[] = [];
+  dinner: IEnergyIntakeResult[] = [];
+
   energyIntakeResults?: IEnergyIntakeResult[];
   isLoading = false;
 
