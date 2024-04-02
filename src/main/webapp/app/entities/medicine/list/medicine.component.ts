@@ -8,7 +8,7 @@ import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/conf
 import { EntityArrayResponseType, MedicineService } from '../service/medicine.service';
 import { MedicineDeleteDialogComponent } from '../delete/medicine-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
-
+import { Chart, registerables } from 'chart.js';
 @Component({
   selector: 'jhi-medicine',
   templateUrl: './medicine.component.html',
@@ -32,13 +32,16 @@ export class MedicineComponent implements OnInit {
     public router: Router,
     protected sortService: SortService,
     protected modalService: NgbModal
-  ) {}
+  ) {
+    Chart.register(...registerables);
+  }
 
   trackId = (_index: number, item: IMedicine): number => this.medicineService.getMedicineIdentifier(item);
 
   ngOnInit(): void {
     this.loadItems();
     this.load();
+    this.createLineChart();
   }
 
   loadItems() {
@@ -130,5 +133,43 @@ export class MedicineComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  createLineChart(): void {
+    const canvas = document.getElementById('line-chart') as HTMLCanvasElement;
+    if (!canvas) return; // Exit the function if the canvas is not found
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return; // Exit the function if the context is not obtained
+
+    const lineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            label: 'Demo Line Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1,
+          },
+          {
+            label: 'Demo Line Dataset',
+            data: [65, 40, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 155, 192)',
+            tension: 0.1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   }
 }

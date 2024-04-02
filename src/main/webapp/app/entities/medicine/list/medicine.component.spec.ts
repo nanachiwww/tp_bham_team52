@@ -6,6 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MedicineService } from '../service/medicine.service';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 import { MedicineComponent } from './medicine.component';
 

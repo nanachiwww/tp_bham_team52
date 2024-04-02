@@ -17,6 +17,12 @@ Navbar
 }
 
 .navbar {
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  z-index: 1030;
+  background-color: 'rgba(255, 255, 255, 0.5)';
   padding: 0.2rem 1rem;
   .dropdown-item.active,
   .dropdown-item.active:focus,
@@ -54,4 +60,18 @@ Logo styles
   margin-left: 10px;
   display: inline-block;
   vertical-align: middle;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar-brand {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  // centralise the box vertically
 }

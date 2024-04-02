@@ -146,8 +146,6 @@ input[type='text']:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
 }
 
 .parent-container {
@@ -157,4 +155,31 @@ input[type='text']:focus {
   align-items: center; /* Centers child vertically if you want */
   /* Ensure it takes the full width if it's not already full width */
   width: 100%;
+}
+
+.medicine-section {
+  position: relative;
+  padding: 10px;
+  overflow: hidden;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  width: '50%';
+  background-color: #fff;
+  border-radius: 16px;
+  margin-top: 32px;
+  margin-right: 12px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page {
+  animation: fadeIn 2s ease-out;
 }
