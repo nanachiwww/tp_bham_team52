@@ -1,4 +1,4 @@
-<div>
+<div class="page">
   <h2 id="page-heading" data-cy="DashboardHeading">
     <p class="page-title">Dashboard</p>
 
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-end">
+    <!-- <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span>Refresh list</span>
@@ -50,7 +50,7 @@
         <fa-icon icon="plus"></fa-icon>
         <span> Create a new Dashboard </span>
       </button>
-    </div>
+    </div> -->
   </h2>
 
   <jhi-alert-error></jhi-alert-error>
@@ -60,7 +60,7 @@
   <div class="alert alert-warning" id="no-result" *ngIf="dashboards?.length === 0">
     <span>No Dashboards found</span>
   </div>
-
+  <!-- 
   <div class="table-responsive table-entities" id="entities" *ngIf="dashboards && dashboards.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
@@ -117,5 +117,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->
 </div>
