@@ -17,7 +17,10 @@ Bootstrap tweaks
 
 html,
 body {
-  background-color: #fdf7df; /* Replace #f5f5f5 with your desired color */
+  // background-color: #fdf7df; /* Replace #fdf7df with your desired color */
+  background: linear-gradient(132deg, #fdf7df, rgb(207, 194, 212), rgb(199, 192, 184), rgb(174, 226, 69));
+  background-size: 400% 400%;
+  animation: Gradient 8s ease infinite;
   height: 100%;
   margin: 0;
 }
@@ -53,11 +56,25 @@ Browser Upgrade Prompt
 /* ==========================================================================
 Generic styles
 ========================================================================== */
-
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 /* other generic styles */
 
 .jh-card {
-  background-color: #fdf7df;
+  // background: linear-gradient(132deg, #fdf7df, rgb(207, 194, 212), rgb(199, 192, 184), rgb(174, 226, 69));
+  // background-size: 400% 400%;
+  // animation: Gradient 15s ease infinite;
+  // make the background see-through
+  background-color: rgba(255, 255, 255, 0);
   padding: 1.5%;
   margin-top: 20px;
   border: none;
@@ -201,6 +218,11 @@ ui bootstrap tweaks
 
 .dropdown-menu {
   padding-left: 0px;
+  background-color: #fff;
+  border-width: 3px;
+  border-color: #000;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 /* ==========================================================================
@@ -223,9 +245,15 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
       margin-left: 0.5em;
     }
   }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between; /* This spreads out the navbar items */
   z-index: 1030;
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 50px;
 }
 
 .page-title {
@@ -244,14 +272,34 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   animation: fadeIn 2s ease-out;
 }
 
+.fade-in {
+  animation: fadeIn 3s ease-out;
+}
+
 .form-container {
-  // white box with shadow and bevelling
-  width: 400px;
+  justify-content: center;
   align-items: center;
-  align-self: center;
+  width: 400px;
+  height: 100vh; /* Take full height to center vertically */
   background-color: #fff;
   border-radius: 24px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
 }
+
+.warning-box {
+  background-color: #000;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.standard-box {
+  background-color: #fff;
+
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  margin-top: 12px;
+}
+
 /* jhipster-needle-scss-add-main JHipster will add new css style */

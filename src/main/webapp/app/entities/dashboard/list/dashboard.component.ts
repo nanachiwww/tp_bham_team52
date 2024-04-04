@@ -10,6 +10,8 @@ import { DashboardDeleteDialogComponent } from '../delete/dashboard-delete-dialo
 import { DataUtils } from 'app/core/util/data-util.service';
 import { SortService } from 'app/shared/sort/sort.service';
 
+import { Chart, registerables } from 'chart.js';
+
 @Component({
   selector: 'jhi-dashboard',
   templateUrl: './dashboard.component.html',
@@ -55,12 +57,17 @@ export class DashboardComponent implements OnInit {
     protected sortService: SortService,
     protected dataUtils: DataUtils,
     protected modalService: NgbModal
-  ) {}
+  ) {
+    Chart.register(...registerables);
+  }
 
   trackId = (_index: number, item: IDashboard): number => this.dashboardService.getDashboardIdentifier(item);
 
   ngOnInit(): void {
     this.load();
+    this.createSleepChart();
+    this.createCalorieChart();
+    this.createMoodChart();
   }
 
   byteSize(base64String: string): string {
@@ -151,5 +158,119 @@ export class DashboardComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  createSleepChart(): void {
+    const canvas = document.getElementById('sleep-chart') as HTMLCanvasElement;
+    if (!canvas) return; // Exit the function if the canvas is not found
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return; // Exit the function if the context is not obtained
+
+    const lineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            label: 'Demo Line Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1,
+          },
+          {
+            label: 'Demo Line Dataset',
+            data: [65, 40, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 155, 192)',
+            tension: 0.1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+
+  createCalorieChart(): void {
+    const canvas = document.getElementById('calorie-chart') as HTMLCanvasElement;
+    if (!canvas) return; // Exit the function if the canvas is not found
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return; // Exit the function if the context is not obtained
+
+    const lineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            label: 'Demo Line Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1,
+          },
+          {
+            label: 'Demo Line Dataset',
+            data: [65, 40, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 155, 192)',
+            tension: 0.1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+
+  createMoodChart(): void {
+    const canvas = document.getElementById('mood-chart') as HTMLCanvasElement;
+    if (!canvas) return; // Exit the function if the canvas is not found
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return; // Exit the function if the context is not obtained
+
+    const lineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            label: 'Demo Line Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1,
+          },
+          {
+            label: 'Demo Line Dataset',
+            data: [65, 40, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 155, 192)',
+            tension: 0.1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   }
 }

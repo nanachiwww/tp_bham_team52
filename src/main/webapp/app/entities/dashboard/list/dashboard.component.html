@@ -1,37 +1,68 @@
 <div class="page">
   <h2 id="page-heading" data-cy="DashboardHeading">
-    <p class="page-title">Dashboard</p>
-
     <div class="dashboard-container">
       <div class="metric sleep-data">
         <h2>Sleep Data</h2>
         <p>Total Hours: {{ userMetrics.sleepData.totalHours }}</p>
         <p>Sleep Quality: {{ userMetrics.sleepData.sleepQuality }}</p>
+        <canvas id="sleep-chart"></canvas>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-secondary" routerLink="/sleep-record">
+            Track Sleep <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
       <div class="metric dietary-data">
         <h2>Dietary Data</h2>
         <p>Calories Consumed: {{ userMetrics.dietaryData.caloriesConsumed }}</p>
         <p>Calories Goal: {{ userMetrics.dietaryData.caloriesGoal }}</p>
+        <canvas id="calorie-chart"></canvas>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-secondary" routerLink="/energy-intake-result">
+            Track Diet <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
       <div class="metric workout-data">
         <h2>Workout Data</h2>
         <p>Activities Completed: {{ userMetrics.workoutData.activitiesCompleted }}</p>
         <p>Goal Activities: {{ userMetrics.workoutData.goalActivities }}</p>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-secondary" routerLink="/workout">
+            Track Workouts <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
       <div class="metric mental-health-data">
         <h2>Mental Health Data</h2>
         <p>Mood: {{ userMetrics.mentalHealthData.mood }}</p>
         <p>Stress Level: {{ userMetrics.mentalHealthData.stressLevel }}</p>
+        <canvas id="mood-chart"></canvas>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-secondary" routerLink="/mood-tracker">
+            Track Mood <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
       <div class="metric goal-tracking-data">
         <h2>Goal Tracking</h2>
         <p>Goals Set: {{ userMetrics.goalTrackingData.goalsSet }}</p>
         <p>Goals Achieved: {{ userMetrics.goalTrackingData.goalsAchieved }}</p>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-secondary" routerLink="/custom-goal">
+            Track Goals <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
       <div class="metric medication-data">
         <h2>Medication Data</h2>
         <p>Supplements Taken: {{ userMetrics.medicationData.supplementsTaken }}</p>
         <p>Supplements Total: {{ userMetrics.medicationData.supplementsTotal }}</p>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-secondary" routerLink="/medicine">
+            Track Supplement Usage <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -57,7 +88,7 @@
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="dashboards?.length === 0">
+  <div class="alert alert-warning warning-box" id="no-result" *ngIf="dashboards?.length === 0">
     <span>No Dashboards found</span>
   </div>
   <!-- 
