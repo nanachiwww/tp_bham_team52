@@ -11,8 +11,9 @@
                 transform="matrix(1.0793 0 0 1.0745 -28.476 -12.959)"
                 d="m149.33 418.72 0.3782-170.61 0.3782-170.61 295.12 171.26-147.94 84.976z"
                 style="fill: #e6e6e6"
-              /></svg
-          ></i>
+              />
+            </svg>
+          </i>
         </button>
       </div>
       <div *ngIf="!play">
@@ -28,6 +29,11 @@
         <div class="timer">{{ timeing }}</div>
       </div>
     </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-outline-secondary" routerLink="/energy-intake-result">
+      Track Diet <i class="fa fa-arrow-right"></i>
+    </button>
   </div>
 
   <h2 id="page-heading" data-cy="SleepRecordHeading">
@@ -45,7 +51,7 @@
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="sleepRecords?.length === 0">
+  <div class="alert alert-warning warning-box" id="no-result" *ngIf="sleepRecords?.length === 0">
     <span>No Sleep Records found</span>
   </div>
 

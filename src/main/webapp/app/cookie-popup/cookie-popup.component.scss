@@ -1,14 +1,17 @@
 .cookie {
   background-color: #ffd700;
   width: 40ex;
-  border-radius: 5px;
+  border-radius: 12px;
   margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   text-align: center;
   border-width: 3px;
   border-style: solid;
   border-color: #000000;
+  padding: 12px;
 }
 .button {
   background-color: #ffd700;

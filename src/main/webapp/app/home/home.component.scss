@@ -4,7 +4,6 @@ Main page styles
 // set the background color for the whole page
 
 .home {
-  background-color: #fdf7df;
   // center all the content
   display: flex;
   justify-content: center;
@@ -34,6 +33,7 @@ Main page styles
 }
 
 .title {
+  margin-top: 12px;
   font-size: 4em;
   color: #000000;
   margin-bottom: 0;
@@ -45,4 +45,19 @@ Main page styles
   display: flex;
   justify-content: center; /* This will place the two items apart if there's space */
   align-items: center; /* This will vertically align items if they are not of equal height */
+}
+.home-title {
+  font-size: 24px;
+  font-weight: 300;
+  color: #333;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-box {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  margin-top: 12px;
 }

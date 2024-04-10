@@ -61,11 +61,15 @@
     </div>
   </h2>
 
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-outline-secondary" routerLink="/custom-goal">Track Goals <i class="fa fa-arrow-right"></i></button>
+  </div>
+
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="moodTrackers?.length === 0">
+  <div class="alert alert-warning warning-box" id="no-result" *ngIf="moodTrackers?.length === 0">
     <span>No Mood Trackers found</span>
   </div>
 

@@ -22,7 +22,7 @@ Navbar
   // left: 0;
   // right: 0;
   z-index: 1030;
-  background-color: 'rgba(255, 255, 255, 0.5)';
+  background-color: 'rgba(255, 255, 255, 0.)';
   padding: 0.2rem 1rem;
   .dropdown-item.active,
   .dropdown-item.active:focus,
@@ -45,16 +45,17 @@ Navbar
 Logo styles
 ========================================================================== */
 .logo-img {
-  height: 90px;
-  width: 90px;
+  height: 40px;
+  width: 40px;
   display: inline-block;
   vertical-align: middle;
   background: url('../../../content/images/logos/logo.png') no-repeat center center;
   background-size: contain;
+  border-radius: 10px;
 }
 
 .navbar-title {
-  font-size: 60px;
+  font-size: 32px;
   font-weight: 400;
   color: black;
   margin-left: 10px;
@@ -62,13 +63,10 @@ Logo styles
   vertical-align: middle;
   justify-content: center;
   text-align: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .navbar-brand {
-  background-color: #fff;
-  border-radius: 16px;
-  padding: 12px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
