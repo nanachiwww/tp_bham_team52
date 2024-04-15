@@ -15,10 +15,17 @@ import { Chart, registerables } from 'chart.js';
   styleUrls: ['./medicine.component.scss'],
 })
 export class MedicineComponent implements OnInit {
+  private chartInitialized = false;
   medicines: IMedicine[] = [];
   supplements: IMedicine[] = [];
   prescriptions: IMedicine[] = [];
   otherItems: IMedicine[] = [];
+  isSecondPartVisible: boolean = false;
+
+  showSecondPart() {
+    this.isSecondPartVisible = true;
+    this.createLineChart();
+  }
 
   interactions = [{ detail: 'Interaction 1 details here...' }, { detail: 'Interaction 2 details here...' }];
 
@@ -41,7 +48,6 @@ export class MedicineComponent implements OnInit {
   ngOnInit(): void {
     this.loadItems();
     this.load();
-    this.createLineChart();
   }
 
   loadItems() {

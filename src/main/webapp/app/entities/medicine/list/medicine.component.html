@@ -1,153 +1,143 @@
 <div class="page">
   <div class="page row">
-    <h2 id="page-heading" data-cy="MedicineHeading">
-      <span class="title">What Supplements did you take today?</span>
-    </h2>
+    <div *ngIf="!isSecondPartVisible">
+      <h2 id="page-heading" data-cy="MedicineHeading">
+        <span class="title">What Supplements did you take today?</span>
+      </h2>
 
-    <div class="d-flex justify-content-around">
-      <!-- Supplements Section -->
-      <div class="category">
-        <h3>Supplements</h3>
-        <ul>
-          <li *ngFor="let item of supplements; let i = index" class="list-item supplement-item">
-            <div class="info">
-              <span class="supplement-name">{{ item.name }}</span>
-              <span class="supplement-date">{{ item.date }}</span>
-              <span class="supplement-description">{{ item.description }}</span>
-            </div>
+      <div class="d-flex justify-content-around">
+        <!-- Supplements Section -->
+        <div class="category">
+          <h3>Supplements</h3>
+          <ul>
+            <li *ngFor="let item of supplements; let i = index" class="list-item supplement-item">
+              <div class="info">
+                <span class="supplement-name">{{ item.name }}</span>
+                <span class="supplement-date">{{ item.date }}</span>
+                <span class="supplement-description">{{ item.description }}</span>
+              </div>
 
-            <div class="action-buttons">
-              <button type="button" class="green-btn btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">
-                <fa-icon icon="eye"></fa-icon> View
-              </button>
-              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">
-                <fa-icon icon="pencil"></fa-icon> Edit
-              </button>
-              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><fa-icon icon="times"></fa-icon> Delete</button>
-            </div>
-          </li>
-        </ul>
+              <div class="action-buttons">
+                <button type="button" class="green-btn btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">
+                  <fa-icon icon="eye"></fa-icon> View
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">
+                  <fa-icon icon="pencil"></fa-icon> Edit
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><fa-icon icon="times"></fa-icon> Delete</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Prescriptions Section -->
+        <div class="category">
+          <h3>Prescriptions</h3>
+          <ul>
+            <li *ngFor="let item of prescriptions; let i = index" class="list-item supplement-item">
+              <div class="info">
+                <span class="supplement-name">{{ item.name }}</span>
+                <span class="supplement-date">{{ item.date }}</span>
+                <span class="supplement-description">{{ item.description }}</span>
+              </div>
+
+              <div class="action-buttons">
+                <button type="button" class="green-btn btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">
+                  <fa-icon icon="eye"></fa-icon> View
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">
+                  <fa-icon icon="pencil"></fa-icon> Edit
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><fa-icon icon="times"></fa-icon> Delete</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Other Items Section -->
+        <div class="category">
+          <h3>Other Items</h3>
+          <ul>
+            <li *ngFor="let item of otherItems; let i = index" class="list-item supplement-item">
+              <div class="info">
+                <span class="supplement-name">{{ item.name }}</span>
+                <span class="supplement-date">{{ item.date }}</span>
+                <span class="supplement-description">{{ item.description }}</span>
+              </div>
+
+              <div class="action-buttons">
+                <button type="button" class="green-btn btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">
+                  <fa-icon icon="eye"></fa-icon> View
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">
+                  <fa-icon icon="pencil"></fa-icon> Edit
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><fa-icon icon="times"></fa-icon> Delete</button>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-
-      <!-- Prescriptions Section -->
-      <div class="category">
-        <h3>Prescriptions</h3>
-        <ul>
-          <li *ngFor="let item of prescriptions; let i = index" class="list-item supplement-item">
-            <div class="info">
-              <span class="supplement-name">{{ item.name }}</span>
-              <span class="supplement-date">{{ item.date }}</span>
-              <span class="supplement-description">{{ item.description }}</span>
-            </div>
-
-            <div class="action-buttons">
-              <button type="button" class="green-btn btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">
-                <fa-icon icon="eye"></fa-icon> View
-              </button>
-              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">
-                <fa-icon icon="pencil"></fa-icon> Edit
-              </button>
-              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><fa-icon icon="times"></fa-icon> Delete</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Other Items Section -->
-      <div class="category">
-        <h3>Other Items</h3>
-        <ul>
-          <li *ngFor="let item of otherItems; let i = index" class="list-item supplement-item">
-            <div class="info">
-              <span class="supplement-name">{{ item.name }}</span>
-              <span class="supplement-date">{{ item.date }}</span>
-              <span class="supplement-description">{{ item.description }}</span>
-            </div>
-
-            <div class="action-buttons">
-              <button type="button" class="green-btn btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">
-                <fa-icon icon="eye"></fa-icon> View
-              </button>
-              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/medicine', item.id, 'edit']">
-                <fa-icon icon="pencil"></fa-icon> Edit
-              </button>
-              <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><fa-icon icon="times"></fa-icon> Delete</button>
-            </div>
-          </li>
-        </ul>
+      <div class="d-flex justify-content-center">
+        <button
+          id="jh-create-entity"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity create-medicine"
+          [routerLink]="['/medicine/new']"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span> Create a new Medicine </span>
+        </button>
+        <button
+          id="jh-create-entity"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity create-medicine"
+          (click)="showSecondPart()"
+        >
+          <fa-icon icon="check"></fa-icon>
+          <span>Submit Day</span>
+        </button>
       </div>
     </div>
+    <div *ngIf="isSecondPartVisible">
+      <div class="d-flex justify-content-center">
+        <div class="category medicine-section">
+          <h3 class="interactions-title">Interactions</h3>
+          <h4>Interactions with other medicines</h4>
+          <div>
+            <span>No interactions found</span>
+          </div>
+        </div>
 
-    <div class="d-flex justify-content-center">
-      <!-- <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>Refresh list</span>
-      </button> -->
+        <div class="category medicine-section">
+          <h3 class="interactions-title">Tracking Intake overtime</h3>
+          <div>
+            <span>Graph</span>
+            <canvas #lineChart *ngIf="isSecondPartVisible" id="line-chart"></canvas>
+          </div>
+        </div>
 
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-medicine"
-        [routerLink]="['/medicine/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span> Create a new Medicine </span>
-      </button>
-    </div>
+        <div class="category medicine-section">
+          <h3 class="interactions-title">Recommendations</h3>
+          <div></div>
+        </div>
 
-    <div class="d-flex justify-content-center">
-      <!-- <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>Refresh list</span>
-      </button> -->
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-medicine"
-        [routerLink]="['/medicine/new']"
-      >
-        <span>Submit Day</span>
-        <fa-icon icon="check"></fa-icon>
-      </button>
-    </div>
-    <div class="d-flex justify-content-center">
-      <div class="category medicine-section">
-        <h3 class="interactions-title">Interactions</h3>
-        <h4>Interactions with other medicines</h4>
-        <div>
-          <span>No interactions found</span>
+        <div class="category medicine-section">
+          <h3 class="interactions-title">Notes</h3>
+          <div></div>
         </div>
       </div>
 
-      <div class="category medicine-section">
-        <h3 class="interactions-title">Tracking Intake overtime</h3>
-        <div>
-          <span>Graph</span>
-          <canvas id="line-chart"></canvas>
-        </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-outline-secondary next-page-btn" routerLink="/mood-tracker">
+          Track Mental Health <i class="fa fa-arrow-right"></i>
+        </button>
       </div>
 
-      <div class="category medicine-section">
-        <h3 class="interactions-title">Recommendations</h3>
-        <div></div>
-      </div>
+      <jhi-alert-error></jhi-alert-error>
 
-      <div class="category medicine-section">
-        <h3 class="interactions-title">Notes</h3>
-        <div></div>
-      </div>
+      <jhi-alert></jhi-alert>
     </div>
-
-    <div class="d-flex justify-content-center">
-      <button type="button" class="btn btn-outline-secondary" routerLink="/mood-tracker">
-        Track Mental Health <i class="fa fa-arrow-right"></i>
-      </button>
-    </div>
-
-    <jhi-alert-error></jhi-alert-error>
-
-    <jhi-alert></jhi-alert>
 
     <!-- <div class="table-responsive table-entities" id="entities" *ngIf="medicines && medicines.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">

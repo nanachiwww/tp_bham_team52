@@ -51,13 +51,17 @@ input[type='text']:focus {
 
 .btn-outline-secondary {
   color: #000;
-  border-color: #f8f9fa;
 }
 
 .btn-outline-secondary:hover {
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
+}
+
+.next-page-btn {
+  background-color: #fff;
+  margin-top: 24px;
 }
 
 /* Adjust padding and font size as needed */
@@ -127,8 +131,13 @@ input[type='text']:focus {
 }
 
 .title {
-  display: block;
+  display: inline-block; /* Make span behave like an inline element that can be centered */
+  width: auto; /* Auto width based on content */
   text-align: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 16px;
+  width: 50%;
 }
 
 .interaction-item {

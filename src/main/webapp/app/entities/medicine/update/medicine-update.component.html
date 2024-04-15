@@ -74,23 +74,6 @@
                 </option>
               </select>
             </div>
-
-            <div class="row mb-3">
-              <label class="form-label" for="field_userProfile">User Profile</label>
-              <select
-                class="form-control"
-                id="field_userProfile"
-                data-cy="userProfile"
-                name="userProfile"
-                formControlName="userProfile"
-                [compareWith]="compareUserProfile"
-              >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="userProfileOption" *ngFor="let userProfileOption of userProfilesSharedCollection">
-                  {{ userProfileOption.id }}
-                </option>
-              </select>
-            </div>
           </div>
 
           <div>
