@@ -1,53 +1,55 @@
-<div class="form-container d-flex justify-content-center align-items-center">
-  <div class="col-lg-6 col-md-8 col-sm-10">
-    <h1 data-cy="loginTitle">Sign in</h1>
-    <div class="alert alert-danger" *ngIf="authenticationError" data-cy="loginError">
-      <strong>Failed to sign in!</strong> Please check your credentials and try again.
-    </div>
-    <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
-      <div class="mb-3">
-        <label class="username-label" for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          id="username"
-          placeholder="Your username"
-          formControlName="username"
-          #username
-          data-cy="username"
-        />
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center min-vh-100">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class="card shadow custom-rounded1">
+        <div class="card-body p-5">
+          <h1 class="text-center mb-4" data-cy="loginTitle">Sign in</h1>
+          <div class="alert alert-danger" *ngIf="authenticationError" data-cy="loginError">
+            <strong>Failed to sign in!</strong> Please check your credentials and try again.
+          </div>
+          <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
+            <div class="mb-3">
+              <label class="form-label" for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                name="username"
+                id="username"
+                placeholder="Your username"
+                formControlName="username"
+                #username
+                data-cy="username"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                id="password"
+                placeholder="Your password"
+                formControlName="password"
+                data-cy="password"
+              />
+            </div>
+            <div class="mb-3 form-check">
+              <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
+              <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" data-cy="submit">Sign in</button>
+          </form>
+          <div class="mt-3 text-center">
+            <a class="text-decoration-none" routerLink="/account/reset/request" data-cy="forgetYourPasswordSelector"
+              >Forgot your password?</a
+            >
+          </div>
+          <div class="mt-3 text-center">
+            <span>Don't have an account?</span>
+            <a class="text-decoration-none" routerLink="/account/register">Register</a>
+          </div>
+        </div>
       </div>
-
-      <div class="mb-3">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          id="password"
-          placeholder="Your password"
-          formControlName="password"
-          data-cy="password"
-        />
-      </div>
-
-      <div class="form-check">
-        <label class="form-check-label" for="rememberMe">
-          <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
-          <span>Remember me</span>
-        </label>
-      </div>
-
-      <button type="submit" class="btn btn-primary" data-cy="submit">Sign in</button>
-    </form>
-    <div class="mt-3 alert alert-warning warning-box">
-      <a class="alert-link" routerLink="/account/reset/request" data-cy="forgetYourPasswordSelector">Did you forget your password?</a>
-    </div>
-
-    <div class="alert alert-warning warning-box">
-      <span>You don't have an account yet?</span>
-      <a class="alert-link" routerLink="/account/register">Register a new account</a>
     </div>
   </div>
 </div>
