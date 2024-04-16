@@ -16,23 +16,22 @@
     <span>Workouts</span>
     <h2>For more details on a workout click View</h2>
     <div class="d-flex justify-content-center">
-      <button type="button" class="btn btn-outline-secondary" routerLink="/dashboard">Dashboard <i class="fa fa-arrow-right"></i></button>
-    </div>
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>Refresh list</span>
-      </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-workout"
-        [routerLink]="['/workout/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span> Create a new Workout </span>
-      </button>
+      <div>
+        <button class="btn btn-info me-2 custom-button-class2" routerLink="/exercise">View Exercises</button>
+        <button class="btn btn-info me-2 custom-button-class1" (click)="load()" [disabled]="isLoading">
+          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+          <span>Refresh list</span>
+        </button>
+        <button
+          id="jh-create-entity"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity create-workout custom-button-class2"
+          [routerLink]="['/workout/new']"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span> Create a new Workout </span>
+        </button>
+      </div>
     </div>
   </h2>
 
@@ -45,7 +44,7 @@
   </div>
 
   <div class="container" *ngIf="workouts && workouts.length > 0">
-    <div class="card" *ngFor="let workout of workouts; trackBy: trackId" data-cy="entityTable">
+    <div class="card custom-rounded1" *ngFor="let workout of workouts; trackBy: trackId" data-cy="entityTable">
       <div class="card-body">
         <h5 class="card-title">{{ workout.name }}</h5>
         <p class="card-text">{{ workout.description }}</p>
@@ -55,8 +54,8 @@
         <p class="card-text">
           <small class="text-muted">Intensity Level: {{ workout.intensityLevel }}</small>
         </p>
-        <a [routerLink]="['/workout', workout.id, 'view']" class="btn btn-primary">View</a>
-        <a [routerLink]="['/workout', workout.id, 'edit']" class="btn btn-primary">Edit</a>
+        <a [routerLink]="['/workout', workout.id, 'view']" class="btn btn-primary custom-button-class1">View</a>
+        <a [routerLink]="['/workout', workout.id, 'edit']" class="btn btn-primary custom-button-class2">Edit</a>
         <button (click)="delete(workout)" class="btn btn-danger">Delete</button>
       </div>
     </div>

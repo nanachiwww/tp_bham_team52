@@ -58,3 +58,29 @@
   background-color: #0056b3; /* Darken primary button background color on hover */
   border-color: #0056b3; /* Darken primary button border color on hover */
 }
+
+.custom-button-class1 {
+  background-color: #ffd700; /* Set your custom color here */
+  border-color: #000000; /* Optional: set border color */
+  color: #800000; /* Optional: set text color */
+  border-width: 2px; /* Optional: set border width */
+}
+
+.custom-button-class1:hover {
+  background-color: #e6c200; /* Set your custom color here */
+  border-color: #000000; /* Optional: set border color */
+  color: #800000; /* Optional: set text color */
+}
+
+.custom-button-class2 {
+  background-color: #2c3e50; /* Set your custom color here */
+  border-color: #000000; /* Optional: set border color */
+  color: #ffffff; /* Optional: set text color */
+  border-width: 2px;
+}
+
+.custom-button-class2:hover {
+  background-color: #233240; /* Set your custom color here */
+  border-color: #000000; /* Optional: set border color */
+  color: #ffffff; /* Optional: set text color */
+}
