@@ -17,6 +17,7 @@
   flex: 0 0 calc(50% - 20px); /* Each card takes up 50% width with 20px spacing between */
   margin-right: 20px; /* Add space between cards */
   margin-bottom: 20px; /* Add space below cards */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
 }
 
 .card:last-child {
@@ -49,21 +50,15 @@
   cursor: pointer; /* Change cursor to pointer on buttons */
 }
 
-.btn-primary {
-  background-color: #007bff; /* Set primary button background color */
-  border-color: #007bff; /* Set primary button border color */
-}
-
-.btn-primary:hover {
-  background-color: #0056b3; /* Darken primary button background color on hover */
-  border-color: #0056b3; /* Darken primary button border color on hover */
-}
-
 .custom-button-class1 {
   background-color: #ffd700; /* Set your custom color here */
   border-color: #000000; /* Optional: set border color */
   color: #800000; /* Optional: set text color */
   border-width: 2px; /* Optional: set border width */
+}
+
+.margin1 {
+  margin-right: 7.5px;
 }
 
 .custom-button-class1:hover {
@@ -83,4 +78,90 @@
   background-color: #233240; /* Set your custom color here */
   border-color: #000000; /* Optional: set border color */
   color: #ffffff; /* Optional: set text color */
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.search-container input[type='text'] {
+  width: 20%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+/* Page container styles */
+.page-container {
+  padding: 20px;
+}
+
+/* Heading styles */
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Instructions styles */
+.instructions {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Filter section styles */
+.filter-section {
+  margin-bottom: 20px;
+}
+
+/* Checkbox container styles */
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Checkbox label styles */
+.checkbox-label {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Checkbox input styles */
+.checkbox-label input[type='checkbox'] {
+  display: none;
+}
+
+/* Checkmark styles */
+.checkmark {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+/* Checkmark after styles */
+.checkmark::after {
+  content: '';
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%) rotate(45deg); /* Move to center and rotate */
+  width: 5px;
+  height: 10px;
+  border: solid black; /* Set border color to black */
+  border-width: 0 2px 2px 0;
+  display: none;
+}
+
+/* Checkbox checked styles */
+.checkbox-label input[type='checkbox']:checked + .checkmark::after {
+  display: block;
 }

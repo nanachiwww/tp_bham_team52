@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,6 +9,12 @@ import { EntityArrayResponseType, WorkoutService } from '../service/workout.serv
 import { WorkoutDeleteDialogComponent } from '../delete/workout-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 
+interface IntensityLevel {
+  id: number;
+  name: string;
+  selected: boolean;
+}
+
 @Component({
   selector: 'jhi-workout',
   templateUrl: './workout.component.html',
@@ -17,9 +23,18 @@ import { SortService } from 'app/shared/sort/sort.service';
 export class WorkoutComponent implements OnInit {
   workouts?: IWorkout[];
   isLoading = false;
+  filteredWorkouts: IWorkout[] = [];
+  intensityLevels: IntensityLevel[] = [
+    { id: 1, name: 'LOW', selected: false },
+    { id: 2, name: 'MODERATE', selected: false },
+    { id: 3, name: 'HIGH', selected: false },
+  ];
 
   predicate = 'id';
   ascending = true;
+
+  searchName: string = ''; // Variable to store the search input
+  similarWorkouts: IWorkout[] = []; // Array to store similar workouts for suggestions
 
   constructor(
     protected workoutService: WorkoutService,
@@ -28,26 +43,12 @@ export class WorkoutComponent implements OnInit {
     protected sortService: SortService,
     protected modalService: NgbModal
   ) {}
-  selectedGoals: string[] = [];
-
-  @Output() done = new EventEmitter<string[]>();
-
-  toggleGoal(goal: string) {
-    const index = this.selectedGoals.indexOf(goal);
-    if (index > -1) {
-      this.selectedGoals.splice(index, 1);
-    } else {
-      this.selectedGoals.push(goal);
-    }
-  }
-  completeSelection() {
-    this.done.emit(this.selectedGoals);
-  }
 
   trackId = (_index: number, item: IWorkout): number => this.workoutService.getWorkoutIdentifier(item);
 
   ngOnInit(): void {
     this.load();
+    this.onSearchChange(); // Trigger initial filtering
   }
 
   delete(workout: IWorkout): void {
@@ -62,6 +63,8 @@ export class WorkoutComponent implements OnInit {
       .subscribe({
         next: (res: EntityArrayResponseType) => {
           this.onResponseSuccess(res);
+          // Filter workouts after deletion
+          this.filterWorkouts();
         },
       });
   }
@@ -70,12 +73,62 @@ export class WorkoutComponent implements OnInit {
     this.loadFromBackendWithRouteInformations().subscribe({
       next: (res: EntityArrayResponseType) => {
         this.onResponseSuccess(res);
+        // Filter workouts after loading
+        this.filterWorkouts();
       },
     });
+  }
+  filterWorkouts(): void {
+    if (!this.workouts) {
+      this.filteredWorkouts = [];
+      return;
+    }
+
+    // Check if none of the intensity levels are selected
+    const isAnyLevelSelected = this.intensityLevels.some(level => level.selected);
+
+    if (!isAnyLevelSelected) {
+      // If none of the intensity levels are selected, show all workouts
+      this.filteredWorkouts = this.workouts;
+    } else {
+      // Filter workouts based on selected intensity levels
+      this.filteredWorkouts = this.workouts.filter(workout => {
+        if (!workout.intensityLevel) return false;
+        return this.intensityLevels.some(level => level.selected && level.name === workout.intensityLevel);
+      });
+    }
   }
 
   navigateToWithComponentValues(): void {
     this.handleNavigation(this.predicate, this.ascending);
+  }
+
+  onIntensityChange(): void {
+    // Filter workouts whenever intensity selection changes
+    this.filterWorkouts();
+  }
+
+  onSearchChange(): void {
+    if (!this.workouts || !this.searchName) {
+      this.filteredWorkouts = this.workouts ?? [];
+      return;
+    }
+
+    // Filter workouts based on search input (case-insensitive)
+    this.filteredWorkouts = this.workouts.filter(
+      workout => workout && workout.name && workout.name.toLowerCase().includes(this.searchName.toLowerCase())
+    );
+
+    // Find similar workouts for suggestions
+    this.similarWorkouts = this.workouts.filter(
+      workout =>
+        workout && workout.name && workout.name.toLowerCase().startsWith(this.searchName.toLowerCase()) && workout.name !== this.searchName
+    );
+  }
+
+  selectSimilarWorkout(workout: IWorkout): void {
+    this.searchName = workout.name || ''; // Set the search input to the selected workout name
+    this.onSearchChange(); // Filter workouts based on the selected workout name
   }
 
   protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
@@ -130,5 +183,9 @@ export class WorkoutComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  get selectedIntensity(): string[] {
+    return this.intensityLevels.filter(level => level.selected).map(level => level.name);
   }
 }
