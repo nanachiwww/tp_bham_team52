@@ -12,6 +12,12 @@ import { EntityArrayResponseType, ExerciseService } from '../service/exercise.se
 import { ExerciseDeleteDialogComponent } from '../delete/exercise-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 
+interface MuscleGroup {
+  id: number;
+  name: string;
+  selected: boolean;
+}
+
 @Component({
   selector: 'jhi-exercise',
   templateUrl: './exercise.component.html',
@@ -20,6 +26,17 @@ import { SortService } from 'app/shared/sort/sort.service';
 export class ExerciseComponent implements OnInit {
   exercises?: IExercise[];
   isLoading = false;
+  filteredExercises: IExercise[] = [];
+  muscleGroups: MuscleGroup[] = [
+    { id: 1, name: 'CHEST', selected: false },
+    { id: 2, name: 'BACK', selected: false },
+    { id: 3, name: 'LEGS', selected: false },
+    { id: 4, name: 'ARMS', selected: false },
+    { id: 5, name: 'SHOULDERS', selected: false },
+    { id: 6, name: 'ABS', selected: false },
+    { id: 7, name: 'CARDIO', selected: false },
+    { id: 8, name: 'OTHER', selected: false },
+  ];
 
   predicate = 'id';
   ascending = true;
@@ -53,6 +70,8 @@ export class ExerciseComponent implements OnInit {
       .subscribe({
         next: (res: EntityArrayResponseType) => {
           this.onResponseSuccess(res);
+          // Filter exercises after deletion
+          this.filterExercises();
         },
       });
   }
@@ -61,12 +80,30 @@ export class ExerciseComponent implements OnInit {
     this.loadFromBackendWithRouteInformations().subscribe({
       next: (res: EntityArrayResponseType) => {
         this.onResponseSuccess(res);
+        // Filter exercises after loading
+        this.filterExercises();
       },
     });
   }
 
+  filterExercises(): void {
+    // If no categories selected, display all exercises
+    if (!this.exercises || this.selectedCategories.length === 0) {
+      this.filteredExercises = this.exercises ?? [];
+      return;
+    }
+
+    // Filter exercises based on selected categories
+    this.filteredExercises = this.exercises.filter(exercise => exercise && this.selectedCategories.includes(exercise.muscleGroup ?? ''));
+  }
+
   navigateToWithComponentValues(): void {
     this.handleNavigation(this.predicate, this.ascending);
+  }
+
+  onCategoryChange(): void {
+    // Filter exercises whenever a category selection changes
+    this.filterExercises();
   }
 
   protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
@@ -121,5 +158,9 @@ export class ExerciseComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  get selectedCategories(): string[] {
+    return this.muscleGroups.filter(category => category.selected).map(category => category.name);
   }
 }

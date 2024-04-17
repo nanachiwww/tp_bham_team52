@@ -62,3 +62,75 @@
 .workouts-button {
   margin-left: 7.5px; /* Adjust the value as needed for the desired padding */
 }
+
+/* Page container styles */
+.page-container {
+  padding: 20px;
+}
+
+/* Heading styles */
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Instructions styles */
+.instructions {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Filter section styles */
+.filter-section {
+  margin-bottom: 20px;
+}
+
+/* Checkbox container styles */
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Checkbox label styles */
+.checkbox-label {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Checkbox input styles */
+.checkbox-label input[type='checkbox'] {
+  display: none;
+}
+
+/* Checkmark styles */
+.checkmark {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+/* Checkmark after styles */
+.checkmark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  display: none;
+}
+
+/* Checkbox checked styles */
+.checkbox-label input[type='checkbox']:checked + .checkmark::after {
+  display: block;
+}
