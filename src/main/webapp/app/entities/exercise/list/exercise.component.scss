@@ -120,13 +120,13 @@
 .checkmark::after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid black;
-  border-bottom: 2px solid black;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%) rotate(45deg); /* Move to center and rotate */
+  width: 5px;
+  height: 10px;
+  border: solid black; /* Set border color to black */
+  border-width: 0 2px 2px 0;
   display: none;
 }
 
