@@ -34,10 +34,6 @@
   <jhi-alert-error></jhi-alert-error>
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning warning-box" id="no-result" *ngIf="exercises?.length === 0">
-    <span>No Exercises found</span>
-  </div>
-
   <!-- Updated UI for checkboxes -->
   <div class="filter-section">
     <div class="checkbox-container">
@@ -47,6 +43,10 @@
         {{ category.name }}
       </label>
     </div>
+  </div>
+
+  <div class="alert alert-warning warning-box" id="no-result" *ngIf="exercises?.length === 0">
+    <span>No Exercises found</span>
   </div>
 
   <div class="exercise-card-container" *ngIf="filteredExercises && filteredExercises.length > 0">
