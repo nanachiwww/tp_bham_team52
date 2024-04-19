@@ -9,6 +9,7 @@ import { EntityArrayResponseType, MedicineService } from '../service/medicine.se
 import { MedicineDeleteDialogComponent } from '../delete/medicine-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 import { Chart, registerables } from 'chart.js';
+import { Dayjs } from 'dayjs'; // Ensure Dayjs is correctly imported
 @Component({
   selector: 'jhi-medicine',
   templateUrl: './medicine.component.html',
@@ -21,6 +22,9 @@ export class MedicineComponent implements OnInit {
   prescriptions: IMedicine[] = [];
   otherItems: IMedicine[] = [];
   isSecondPartVisible: boolean = false;
+  todaySupplements: any[] = [];
+  todayPrescriptions: any[] = [];
+  todayOtherItems: any[] = [];
 
   showSecondPart() {
     this.isSecondPartVisible = true;
@@ -43,6 +47,20 @@ export class MedicineComponent implements OnInit {
     Chart.register(...registerables);
   }
 
+  filterItemsByToday() {
+    const today = new Date().toISOString().split('T')[0];
+    console.log("Today's date: ", today);
+    this.todaySupplements = this.filterByToday(this.supplements);
+    console.log("Today's supplements: ", this.todaySupplements); // Verify the filtered data
+    this.todayPrescriptions = this.filterByToday(this.prescriptions);
+    this.todayOtherItems = this.filterByToday(this.otherItems);
+  }
+
+  private filterByToday(items: any[]): any[] {
+    const today = new Date().toISOString().split('T')[0];
+    return items.filter(item => item.date === today);
+  }
+
   trackId = (_index: number, item: IMedicine): number => this.medicineService.getMedicineIdentifier(item);
 
   ngOnInit(): void {
@@ -51,12 +69,19 @@ export class MedicineComponent implements OnInit {
   }
 
   loadItems() {
-    this.medicineService.getMedicines().subscribe(data => {
-      this.medicines = data;
-      this.supplements = this.medicines.filter(medicine => medicine.supplementType === 'SUPPLEMENT');
-      this.prescriptions = this.medicines.filter(medicine => medicine.supplementType === 'PRESCRIPTION');
-      this.otherItems = this.medicines.filter(medicine => medicine.supplementType === 'OTHER');
-    });
+    this.medicineService.getMedicines().subscribe(
+      data => {
+        console.log('Loaded medicines: ', data); // Check what is being loaded
+        this.medicines = data;
+        this.supplements = this.medicines.filter(medicine => medicine.supplementType === 'SUPPLEMENT');
+        this.prescriptions = this.medicines.filter(medicine => medicine.supplementType === 'PRESCRIPTION');
+        this.otherItems = this.medicines.filter(medicine => medicine.supplementType === 'OTHER');
+        this.filterItemsByToday(); // Ensure this is called after data is loaded
+      },
+      error => {
+        console.error('Failed to load medicines', error);
+      }
+    );
   }
 
   delete(medicine: IMedicine): void {

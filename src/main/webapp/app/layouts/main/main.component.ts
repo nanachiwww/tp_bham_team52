@@ -3,16 +3,20 @@ import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 
 import { AccountService } from 'app/core/auth/account.service';
+import { CookieService } from 'app/cookie.service';
 
 @Component({
   selector: 'jhi-main',
   templateUrl: './main.component.html',
 })
 export class MainComponent implements OnInit {
+  hasSetupCookies: boolean = false;
+
   constructor(private accountService: AccountService, private titleService: Title, private router: Router) {}
 
   ngOnInit(): void {
     // try to log in automatically
+    this.checkCookieConsent();
     this.accountService.identity().subscribe();
 
     this.router.events.subscribe(event => {
@@ -20,6 +24,11 @@ export class MainComponent implements OnInit {
         this.updateTitle();
       }
     });
+  }
+
+  private checkCookieConsent(): void {
+    const consent = localStorage.getItem('acceptedCookies');
+    this.hasSetupCookies = consent === 'true';
   }
 
   private getPageTitle(routeSnapshot: ActivatedRouteSnapshot): string {

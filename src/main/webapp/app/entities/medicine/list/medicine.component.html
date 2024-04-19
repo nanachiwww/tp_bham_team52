@@ -1,16 +1,16 @@
 <div class="page">
   <div class="page row">
     <div *ngIf="!isSecondPartVisible">
-      <h2 id="page-heading" data-cy="MedicineHeading">
+      <h2 id="page-heading" data-cy="MedicineHeading" class="text-center">
         <span class="title">What Supplements did you take today?</span>
       </h2>
 
       <div class="d-flex justify-content-around">
         <!-- Supplements Section -->
         <div class="category">
-          <h3>Supplements</h3>
+          <h3 class="supplement-titles">Supplements</h3>
           <ul>
-            <li *ngFor="let item of supplements; let i = index" class="list-item supplement-item">
+            <li *ngFor="let item of todaySupplements; let i = index" class="list-item supplement-item supplement-type">
               <div class="info">
                 <span class="supplement-name">{{ item.name }}</span>
                 <span class="supplement-date">{{ item.date }}</span>
@@ -32,9 +32,9 @@
 
         <!-- Prescriptions Section -->
         <div class="category">
-          <h3>Prescriptions</h3>
+          <h3 class="supplement-titles">Prescriptions</h3>
           <ul>
-            <li *ngFor="let item of prescriptions; let i = index" class="list-item supplement-item">
+            <li *ngFor="let item of todayPrescriptions; let i = index" class="list-item supplement-item prescription-type">
               <div class="info">
                 <span class="supplement-name">{{ item.name }}</span>
                 <span class="supplement-date">{{ item.date }}</span>
@@ -56,9 +56,9 @@
 
         <!-- Other Items Section -->
         <div class="category">
-          <h3>Other Items</h3>
+          <h3 class="supplement-titles">Other Items</h3>
           <ul>
-            <li *ngFor="let item of otherItems; let i = index" class="list-item supplement-item">
+            <li *ngFor="let item of todayOtherItems; let i = index" class="list-item supplement-item other-type">
               <div class="info">
                 <span class="supplement-name">{{ item.name }}</span>
                 <span class="supplement-date">{{ item.date }}</span>
@@ -88,152 +88,54 @@
           <fa-icon icon="plus"></fa-icon>
           <span> Create a new Medicine </span>
         </button>
-        <button
-          id="jh-create-entity"
-          data-cy="entityCreateButton"
-          class="btn btn-primary jh-create-entity create-medicine"
-          (click)="showSecondPart()"
-        >
+        <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity" (click)="showSecondPart()">
           <fa-icon icon="check"></fa-icon>
           <span>Submit Day</span>
         </button>
       </div>
     </div>
     <div *ngIf="isSecondPartVisible">
-      <div class="d-flex justify-content-center">
-        <div class="category medicine-section">
-          <h3 class="interactions-title">Interactions</h3>
-          <h4>Interactions with other medicines</h4>
-          <div>
-            <span>No interactions found</span>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="category medicine-section">
+              <h3 class="interactions-title">Interactions</h3>
+              <h4>Interactions with other medicines</h4>
+              <div>
+                <span>No interactions found</span>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="category medicine-section">
-          <h3 class="interactions-title">Tracking Intake overtime</h3>
-          <div>
-            <span>Graph</span>
-            <canvas #lineChart *ngIf="isSecondPartVisible" id="line-chart"></canvas>
+          <div class="col-md-6">
+            <div class="category medicine-section">
+              <h3 class="interactions-title">Tracking Intake overtime</h3>
+              <div>
+                <span>Graph</span>
+                <canvas #lineChart *ngIf="isSecondPartVisible" id="line-chart"></canvas>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="category medicine-section">
-          <h3 class="interactions-title">Recommendations</h3>
-          <div></div>
-        </div>
-
-        <div class="category medicine-section">
-          <h3 class="interactions-title">Notes</h3>
-          <div></div>
+          <div class="col-md-6">
+            <div class="category medicine-section">
+              <h3 class="interactions-title">Recommendations</h3>
+              <div></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="category medicine-section">
+              <h3 class="interactions-title">Notes</h3>
+              <div></div>
+            </div>
+          </div>
         </div>
       </div>
-
       <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-outline-secondary next-page-btn" routerLink="/mood-tracker">
           Track Mental Health <i class="fa fa-arrow-right"></i>
         </button>
       </div>
-
       <jhi-alert-error></jhi-alert-error>
-
       <jhi-alert></jhi-alert>
     </div>
-
-    <!-- <div class="table-responsive table-entities" id="entities" *ngIf="medicines && medicines.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
-            <div class="d-flex">
-              <span>ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="date">
-            <div class="d-flex">
-              <span>Date</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="name">
-            <div class="d-flex">
-              <span>Name</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="description">
-            <div class="d-flex">
-              <span>Description</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="subjectiveEffect">
-            <div class="d-flex">
-              <span>Subjective Effect</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="supplementType">
-            <div class="d-flex">
-              <span>Supplement Type</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="userProfile.id">
-            <div class="d-flex">
-              <span>User Profile</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let medicine of medicines; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/medicine', medicine.id, 'view']">{{ medicine.id }}</a>
-          </td>
-          <td>{{ medicine.date | formatMediumDate }}</td>
-          <td>{{ medicine.name }}</td>
-          <td>{{ medicine.description }}</td>
-          <td>{{ medicine.subjectiveEffect }}</td>
-          <td>{{ medicine.supplementType }}</td>
-          <td>
-            <div *ngIf="medicine.userProfile">
-              <a [routerLink]="['/user-profile', medicine.userProfile.id, 'view']">{{ medicine.userProfile.id }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/medicine', medicine.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">View</span>
-              </button>
-
-              <button
-                type="submit"
-                [routerLink]="['/medicine', medicine.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Edit</span>
-              </button>
-
-              <button type="submit" (click)="delete(medicine)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div> -->
   </div>
 </div>
