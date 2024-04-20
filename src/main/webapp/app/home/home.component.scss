@@ -47,11 +47,18 @@ Main page styles
   align-items: center; /* This will vertically align items if they are not of equal height */
 }
 .home-title {
-  font-size: 24px;
-  font-weight: 300;
-  color: #333;
-  text-align: center;
+  font-size: 64px;
+  font-weight: bold;
+  color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+}
+.home-subtitle {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .home-box {
@@ -60,4 +67,18 @@ Main page styles
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   padding: 12px;
   margin-top: 12px;
+}
+
+.login-box {
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.register-box {
+  border-radius: 16px;
+}
+
+.btn-text {
+  // remove the underline from the link
+  text-decoration: none;
 }

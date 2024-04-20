@@ -8,6 +8,7 @@ import { CookieService } from 'app/cookie.service';
 @Component({
   selector: 'jhi-main',
   templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
   hasSetupCookies: boolean = false;

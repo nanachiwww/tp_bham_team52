@@ -57,13 +57,15 @@ Logo styles
 .navbar-title {
   font-size: 32px;
   font-weight: 400;
-  color: black;
+  color: white;
   margin-left: 10px;
   display: inline-block;
   vertical-align: middle;
   justify-content: center;
   text-align: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  //add shadow to the text
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .navbar-brand {
