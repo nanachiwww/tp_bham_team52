@@ -135,12 +135,35 @@ input[type='text']:focus {
 }
 
 .title {
-  display: inline-block; /* Make span behave like an inline element that can be centered */
-  width: 100%; /* Adjust the width as needed */
-  text-align: center;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 16px;
+  padding: 8px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 6px solid white; /* Mimics the cursor at the end of the typing */
+  animation: typing 4s steps(37, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
 }
 
 .interaction-item {
@@ -324,4 +347,28 @@ input[type='text']:focus {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.subtitle-box {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
 }

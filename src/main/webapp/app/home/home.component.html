@@ -1,4 +1,4 @@
-<div class="home page">
+<div class="area home page">
   <div class="col-md-9">
     <h1 class="home-title"><span>Health Hive</span></h1>
     <h1 class="home-subtitle"><span>Achieve More.</span></h1>
@@ -7,7 +7,7 @@
       <p class="lead">Your all-in-one web-based platform for managing sleep, diet, workouts, and mental health seamlessly.</p>
 
       <div [ngSwitch]="account !== null">
-        <div class="alerts-container">
+        <div class="alerts-container btn-bar">
           <div class="alert alert-warning warning-box login-box" *ngSwitchCase="false" style="margin-right: 12px">
             <a class="alert-link btn-text" (click)="login()">Login</a>
           </div>
@@ -18,26 +18,17 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="fade-in">
-      <p class="lead">Here is what Health Hive has to offer:</p>
-      <ul class="lead">
-        <li>Sleep Tracker: Monitor your sleep cycles, quality, and duration to optimize your rest and recovery process.</li>
-        <li>
-          Dietary Log: Keep track of your meals, caloric intake, and nutritional content, aligning your eating habits with your health goals
-          effortlessly.
-        </li>
-        <li>Workout Planner: Personalized workout suggestions and tracking to keep you on the path to fitness success.</li>
-        <li>
-          Mental Health Monitor: Prioritize your mental well-being with tools to track mood patterns, stress levels, and mindfulness
-          practices. Select how you're feeling and monitor your progress.
-        </li>
-        <li>
-          Goal Setting and Target Tracker: Set specific targets, whether academic, financial, or personal, and track your progress towards
-          them.
-        </li>
-        <li>Medication and Supplement Tracker: Keep track of your medication and supplement intake, ensuring you never miss a dose.</li>
-      </ul>
-    </div> -->
   </div>
+  <ul class="circles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
 </div>
