@@ -19,7 +19,10 @@ import { IMoodTracker } from '../../mood-tracker/mood-tracker.model';
 })
 export class CustomGoalUpdateComponent implements OnInit {
   isSaving = false;
-
+  customGoalsValue1: ICustomGoal[] = [];
+  customGoalsValue2: ICustomGoal[] = [];
+  customGoalsValue3: ICustomGoal[] = [];
+  customGoalsValue4: ICustomGoal[] = [];
   customGoal: ICustomGoal | null = null;
   moodTracker: IMoodTracker | null = null;
   moodValues = Object.keys(Mood);
@@ -50,6 +53,10 @@ export class CustomGoalUpdateComponent implements OnInit {
       }
 
       this.loadRelationshipsOptions();
+      this.customGoalsValue1 = [];
+      this.customGoalsValue2 = [];
+      this.customGoalsValue3 = [];
+      this.customGoalsValue4 = [];
     });
   }
 
@@ -65,11 +72,36 @@ export class CustomGoalUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.customGoalService.create(customGoal));
     }
+    const selectedValue = this.sharedDataService.getSelectedValue();
+    if (selectedValue === 'Value1') {
+      this.customGoalsValue1.push(<ICustomGoal>customGoal);
+    } else if (selectedValue === 'Value2') {
+      this.customGoalsValue2.push(<ICustomGoal>customGoal);
+    } else if (selectedValue === 'Value3') {
+      this.customGoalsValue3.push(<ICustomGoal>customGoal);
+    } else if (selectedValue === 'Value4') {
+      this.customGoalsValue4.push(<ICustomGoal>customGoal);
+    } else {
+      console.error('Custom goal is null or undefined.');
+    }
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ICustomGoal>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
+      next: response => {
+        const customGoal = response.body;
+        const selectedValue = this.getSelectedValue();
+        if (selectedValue === 'Value1') {
+          this.customGoalsValue1.push(<ICustomGoal>customGoal);
+        } else if (selectedValue === 'Value2') {
+          this.customGoalsValue2.push(<ICustomGoal>customGoal);
+        } else if (selectedValue === 'Value3') {
+          this.customGoalsValue3.push(<ICustomGoal>customGoal);
+        } else if (selectedValue === 'Value4') {
+          this.customGoalsValue4.push(<ICustomGoal>customGoal);
+        }
+        this.onSaveSuccess();
+      },
       error: () => this.onSaveError(),
     });
   }
@@ -89,7 +121,7 @@ export class CustomGoalUpdateComponent implements OnInit {
   protected updateForm(customGoal: ICustomGoal): void {
     this.customGoal = customGoal;
     this.customGoalFormService.resetForm(this.editForm, customGoal);
-
+    this.editForm.controls['name'].setValue('Sleeping Goal');
     this.userProfilesSharedCollection = this.userProfileService.addUserProfileToCollectionIfMissing<IUserProfile>(
       this.userProfilesSharedCollection,
       customGoal.userProfile

@@ -39,6 +39,7 @@ describe('CustomGoal Service', () => {
     it('should create a CustomGoal', () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const customGoal = { ...sampleWithNewData };
+
       const returnedFromService = { ...requireRestSample };
       const expected = { ...sampleWithRequiredData };
 

@@ -12,39 +12,27 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_name">Start time</label>
-          <input
-            type="datetime-local"
-            placeholder="YYYY-MM-DD HH:mm"
-            class="form-control"
-            name="name"
-            id="field_name"
-            data-cy="name"
-            formControlName="name"
-          />
-          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label class="form-label" for="field_name">End time</label>
-          <input
-            type="datetime-local"
-            placeholder="YYYY-MM-DD HH:mm"
-            class="form-control"
-            name="name"
-            id="field_time"
-            data-cy="name"
-            formControlName="name"
-          />
-          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
-          </div>
-        </div>
+          <label class="form-label" for="field_name">Name</label>
 
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
         <div class="row mb-3">
-          <label class="form-label" for="field_rating">Rating</label>
-          <input type="number" class="form-control" name="rating" id="field_rating" data-cy="rating" formControlName="rating" />
+          <label class="form-label" for="field_name">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="filed_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('description')?.errors?.required"> This field is required. </small>
+          </div>
         </div>
 
         <div class="row mb-3">
@@ -91,15 +79,22 @@
         <input type="number" class="form-control" name="id" id="diet_id" data-cy="id" formControlName="id" [readonly]="true" />
       </div>
       <div class="row mb-3">
-        <label class="form-label" for="field_name">Calorie intake</label>
-        <input type="number" class="form-control" name="name" id="diet_intake" data-cy="name" formControlName="name" />
+        <label class="form-label" for="field_name">Name</label>
+        <input type="text" class="form-control" name="description" id="calorie_name" data-cy="name" formControlName="name" />
         <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
           <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
         </div>
-        <label class="form-label" for="field_name">Date</label>
-        <input type="date" class="form-control" name="name" id="diet_date" data-cy="name" formControlName="name" />
-        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+        <label class="form-label" for="field_name">description</label>
+        <input
+          type="text"
+          class="form-control"
+          name="description"
+          id="calorie_description"
+          data-cy="description"
+          formControlName="description"
+        />
+        <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('description')?.errors?.required"> This field is required. </small>
         </div>
       </div>
       <div>
@@ -128,21 +123,25 @@
       </div>
 
       <div class="row mb-3">
-        <label class="form-label" for="field_name">Date</label>
-        <input type="date" class="form-control" name="name" id="mood_date" data-cy="name" formControlName="name" />
+        <label class="form-label" for="field_name">name</label>
+        <input type="text" class="form-control" name="name" id="mood_name" data-cy="name" formControlName="name" />
         <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
           <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
         </div>
       </div>
 
       <div class="row mb-3">
-        <label class="form-label" for="field_mood">Mood</label>
-        <select class="form-control" name="mood" formControlName="mood" id="field_mood" data-cy="mood">
-          <option [ngValue]="null"></option>
-          <option *ngFor="let mood of moodValues" [value]="mood">{{ mood }}</option>
-        </select>
-        <div *ngIf="editForm.get('mood')!.invalid && (editForm.get('mood')!.dirty || editForm.get('mood')!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get('mood')?.errors?.required"> This field is required. </small>
+        <label class="form-label" for="mood_description">Mood</label>
+        <input
+          type="text"
+          class="form-control"
+          name="description"
+          id="mood_description"
+          data-cy="description"
+          formControlName="description"
+        />
+        <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('description')?.errors?.required"> This field is required. </small>
         </div>
       </div>
 
@@ -163,7 +162,6 @@
       </div>
     </form>
     <form name="editForm" role="form" *ngIf="getSelectedValue() === 'Value4'" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      >
       <h2 id="jhi-custom-goal-heading" data-cy="CustomGoalCreateUpdateHeading">Create or edit custom goal</h2>
       <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
         <label class="form-label" for="sleep_id">ID</label>
@@ -179,10 +177,38 @@
       </div>
       <div class="row mb-3">
         <label class="form-label" for="field_name">Description</label>
-        <input type="text" class="form-control" name="description" id="custom_description" data-cy="name" formControlName="name" />
-        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+        <input
+          type="text"
+          class="form-control"
+          name="description"
+          id="custom_description"
+          data-cy="description"
+          formControlName="description"
+        />
+        <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('description')?.errors?.required"> This field is required. </small>
         </div>
+      </div>
+      <div>
+        <button
+          type="button"
+          id="cancel-custom-goal"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-custom-goal"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
       </div>
     </form>
   </div>

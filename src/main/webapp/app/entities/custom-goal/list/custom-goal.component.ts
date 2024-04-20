@@ -16,6 +16,7 @@ import { SharedDataService } from 'app/shared/data/shared-data.service';
 })
 export class CustomGoalComponent implements OnInit {
   customGoals?: ICustomGoal[];
+  customGoalsValue1?: ICustomGoal[];
   isLoading = false;
 
   predicate = 'id';

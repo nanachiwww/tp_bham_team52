@@ -15,6 +15,23 @@
 .container.text-center {
   margin-bottom: 50px; /* Set the spacing at the bottom of the header to 50 pixels */
 }
+.card {
+  width: 300px;
+  height: 200px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.custom-button-class1 {
+  background-color: yellow;
+  color: black;
+}
+.custom-button-class2 {
+  background-color: red;
+  color: white;
+}
+.card-body {
+  text-align: center;
+}
 
 /*.goal-container {
   display: flex;

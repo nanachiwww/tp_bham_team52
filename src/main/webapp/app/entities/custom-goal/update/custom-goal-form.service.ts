@@ -20,6 +20,7 @@ type CustomGoalFormGroupContent = {
   id: FormControl<ICustomGoal['id'] | NewCustomGoal['id']>;
   name: FormControl<ICustomGoal['name']>;
   description: FormControl<ICustomGoal['description']>;
+
   userProfile: FormControl<ICustomGoal['userProfile']>;
 };
 
@@ -32,7 +33,7 @@ export class CustomGoalFormService {
       ...this.getFormDefaults(),
       ...customGoal,
     };
-    return new FormGroup<CustomGoalFormGroupContent>({
+    return new FormGroup<CustomGoalFormGroupContent>(<CustomGoalFormGroupContent>{
       id: new FormControl(
         { value: customGoalRawValue.id, disabled: true },
         {
