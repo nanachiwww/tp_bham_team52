@@ -170,7 +170,7 @@ input[type='text']:focus {
 
 .medicine-section {
   padding: 10px;
-  height: 240px;
+  width: 800px;
   background-color: #fff;
 }
 
@@ -255,4 +255,58 @@ input[type='text']:focus {
 /* Ensure there's enough space for the border by adjusting padding */
 .second-section .medicine-section {
   padding-bottom: 20px; /* Add more padding to the right */
+}
+
+/* Filter section styles */
+.filter-section {
+  margin-bottom: 20px;
+}
+
+/* Checkbox container styles */
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Checkbox label styles */
+.checkbox-label {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Checkbox input styles */
+.checkbox-label input[type='checkbox'] {
+  display: none;
+}
+
+/* Checkmark styles */
+.checkmark {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+/* Checkmark after styles */
+.checkmark::after {
+  content: '';
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%) rotate(45deg); /* Move to center and rotate */
+  width: 5px;
+  height: 10px;
+  border: solid black; /* Set border color to black */
+  border-width: 0 2px 2px 0;
+  display: none;
+}
+
+/* Checkbox checked styles */
+.checkbox-label input[type='checkbox']:checked + .checkmark::after {
+  display: block;
 }

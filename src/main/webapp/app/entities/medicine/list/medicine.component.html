@@ -104,26 +104,31 @@
         </button>
         <div class="second-section">
           <div class="medicine-section">
-            <h3 class="interactions-title">Interactions</h3>
-            <h4>Interactions with other medicines</h4>
+            <h3 class="interactions-title">Tracking Supplement Type</h3>
+            <div class="filters">
+              <label *ngFor="let filter of filters; let i = index">
+                <input type="checkbox" [(ngModel)]="filter.checked" (change)="updateChartFilters()" [id]="filter.id" />
+                {{ filter.name }}
+              </label>
+            </div>
             <div>
-              <span>No interactions found</span>
+              <canvas #lineChart id="overall-chart"></canvas>
             </div>
           </div>
+
           <div class="medicine-section">
-            <h3 class="interactions-title">Tracking Intake overtime</h3>
+            <h3 class="interactions-title">Tracking Specific Supplements</h3>
+            <input
+              type="text"
+              [(ngModel)]="searchTerm"
+              (input)="filterData()"
+              placeholder="Search specific supplements"
+              class="form-control"
+            />
+
             <div>
-              <span>Graph</span>
-              <canvas #lineChart *ngIf="isSecondPartVisible" id="line-chart"></canvas>
+              <canvas #lineChart id="specific-chart"></canvas>
             </div>
-          </div>
-          <div class="medicine-section">
-            <h3 class="interactions-title">Recommendations</h3>
-            <div></div>
-          </div>
-          <div class="medicine-section">
-            <h3 class="interactions-title">Notes</h3>
-            <div></div>
           </div>
         </div>
       </div>

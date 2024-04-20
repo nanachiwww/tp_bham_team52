@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import { MedicineDeleteDialogComponent } from '../delete/medicine-delete-dialog.
 import { SortService } from 'app/shared/sort/sort.service';
 import { Chart, registerables } from 'chart.js';
 import { Dayjs } from 'dayjs'; // Ensure Dayjs is correctly imported
+import dayjs from 'dayjs'; // Import dayjs directly
 @Component({
   selector: 'jhi-medicine',
   templateUrl: './medicine.component.html',
@@ -25,10 +26,15 @@ export class MedicineComponent implements OnInit {
   todaySupplements: any[] = [];
   todayPrescriptions: any[] = [];
   todayOtherItems: any[] = [];
+  searchTerm: string = '';
+  types = ['SUPPLEMENT', 'PRESCRIPTION', 'OTHER'];
 
   showSecondPart() {
     this.isSecondPartVisible = true;
-    this.createLineChart();
+    setTimeout(() => {
+      this.createOverallUsageChart();
+      this.createSpecificUsageChart();
+    }, 0); // Timeout might need adjustment based on actual behavior
   }
   showFirstPart() {
     this.isSecondPartVisible = false;
@@ -39,6 +45,11 @@ export class MedicineComponent implements OnInit {
   isLoading = false;
   predicate = 'id';
   ascending = true;
+  filters = [
+    { id: 'vitaminC', name: 'Vitamin C', checked: true },
+    { id: 'zinc', name: 'Zinc', checked: false },
+    // add other filters as necessary
+  ];
 
   constructor(
     protected medicineService: MedicineService,
@@ -168,41 +179,116 @@ export class MedicineComponent implements OnInit {
     }
   }
 
-  createLineChart(): void {
-    const canvas = document.getElementById('line-chart') as HTMLCanvasElement;
-    if (!canvas) return; // Exit the function if the canvas is not found
+  filterData() {}
+  updateChartFilters() {}
 
+  getOverallGraphData(): any {
+    const labels = this.getLast12Months();
+    const medicineCounts = this.countItemsByMonth(this.medicines);
+    const supplementCounts = this.countItemsByMonth(this.supplements);
+    const prescriptionCounts = this.countItemsByMonth(this.prescriptions);
+
+    return {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Medicines',
+          data: medicineCounts,
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1,
+        },
+        {
+          label: 'Supplements',
+          data: supplementCounts,
+          fill: false,
+          borderColor: 'rgb(192, 75, 75)',
+          tension: 0.1,
+        },
+        {
+          label: 'Prescriptions',
+          data: prescriptionCounts,
+          fill: false,
+          borderColor: 'rgb(75, 75, 192)',
+          tension: 0.1,
+        },
+      ],
+    };
+  }
+
+  getSpecificGraphData(): any {
+    const labels = this.getLast12Months();
+    const supplementCounts = this.countItemsByMonth(this.todaySupplements);
+    const prescriptionCounts = this.countItemsByMonth(this.todayPrescriptions);
+    const otherCounts = this.countItemsByMonth(this.todayOtherItems);
+
+    return {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Supplements',
+          data: supplementCounts,
+          fill: false,
+          borderColor: 'rgb(192, 75, 75)',
+          tension: 0.1,
+        },
+        {
+          label: 'Prescriptions',
+          data: prescriptionCounts,
+          fill: false,
+          borderColor: 'rgb(75, 75, 192)',
+          tension: 0.1,
+        },
+        {
+          label: 'Other Items',
+          data: otherCounts,
+          fill: false,
+          borderColor: 'rgb(75, 192, 75)',
+          tension: 0.1,
+        },
+      ],
+    };
+  }
+
+  countItemsByMonth(items: any): number[] {
+    const counts = Array(12).fill(0);
+    const today = dayjs();
+    items.forEach((item: any) => {
+      const monthDifference = today.diff(dayjs(item.date), 'month');
+      if (monthDifference >= 0 && monthDifference < 12) {
+        counts[11 - monthDifference]++;
+      }
+    });
+    return counts;
+  }
+
+  getLast12Months(): string[] {
+    return Array.from({ length: 12 }, (_, i) => dayjs().subtract(i, 'month').format('MMMM YYYY')).reverse();
+  }
+
+  createOverallUsageChart(): void {
+    const canvas = document.getElementById('overall-chart') as HTMLCanvasElement;
+    if (!canvas) return; // Exit the function if the canvas is not found
     const ctx = canvas.getContext('2d');
+
     if (!ctx) return; // Exit the function if the context is not obtained
 
     const lineChart = new Chart(ctx, {
       type: 'line',
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-          {
-            label: 'Demo Line Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1,
-          },
-          {
-            label: 'Demo Line Dataset',
-            data: [65, 40, 80, 81, 56, 55, 40],
-            fill: false,
-            borderColor: 'rgb(75, 155, 192)',
-            tension: 0.1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
+      data: this.getOverallGraphData(),
+    });
+  }
+
+  createSpecificUsageChart(): void {
+    const canvas = document.getElementById('specific-chart') as HTMLCanvasElement;
+    if (!canvas) return; // Exit the function if the canvas is not found
+    const ctx = canvas.getContext('2d');
+
+    if (!ctx) return; // Exit the function if the context is not obtained
+
+    const lineChart = new Chart(ctx, {
+      type: 'line',
+      data: this.getSpecificGraphData(),
     });
   }
 }
