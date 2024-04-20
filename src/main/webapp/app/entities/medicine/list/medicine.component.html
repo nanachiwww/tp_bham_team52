@@ -96,7 +96,7 @@
         </button>
       </div>
     </div>
-    <div *ngIf="isSecondPartVisible">
+    <div *ngIf="isSecondPartVisible" class="fadeIn">
       <div class="container">
         <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity" (click)="showFirstPart()">
           <fa-icon icon="check"></fa-icon>
@@ -107,7 +107,7 @@
             <h3 class="interactions-title">Tracking Supplement Type</h3>
             <div class="filters">
               <label *ngFor="let filter of filters; let i = index">
-                <input type="checkbox" [(ngModel)]="filter.checked" (change)="updateChartFilters()" [id]="filter.id" />
+                <input type="checkbox" [(ngModel)]="filter.checked" (change)="updateVisibleItems()" [id]="filter.id" />
                 {{ filter.name }}
               </label>
             </div>
@@ -118,13 +118,15 @@
 
           <div class="medicine-section">
             <h3 class="interactions-title">Tracking Specific Supplements</h3>
-            <input
-              type="text"
-              [(ngModel)]="searchTerm"
-              (input)="filterData()"
-              placeholder="Search specific supplements"
-              class="form-control"
-            />
+            <div>
+              <input
+                type="text"
+                [(ngModel)]="searchTerm"
+                (input)="filterData()"
+                placeholder="Search specific supplements"
+                class="form-control"
+              />
+            </div>
 
             <div>
               <canvas #lineChart id="specific-chart"></canvas>

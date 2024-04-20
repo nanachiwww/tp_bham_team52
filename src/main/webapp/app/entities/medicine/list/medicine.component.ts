@@ -11,6 +11,8 @@ import { SortService } from 'app/shared/sort/sort.service';
 import { Chart, registerables } from 'chart.js';
 import { Dayjs } from 'dayjs'; // Ensure Dayjs is correctly imported
 import dayjs from 'dayjs'; // Import dayjs directly
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
   selector: 'jhi-medicine',
   templateUrl: './medicine.component.html',
@@ -27,6 +29,8 @@ export class MedicineComponent implements OnInit {
   todayPrescriptions: any[] = [];
   todayOtherItems: any[] = [];
   searchTerm: string = '';
+  private overallChart?: Chart;
+  private specificChart?: Chart;
   types = ['SUPPLEMENT', 'PRESCRIPTION', 'OTHER'];
 
   showSecondPart() {
@@ -46,12 +50,13 @@ export class MedicineComponent implements OnInit {
   predicate = 'id';
   ascending = true;
   filters = [
-    { id: 'vitaminC', name: 'Vitamin C', checked: true },
-    { id: 'zinc', name: 'Zinc', checked: false },
-    // add other filters as necessary
+    { id: 'SUPPLEMENT', name: 'SUPPLEMENT', checked: true },
+    { id: 'PRESCRIPTION', name: 'PRESCRIPTION', checked: true },
+    { id: 'OTHER', name: 'OTHER', checked: true },
   ];
 
   constructor(
+    private cdr: ChangeDetectorRef,
     protected medicineService: MedicineService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
@@ -63,9 +68,7 @@ export class MedicineComponent implements OnInit {
 
   filterItemsByToday() {
     const today = new Date().toISOString().split('T')[0];
-    console.log("Today's date: ", today);
     this.todaySupplements = this.filterByToday(this.supplements);
-    console.log("Today's supplements: ", this.todaySupplements); // Verify the filtered data
     this.todayPrescriptions = this.filterByToday(this.prescriptions);
     this.todayOtherItems = this.filterByToday(this.otherItems);
   }
@@ -86,15 +89,37 @@ export class MedicineComponent implements OnInit {
     this.medicineService.getMedicines().subscribe(
       data => {
         this.medicines = data;
-        this.supplements = this.medicines.filter(medicine => medicine.supplementType === 'SUPPLEMENT');
-        this.prescriptions = this.medicines.filter(medicine => medicine.supplementType === 'PRESCRIPTION');
-        this.otherItems = this.medicines.filter(medicine => medicine.supplementType === 'OTHER');
-        this.filterItemsByToday(); // Ensure this is called after data is loaded
+        this.updateVisibleItems(); // Call this function to update the view based on filters
       },
       error => {
         console.error('Failed to load medicines', error);
       }
     );
+  }
+
+  updateVisibleItems() {
+    this.supplements = this.filters.find(f => f.id === 'SUPPLEMENT')?.checked
+      ? this.medicines.filter(medicine => medicine.supplementType === 'SUPPLEMENT')
+      : [];
+    this.prescriptions = this.filters.find(f => f.id === 'PRESCRIPTION')?.checked
+      ? this.medicines.filter(medicine => medicine.supplementType === 'PRESCRIPTION')
+      : [];
+    this.otherItems = this.filters.find(f => f.id === 'OTHER')?.checked
+      ? this.medicines.filter(medicine => medicine.supplementType === 'OTHER')
+      : [];
+
+    console.log('Filtered Supplements:', this.supplements.length === 0);
+    console.log('Filtered Prescriptions:', this.prescriptions.length === 0);
+    console.log('Filtered Other Items:', this.otherItems.length === 0);
+
+    this.filterItemsByToday();
+    this.updateCharts();
+  }
+
+  updateCharts() {
+    this.createOverallUsageChart();
+    this.createSpecificUsageChart();
+    this.cdr.detectChanges(); // Manually trigger change detection
   }
 
   delete(medicine: IMedicine): void {
@@ -180,34 +205,33 @@ export class MedicineComponent implements OnInit {
   }
 
   filterData() {}
-  updateChartFilters() {}
 
   getOverallGraphData(): any {
     const labels = this.getLast12Months();
-    const medicineCounts = this.countItemsByMonth(this.medicines);
     const supplementCounts = this.countItemsByMonth(this.supplements);
     const prescriptionCounts = this.countItemsByMonth(this.prescriptions);
+    const otherCounts = this.countItemsByMonth(this.otherItems);
 
     return {
       labels: labels,
       datasets: [
         {
-          label: 'Medicines',
-          data: medicineCounts,
+          label: 'Supplements',
+          data: supplementCounts,
           fill: false,
           borderColor: 'rgb(75, 192, 192)',
           tension: 0.1,
         },
         {
-          label: 'Supplements',
-          data: supplementCounts,
+          label: 'Prescriptions',
+          data: prescriptionCounts,
           fill: false,
           borderColor: 'rgb(192, 75, 75)',
           tension: 0.1,
         },
         {
-          label: 'Prescriptions',
-          data: prescriptionCounts,
+          label: 'Other Items',
+          data: otherCounts,
           fill: false,
           borderColor: 'rgb(75, 75, 192)',
           tension: 0.1,
@@ -268,27 +292,53 @@ export class MedicineComponent implements OnInit {
 
   createOverallUsageChart(): void {
     const canvas = document.getElementById('overall-chart') as HTMLCanvasElement;
-    if (!canvas) return; // Exit the function if the canvas is not found
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    if (!ctx) return; // Exit the function if the context is not obtained
+    // Destroy the existing chart if it exists
+    if (this.overallChart) {
+      this.overallChart.destroy();
+    }
 
-    const lineChart = new Chart(ctx, {
+    // Create a new chart instance and assign it to the overallChart property
+    this.overallChart = new Chart(ctx, {
       type: 'line',
       data: this.getOverallGraphData(),
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true, // Ensure that y-axis starts at 0
+            min: 0, // Explicitly set the minimum to 0
+          },
+        },
+      }, // Add any necessary options
     });
   }
 
   createSpecificUsageChart(): void {
     const canvas = document.getElementById('specific-chart') as HTMLCanvasElement;
-    if (!canvas) return; // Exit the function if the canvas is not found
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    if (!ctx) return; // Exit the function if the context is not obtained
+    // Destroy the existing chart if it exists
+    if (this.specificChart) {
+      this.specificChart.destroy();
+    }
 
-    const lineChart = new Chart(ctx, {
+    // Create a new chart instance and assign it to the specificChart property
+    this.specificChart = new Chart(ctx, {
       type: 'line',
       data: this.getSpecificGraphData(),
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true, // Ensure that y-axis starts at 0
+            min: 0, // Explicitly set the minimum to 0
+          },
+        },
+      }, // Add any necessary options
     });
   }
 }

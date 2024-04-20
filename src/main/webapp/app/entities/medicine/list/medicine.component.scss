@@ -310,3 +310,18 @@ input[type='text']:focus {
 .checkbox-label input[type='checkbox']:checked + .checkmark::after {
   display: block;
 }
+
+.search-box {
+  border-width: 2px;
+  border-color: #000;
+  border-style: solid;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
