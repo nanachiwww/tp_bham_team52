@@ -30,6 +30,9 @@ export class MedicineComponent implements OnInit {
     this.isSecondPartVisible = true;
     this.createLineChart();
   }
+  showFirstPart() {
+    this.isSecondPartVisible = false;
+  }
 
   interactions = [{ detail: 'Interaction 1 details here...' }, { detail: 'Interaction 2 details here...' }];
 
@@ -71,7 +74,6 @@ export class MedicineComponent implements OnInit {
   loadItems() {
     this.medicineService.getMedicines().subscribe(
       data => {
-        console.log('Loaded medicines: ', data); // Check what is being loaded
         this.medicines = data;
         this.supplements = this.medicines.filter(medicine => medicine.supplementType === 'SUPPLEMENT');
         this.prescriptions = this.medicines.filter(medicine => medicine.supplementType === 'PRESCRIPTION');

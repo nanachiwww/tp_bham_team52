@@ -5,8 +5,7 @@
         <span class="title">What Supplements did you take today?</span>
       </h2>
 
-      <div class="d-flex justify-content-around">
-        <!-- Supplements Section -->
+      <div class="d-flex justify-content-center supplements">
         <div class="category">
           <h3 class="supplement-titles">Supplements</h3>
           <ul>
@@ -30,7 +29,6 @@
           </ul>
         </div>
 
-        <!-- Prescriptions Section -->
         <div class="category">
           <h3 class="supplement-titles">Prescriptions</h3>
           <ul>
@@ -40,7 +38,6 @@
                 <span class="supplement-date">{{ item.date }}</span>
                 <span class="supplement-description">{{ item.description }}</span>
               </div>
-
               <div class="action-buttons">
                 <button type="button" class="green-btn btn btn-info btn-sm" [routerLink]="['/medicine', item.id, 'view']">
                   <fa-icon icon="eye"></fa-icon> View
@@ -78,7 +75,7 @@
           </ul>
         </div>
       </div>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center button-bar">
         <button
           id="jh-create-entity"
           data-cy="entityCreateButton"
@@ -88,7 +85,12 @@
           <fa-icon icon="plus"></fa-icon>
           <span> Create a new Medicine </span>
         </button>
-        <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity" (click)="showSecondPart()">
+        <button
+          id="jh-create-entity"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity submit-day"
+          (click)="showSecondPart()"
+        >
           <fa-icon icon="check"></fa-icon>
           <span>Submit Day</span>
         </button>
@@ -96,36 +98,32 @@
     </div>
     <div *ngIf="isSecondPartVisible">
       <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="category medicine-section">
-              <h3 class="interactions-title">Interactions</h3>
-              <h4>Interactions with other medicines</h4>
-              <div>
-                <span>No interactions found</span>
-              </div>
+        <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity" (click)="showFirstPart()">
+          <fa-icon icon="check"></fa-icon>
+          <span>Edit Today</span>
+        </button>
+        <div class="second-section">
+          <div class="medicine-section">
+            <h3 class="interactions-title">Interactions</h3>
+            <h4>Interactions with other medicines</h4>
+            <div>
+              <span>No interactions found</span>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="category medicine-section">
-              <h3 class="interactions-title">Tracking Intake overtime</h3>
-              <div>
-                <span>Graph</span>
-                <canvas #lineChart *ngIf="isSecondPartVisible" id="line-chart"></canvas>
-              </div>
+          <div class="medicine-section">
+            <h3 class="interactions-title">Tracking Intake overtime</h3>
+            <div>
+              <span>Graph</span>
+              <canvas #lineChart *ngIf="isSecondPartVisible" id="line-chart"></canvas>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="category medicine-section">
-              <h3 class="interactions-title">Recommendations</h3>
-              <div></div>
-            </div>
+          <div class="medicine-section">
+            <h3 class="interactions-title">Recommendations</h3>
+            <div></div>
           </div>
-          <div class="col-md-6">
-            <div class="category medicine-section">
-              <h3 class="interactions-title">Notes</h3>
-              <div></div>
-            </div>
+          <div class="medicine-section">
+            <h3 class="interactions-title">Notes</h3>
+            <div></div>
           </div>
         </div>
       </div>
