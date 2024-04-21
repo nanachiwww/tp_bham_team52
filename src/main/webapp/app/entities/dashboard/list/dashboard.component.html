@@ -7,7 +7,7 @@
         <p>Sleep Quality: {{ userMetrics.sleepData.sleepQuality }}</p>
         <canvas id="sleep-chart"></canvas>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-secondary" routerLink="/sleep-record">
+          <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/sleep-record">
             Track Sleep <i class="fa fa-arrow-right"></i>
           </button>
         </div>
@@ -18,7 +18,7 @@
         <p>Calories Goal: {{ userMetrics.dietaryData.caloriesGoal }}</p>
         <canvas id="calorie-chart"></canvas>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-secondary" routerLink="/energy-intake-result">
+          <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/energy-intake-result">
             Track Diet <i class="fa fa-arrow-right"></i>
           </button>
         </div>
@@ -28,7 +28,7 @@
         <p>Activities Completed: {{ userMetrics.workoutData.activitiesCompleted }}</p>
         <p>Goal Activities: {{ userMetrics.workoutData.goalActivities }}</p>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-secondary" routerLink="/workout">
+          <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/workout">
             Track Workouts <i class="fa fa-arrow-right"></i>
           </button>
         </div>
@@ -39,7 +39,7 @@
         <p>Stress Level: {{ userMetrics.mentalHealthData.stressLevel }}</p>
         <canvas id="mood-chart"></canvas>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-secondary" routerLink="/mood-tracker">
+          <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/mood-tracker">
             Track Mood <i class="fa fa-arrow-right"></i>
           </button>
         </div>
@@ -49,18 +49,17 @@
         <p>Goals Set: {{ userMetrics.goalTrackingData.goalsSet }}</p>
         <p>Goals Achieved: {{ userMetrics.goalTrackingData.goalsAchieved }}</p>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-secondary" routerLink="/custom-goal">
+          <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/custom-goal">
             Track Goals <i class="fa fa-arrow-right"></i>
           </button>
         </div>
       </div>
       <div class="metric medication-data">
-        <h2>Medication Data</h2>
-        <p>Supplements Taken: {{ userMetrics.medicationData.supplementsTaken }}</p>
-        <p>Supplements Total: {{ userMetrics.medicationData.supplementsTotal }}</p>
+        <h2>Medication</h2>
+        <p>Supplements Taken Today: {{ userMetrics.medicationData.supplementsTaken }}</p>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-secondary" routerLink="/medicine">
-            Track Supplement Usage <i class="fa fa-arrow-right"></i>
+          <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/medicine">
+            Track Supplements<i class="fa fa-arrow-right"></i>
           </button>
         </div>
       </div>

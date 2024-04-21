@@ -27,6 +27,9 @@
               </div>
             </li>
           </ul>
+          <div *ngIf="todaySupplements.length === 0" class="no-items">
+            <span>No supplements taken today</span>
+          </div>
         </div>
 
         <div class="category">
@@ -49,6 +52,9 @@
               </div>
             </li>
           </ul>
+          <div *ngIf="todayPrescriptions.length === 0" class="no-items">
+            <span>No prescriptions taken today</span>
+          </div>
         </div>
 
         <!-- Other Items Section -->
@@ -73,6 +79,9 @@
               </div>
             </li>
           </ul>
+          <div *ngIf="todayOtherItems.length === 0" class="no-items">
+            <span>No other items taken today</span>
+          </div>
         </div>
       </div>
       <div class="d-flex justify-content-center button-bar">
@@ -130,6 +139,23 @@
 
             <div>
               <canvas #lineChart id="specific-chart"></canvas>
+            </div>
+          </div>
+          <div class="share-section">
+            Share your progress with your doctor
+            <div class="social-icons">
+              Facebook
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.jhipster.tech" target="_blank">
+                <fa-icon icon="facebook"></fa-icon>
+              </a>
+              Twitter
+              <a href="https://twitter.com/intent/tweet?url=https://www.jhipster.tech" target="_blank">
+                <fa-icon icon="twitter"></fa-icon>
+              </a>
+              LinkedIn
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.jhipster.tech" target="_blank">
+                <fa-icon icon="linkedin"></fa-icon>
+              </a>
             </div>
           </div>
         </div>

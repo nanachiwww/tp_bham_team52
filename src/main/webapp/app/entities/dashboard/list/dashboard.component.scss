@@ -11,19 +11,49 @@
 }
 
 .metric {
+  background-color: #ccc;
   border: 1px solid black;
   border-radius: 8px;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
-
-.metric h2 {
-  text-align: center;
+.dashboard-container :hover {
+  background-color: #f0f0f0;
 }
 
 .metric p {
   text-align: center;
   margin: 5px 0; /* Adds vertical spacing between paragraphs */
+}
+h2 {
+  font-size: 36px;
+  text-align: center;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+  font-weight: bold;
+}
+
+p {
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+  font-weight: bold;
+}
+
+.dashboard-btn {
+  background-color: #d1bc92;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px auto;
+  display: block;
+  width: 200px;
+  text-align: center;
 }

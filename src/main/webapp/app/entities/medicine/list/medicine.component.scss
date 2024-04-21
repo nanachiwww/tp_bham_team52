@@ -12,11 +12,11 @@
   flex-direction: column;
   align-items: center;
   width: 400px;
+  min-height: 600px;
 }
 
 .category h3 {
   text-align: center;
-  color: #333;
 }
 
 .category ul {
@@ -193,7 +193,7 @@ input[type='text']:focus {
 
 .medicine-section {
   padding: 10px;
-  width: 800px;
+  width: 1200px;
   background-color: #fff;
 }
 
@@ -235,6 +235,10 @@ input[type='text']:focus {
 .supplement-titles {
   text-align: center;
   align-self: center;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+  font-weight: bold;
 }
 
 .list-item .action-buttons {
@@ -261,6 +265,7 @@ input[type='text']:focus {
 
 .button-bar {
   margin-top: 12px;
+  height: 50px;
 }
 
 .second-section {
@@ -371,4 +376,14 @@ input[type='text']:focus {
   50% {
     border-color: white;
   }
+}
+
+.share-section {
+  margin-top: 12px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
