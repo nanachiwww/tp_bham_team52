@@ -4,15 +4,14 @@ Main page styles
 // set the background color for the whole page
 
 .home {
-  // center all the content
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Horizontally center content */
+  align-items: center; /* Vertically center content */
   flex-direction: column;
-  // set the font color
-  align-self: center;
-  margin-top: 0px;
+  height: 100vh; /* Use the full height of the viewport */
+  text-align: center; /* Center-align the text within the flex items */
 }
+
 .hipster {
   display: inline-block;
   width: 347px;
@@ -227,14 +226,20 @@ Main page styles
 }
 
 .lead {
-  width: 600px;
   font-size: 24px;
   font-weight: bold;
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-shadow: 2px 2px 4px #000000;
+  width: auto; /* Adjust based on content size or specific design requirements */
+  padding: 0 20px;
 }
-
+.lead,
+.home-title,
+.home-subtitle {
+  margin: 0 auto; /* Remove specific top margins if any and center horizontally */
+  width: 60%; /* Ensures the width takes up 100% within the flex item, useful for text-align */
+}
 .btn-bar {
   margin-top: 24px;
 }

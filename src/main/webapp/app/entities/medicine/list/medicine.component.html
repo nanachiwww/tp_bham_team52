@@ -12,7 +12,6 @@
             <li *ngFor="let item of todaySupplements; let i = index" class="list-item supplement-item supplement-type">
               <div class="info">
                 <span class="supplement-name">{{ item.name }}</span>
-                <span class="supplement-date">{{ item.date }}</span>
                 <span class="supplement-description">{{ item.description }}</span>
               </div>
 
@@ -38,7 +37,6 @@
             <li *ngFor="let item of todayPrescriptions; let i = index" class="list-item supplement-item prescription-type">
               <div class="info">
                 <span class="supplement-name">{{ item.name }}</span>
-                <span class="supplement-date">{{ item.date }}</span>
                 <span class="supplement-description">{{ item.description }}</span>
               </div>
               <div class="action-buttons">
@@ -64,7 +62,6 @@
             <li *ngFor="let item of todayOtherItems; let i = index" class="list-item supplement-item other-type">
               <div class="info">
                 <span class="supplement-name">{{ item.name }}</span>
-                <span class="supplement-date">{{ item.date }}</span>
                 <span class="supplement-description">{{ item.description }}</span>
               </div>
 
@@ -159,27 +156,22 @@
           </div>
         </div>
       </div>
-      <div style="background-color: white; padding: 12px; border-radius: 16px">
-        <p>Description for slide 3.</p>
-      </div>
+
       <div class="carousel">
         <div class="carousel-container">
-          <div class="carousel-slide" style="background-image: url('slide1.jpg')">
-            <h2>Slide 1</h2>
-            <p>Description for slide 1.</p>
+          <div class="carousel-supplement-item">
+            <p>Description for slidefsdfd 1.</p>
           </div>
-          <div class="carousel-slide" style="background-image: url('slide2.jpg')">
-            <h2>Slide 2</h2>
-            <p>Description for slide 2.</p>
+          <div class="carousel-supplement-item">
+            <p>Description for slidefsdfd 2.</p>
           </div>
-          <div class="carousel-slide" style="background-image: url('slide3.jpg')">
-            <h2>Slide 3</h2>
-            <p>Description for slide 3.</p>
+          <div class="carousel-supplement-item">
+            <p>Description for slidefsdfd 3.</p>
           </div>
         </div>
 
-        <a class="carousel-control prev" onclick="moveSlide(-1)">&#10094;</a>
-        <a class="carousel-control next" onclick="moveSlide(1)">&#10095;</a>
+        <a class="carousel-control prev" (click)="moveSlide(-1)">&#10094;</a>
+        <a class="carousel-control next" (click)="moveSlide(1)">&#10095;</a>
       </div>
 
       <div class="d-flex justify-content-center">

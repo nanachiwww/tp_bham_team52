@@ -19,6 +19,7 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./medicine.component.scss'],
 })
 export class MedicineComponent implements OnInit {
+  private autoScrollInterval: any;
   private chartInitialized = false;
   medicines: IMedicine[] = [];
   supplements: IMedicine[] = [];
@@ -83,6 +84,23 @@ export class MedicineComponent implements OnInit {
   ngOnInit(): void {
     this.loadItems();
     this.load();
+    this.startAutoScroll();
+  }
+
+  ngOnDestroy(): void {
+    this.stopAutoScroll();
+  }
+
+  startAutoScroll(): void {
+    this.autoScrollInterval = setInterval(() => {
+      this.moveSlide(1);
+    }, 4500); // Adjust time here for 4.5 seconds
+  }
+
+  stopAutoScroll(): void {
+    if (this.autoScrollInterval) {
+      clearInterval(this.autoScrollInterval);
+    }
   }
 
   loadItems() {
@@ -107,11 +125,6 @@ export class MedicineComponent implements OnInit {
     this.otherItems = this.filters.find(f => f.id === 'OTHER')?.checked
       ? this.medicines.filter(medicine => medicine.supplementType === 'OTHER')
       : [];
-
-    console.log('Filtered Supplements:', this.supplements.length === 0);
-    console.log('Filtered Prescriptions:', this.prescriptions.length === 0);
-    console.log('Filtered Other Items:', this.otherItems.length === 0);
-
     this.filterItemsByToday();
     this.updateCharts();
   }
@@ -211,11 +224,12 @@ export class MedicineComponent implements OnInit {
 
   moveSlide(n: any): any {
     this.showSlides((this.slideIndex += n));
+    console.log('Slide Index:', this.slideIndex);
   }
 
   showSlides(n: any): any {
     let i;
-    const slides = document.getElementsByClassName('carousel-slide') as HTMLCollectionOf<HTMLElement>;
+    const slides = document.getElementsByClassName('carousel-supplement-item') as HTMLCollectionOf<HTMLElement>;
     if (n >= slides.length) this.slideIndex = 0;
     if (n < 0) this.slideIndex = slides.length - 1;
 

@@ -446,6 +446,11 @@ input[type='text']:focus {
 
 .carousel-supplement-item {
   background-color: white;
+  padding: 12px;
+  border-radius: 16px;
+  width: inherit;
+  margin-top: 24px;
+  height: 300px;
 }
 .row {
   display: flex;
