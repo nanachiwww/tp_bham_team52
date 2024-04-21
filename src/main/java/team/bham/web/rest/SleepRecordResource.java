@@ -11,10 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import team.bham.domain.SleepRecord;
+import team.bham.domain.UserProfile;
 import team.bham.repository.SleepRecordRepository;
+import team.bham.repository.UserProfileRepository;
 import team.bham.web.rest.errors.BadRequestAlertException;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -36,9 +40,12 @@ public class SleepRecordResource {
 
     private final SleepRecordRepository sleepRecordRepository;
 
-    public SleepRecordResource(SleepRecordRepository sleepRecordRepository) {
+    public SleepRecordResource(SleepRecordRepository sleepRecordRepository, UserProfileRepository userProfileRepository) {
         this.sleepRecordRepository = sleepRecordRepository;
+        this.userProfileRepository = userProfileRepository;
     }
+
+    private final UserProfileRepository userProfileRepository;
 
     /**
      * {@code POST  /sleep-records} : Create a new sleepRecord.
@@ -52,6 +59,24 @@ public class SleepRecordResource {
         log.debug("REST request to save SleepRecord : {}", sleepRecord);
         if (sleepRecord.getId() != null) {
             throw new BadRequestAlertException("A new sleepRecord cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        //validate sleeprecord and user
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        log.debug("Auth obj2 : {}", userProfileRepository.findAll());
+        String name = auth.getName();
+        List<UserProfile> allusers = userProfileRepository.findAll();
+        UserProfile user = null;
+        log.debug("check 1, name : {}", allusers);
+        for (int i = 0; i < allusers.size(); i++) {
+            if (allusers.get(i).getUsername().equals(name)) {
+                user = allusers.get(i);
+            }
+        }
+        if (user != null) {
+            sleepRecord.setUserProfile(user);
+        } else {
+            log.debug("no UserProfile match for: {}", name);
+            throw new BadRequestAlertException("no UserProfile match for authName", ENTITY_NAME, "namemismatch");
         }
         SleepRecord result = sleepRecordRepository.save(sleepRecord);
         return ResponseEntity
