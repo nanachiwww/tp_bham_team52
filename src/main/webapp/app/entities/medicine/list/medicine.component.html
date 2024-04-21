@@ -92,7 +92,11 @@
           [routerLink]="['/medicine/new']"
         >
           <fa-icon icon="plus"></fa-icon>
-          <span> Create a new Medicine </span>
+          <span>Add Item </span>
+        </button>
+        <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity refresh-day" (click)="load()">
+          <fa-icon icon="sync"></fa-icon>
+          <span>Refresh</span>
         </button>
         <button
           id="jh-create-entity"
@@ -112,8 +116,7 @@
           <span>Edit Today</span>
         </button>
         <div class="second-section">
-          <div class="medicine-section">
-            <h3 class="interactions-title">Tracking Supplement Type</h3>
+          <div>
             <div class="filters">
               <label *ngFor="let filter of filters; let i = index">
                 <input type="checkbox" [(ngModel)]="filter.checked" (change)="updateVisibleItems()" [id]="filter.id" />
@@ -123,10 +126,6 @@
             <div>
               <canvas #lineChart id="overall-chart"></canvas>
             </div>
-          </div>
-
-          <div class="medicine-section">
-            <h3 class="interactions-title">Tracking Specific Supplements</h3>
             <div>
               <input
                 type="text"
@@ -160,6 +159,29 @@
           </div>
         </div>
       </div>
+      <div style="background-color: white; padding: 12px; border-radius: 16px">
+        <p>Description for slide 3.</p>
+      </div>
+      <div class="carousel">
+        <div class="carousel-container">
+          <div class="carousel-slide" style="background-image: url('slide1.jpg')">
+            <h2>Slide 1</h2>
+            <p>Description for slide 1.</p>
+          </div>
+          <div class="carousel-slide" style="background-image: url('slide2.jpg')">
+            <h2>Slide 2</h2>
+            <p>Description for slide 2.</p>
+          </div>
+          <div class="carousel-slide" style="background-image: url('slide3.jpg')">
+            <h2>Slide 3</h2>
+            <p>Description for slide 3.</p>
+          </div>
+        </div>
+
+        <a class="carousel-control prev" onclick="moveSlide(-1)">&#10094;</a>
+        <a class="carousel-control next" onclick="moveSlide(1)">&#10095;</a>
+      </div>
+
       <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-outline-secondary next-page-btn" routerLink="/mood-tracker">
           Track Mental Health <i class="fa fa-arrow-right"></i>

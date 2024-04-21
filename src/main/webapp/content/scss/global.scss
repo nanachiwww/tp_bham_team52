@@ -221,10 +221,10 @@ ui bootstrap tweaks
 .dropdown-menu {
   padding-left: 0px;
   background-color: #fff;
-  border-width: 3px;
-  border-color: #000;
   padding-top: 0;
   padding-bottom: 0;
+  border-width: 0px;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 /* ==========================================================================
@@ -316,3 +316,11 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   text-shadow: 2px 2px 4px #000000;
 }
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+.standard-subtitle-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+}

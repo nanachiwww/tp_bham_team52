@@ -120,6 +120,7 @@ export class MedicineComponent implements OnInit {
     this.createOverallUsageChart();
     this.createSpecificUsageChart();
     this.cdr.detectChanges(); // Manually trigger change detection
+    this.showSlides(1);
   }
 
   delete(medicine: IMedicine): void {
@@ -205,6 +206,23 @@ export class MedicineComponent implements OnInit {
   }
 
   filterData() {}
+
+  slideIndex = 0;
+
+  moveSlide(n: any): any {
+    this.showSlides((this.slideIndex += n));
+  }
+
+  showSlides(n: any): any {
+    let i;
+    const slides = document.getElementsByClassName('carousel-slide') as HTMLCollectionOf<HTMLElement>;
+    if (n >= slides.length) this.slideIndex = 0;
+    if (n < 0) this.slideIndex = slides.length - 1;
+
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.transform = `translateX(-${this.slideIndex * 100}%)`;
+    }
+  }
 
   getOverallGraphData(): any {
     const labels = this.getLast12Months();

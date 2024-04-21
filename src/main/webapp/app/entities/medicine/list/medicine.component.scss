@@ -24,9 +24,9 @@
   padding: 0;
 }
 
-.category:not(:last-child) {
-  border-right: 1px solid #333;
-}
+// .category:not(:last-child) {
+//   border-right: 1px solid #333;
+// }
 
 .category li {
   padding: 5px 10px;
@@ -227,7 +227,7 @@ input[type='text']:focus {
 }
 
 .create-medicine {
-  width: 50%;
+  width: 33.3333333%;
   border-radius: 16px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -257,12 +257,18 @@ input[type='text']:focus {
   background-color: #28a745;
   color: white;
   border-width: 0px;
-  width: 50%;
+  width: 33.3333333%;
   border-radius: 16px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-
+.refresh-day {
+  background-color: #007bff;
+  color: white;
+  border-width: 0px;
+  width: 33.3333333%;
+  border-radius: 0px;
+}
 .button-bar {
   margin-top: 12px;
   height: 50px;
@@ -386,4 +392,65 @@ input[type='text']:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.carousel {
+  position: relative;
+  max-width: 600px; /* Adjust based on your requirement */
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  width: 300%; /* Adjust based on the number of slides you have */
+  transition: 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  width: 100%; /* Ensure this matches the parent container width divided by number of slides */
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-control.prev {
+  left: 10px;
+}
+
+.carousel-control.next {
+  right: 10px;
+}
+
+.carousel-control:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+  color: #ddd; /* Lighter text color on hover */
+}
+
+.carousel-supplement-item {
+  background-color: white;
+}
+.row {
+  display: flex;
+  justify-content: space-around; /* Adjusts spacing between the child divs */
+  align-items: start; /* Aligns items to the start of the flex container */
+  flex-wrap: wrap;
+  flex-direction: row;
 }
