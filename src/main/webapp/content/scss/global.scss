@@ -68,7 +68,9 @@ Generic styles
   }
 }
 /* other generic styles */
-
+.card {
+  background-color: rgba(255, 255, 255, 0.3);
+}
 .jh-card {
   // background: linear-gradient(132deg, #fdf7df, rgb(207, 194, 212), rgb(199, 192, 184), rgb(174, 226, 69));
   // background-size: 400% 400%;
@@ -306,4 +308,11 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   border-radius: 20px;
 }
 
+.standard-text {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+}
 /* jhipster-needle-scss-add-main JHipster will add new css style */

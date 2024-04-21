@@ -8,11 +8,20 @@
 }
 
 .medicine-container {
-  background-color: white;
-  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5); /* Background color with opacity */
+  border-radius: 16px;
   padding: 20px;
   margin: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 800px;
+}
+
+.update-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+  text-align: center;
 }
