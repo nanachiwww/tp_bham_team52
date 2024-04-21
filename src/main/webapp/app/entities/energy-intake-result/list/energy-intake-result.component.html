@@ -38,16 +38,39 @@
         <input type="text" class="form-control" name="name" id="dinner_name3" data-cy="name" formControlName="name" />
       </div>
     </div>
-
+    <br />
     <div class="d-flex justify-content-center button">
       <button class="btn btn-primary" [routerLink]="['/energy-intake-result/new']">View dietary recommendation for you</button>
     </div>
-
+    <br />
     <div class="d-flex justify-content-center">
       <button type="button" class="btn btn-outline-secondary" routerLink="/medicine">
         Track Supplement Usage <i class="fa fa-arrow-right"></i>
       </button>
     </div>
+    <br />
+    <div class="d-flex justify-content-around">
+      <div class="category">
+        <h3>Your energy intake goal</h3>
+        <label class="form-label" for="dinner_name1"></label>
+        <input type="text" class="form-control" name="name" id="goal_complete_name1" data-cy="name" formControlName="name" />
+        <label class="form-label" for="dinner_name2"></label>
+        <input type="text" class="form-control" name="name" id="goal_complete_name2" data-cy="name" formControlName="name" />
+        <label class="form-label" for="dinner_name3"></label>
+        <input type="text" class="form-control" name="name" id="goal_complete_name3" data-cy="name" formControlName="name" />
+      </div>
+
+      <div class="category">
+        <h3>Your true energy intake</h3>
+        <label class="form-label" for="dinner_name1"></label>
+        <input type="text" class="form-control" name="name" id="goal_complete_name4" data-cy="name" formControlName="name" />
+        <label class="form-label" for="dinner_name2"></label>
+        <input type="text" class="form-control" name="name" id="goal_complete_name5" data-cy="name" formControlName="name" />
+        <label class="form-label" for="dinner_name3"></label>
+        <input type="text" class="form-control" name="name" id="goal_complete_name6" data-cy="name" formControlName="name" />
+      </div>
+    </div>
+    <br />
 
     <jhi-alert-error></jhi-alert-error>
 
