@@ -31,10 +31,12 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "name",
       "otherEntityName": "exercise",
-      "otherEntityRelationshipName": "workout",
+      "otherEntityRelationshipName": "workouts",
+      "ownerSide": true,
       "relationshipName": "exercises",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-many"
     },
     {
       "otherEntityName": "userProfile",

@@ -10,10 +10,14 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import team.bham.domain.Exercise;
 import team.bham.domain.Workout;
+// Add this import statement at the top of your file
+import team.bham.repository.ExerciseRepository;
 import team.bham.repository.WorkoutRepository;
 import team.bham.web.rest.errors.BadRequestAlertException;
 import tech.jhipster.web.util.HeaderUtil;
@@ -35,10 +39,14 @@ public class WorkoutResource {
     private String applicationName;
 
     private final WorkoutRepository workoutRepository;
+    private final ExerciseRepository exerciseRepository;
 
-    public WorkoutResource(WorkoutRepository workoutRepository) {
+    public WorkoutResource(WorkoutRepository workoutRepository, ExerciseRepository exerciseRepository) {
         this.workoutRepository = workoutRepository;
+        this.exerciseRepository = exerciseRepository;
     }
+
+    // Add this field to your WorkoutResource class
 
     /**
      * {@code POST  /workouts} : Create a new workout.
@@ -58,6 +66,44 @@ public class WorkoutResource {
             .created(new URI("/api/workouts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    // Add this method to your WorkoutResource class
+    @PostMapping("/workouts/{id}/exercises")
+    public ResponseEntity<Workout> addExercisesToWorkout(@PathVariable Long id, @RequestBody List<Long> exerciseIds) {
+        Optional<Workout> workoutOptional = workoutRepository.findById(id);
+        if (!workoutOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Workout workout = workoutOptional.get();
+        for (Long exerciseId : exerciseIds) {
+            Optional<Exercise> exerciseOptional = exerciseRepository.findById(exerciseId);
+            if (!exerciseOptional.isPresent()) {
+                throw new ExerciseNotFoundException(exerciseId);
+            }
+
+            workout.addExercises(exerciseOptional.get());
+        }
+
+        workoutRepository.save(workout);
+        return ResponseEntity.ok().body(workout);
+    }
+
+    public class ExerciseNotFoundException extends RuntimeException {
+
+        public ExerciseNotFoundException(Long id) {
+            super("Exercise with id " + id + " not found");
+        }
+    }
+
+    @ControllerAdvice
+    public class GlobalExceptionHandler {
+
+        @ExceptionHandler(ExerciseNotFoundException.class)
+        public ResponseEntity<String> handleExerciseNotFoundException(ExerciseNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
     }
 
     /**
@@ -151,12 +197,17 @@ public class WorkoutResource {
     /**
      * {@code GET  /workouts} : get all the workouts.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of workouts in body.
      */
     @GetMapping("/workouts")
-    public List<Workout> getAllWorkouts() {
+    public List<Workout> getAllWorkouts(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Workouts");
-        return workoutRepository.findAll();
+        if (eagerload) {
+            return workoutRepository.findAllWithEagerRelationships();
+        } else {
+            return workoutRepository.findAll();
+        }
     }
 
     /**
@@ -168,7 +219,7 @@ public class WorkoutResource {
     @GetMapping("/workouts/{id}")
     public ResponseEntity<Workout> getWorkout(@PathVariable Long id) {
         log.debug("REST request to get Workout : {}", id);
-        Optional<Workout> workout = workoutRepository.findById(id);
+        Optional<Workout> workout = workoutRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(workout);
     }
 

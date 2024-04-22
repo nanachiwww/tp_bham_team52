@@ -44,7 +44,7 @@ public class Exercise implements Serializable {
     @Column(name = "muscle_group")
     private MuscleGroupEnum muscleGroup;
 
-    @OneToMany(mappedBy = "exercises")
+    @ManyToMany(mappedBy = "exercises")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "exercises", "userProfile" }, allowSetters = true)
     private Set<Workout> workouts = new HashSet<>();
@@ -135,10 +135,10 @@ public class Exercise implements Serializable {
 
     public void setWorkouts(Set<Workout> workouts) {
         if (this.workouts != null) {
-            this.workouts.forEach(i -> i.setExercises(null));
+            this.workouts.forEach(i -> i.removeExercises(this));
         }
         if (workouts != null) {
-            workouts.forEach(i -> i.setExercises(this));
+            workouts.forEach(i -> i.addExercises(this));
         }
         this.workouts = workouts;
     }
@@ -148,15 +148,15 @@ public class Exercise implements Serializable {
         return this;
     }
 
-    public Exercise addWorkout(Workout workout) {
+    public Exercise addWorkouts(Workout workout) {
         this.workouts.add(workout);
-        workout.setExercises(this);
+        workout.getExercises().add(this);
         return this;
     }
 
-    public Exercise removeWorkout(Workout workout) {
+    public Exercise removeWorkouts(Workout workout) {
         this.workouts.remove(workout);
-        workout.setExercises(null);
+        workout.getExercises().remove(this);
         return this;
     }
 

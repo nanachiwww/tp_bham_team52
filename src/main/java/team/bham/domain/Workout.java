@@ -2,6 +2,8 @@ package team.bham.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -39,9 +41,15 @@ public class Workout implements Serializable {
     @Column(name = "intensity_level")
     private IntensityLevelEnum intensityLevel;
 
-    @ManyToOne
+    @ManyToMany
+    @JoinTable(
+        name = "rel_workout__exercises",
+        joinColumns = @JoinColumn(name = "workout_id"),
+        inverseJoinColumns = @JoinColumn(name = "exercises_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "workouts" }, allowSetters = true)
-    private Exercise exercises;
+    private Set<Exercise> exercises = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(
@@ -129,16 +137,28 @@ public class Workout implements Serializable {
         this.intensityLevel = intensityLevel;
     }
 
-    public Exercise getExercises() {
+    public Set<Exercise> getExercises() {
         return this.exercises;
     }
 
-    public void setExercises(Exercise exercise) {
-        this.exercises = exercise;
+    public void setExercises(Set<Exercise> exercises) {
+        this.exercises = exercises;
     }
 
-    public Workout exercises(Exercise exercise) {
-        this.setExercises(exercise);
+    public Workout exercises(Set<Exercise> exercises) {
+        this.setExercises(exercises);
+        return this;
+    }
+
+    public Workout addExercises(Exercise exercise) {
+        this.exercises.add(exercise);
+        exercise.getWorkouts().add(this);
+        return this;
+    }
+
+    public Workout removeExercises(Exercise exercise) {
+        this.exercises.remove(exercise);
+        exercise.getWorkouts().remove(this);
         return this;
     }
 

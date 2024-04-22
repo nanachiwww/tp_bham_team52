@@ -35,10 +35,12 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "name",
       "otherEntityName": "workout",
       "otherEntityRelationshipName": "exercises",
-      "relationshipName": "workout",
-      "relationshipType": "one-to-many"
+      "ownerSide": false,
+      "relationshipName": "workouts",
+      "relationshipType": "many-to-many"
     }
   ],
   "service": "no"

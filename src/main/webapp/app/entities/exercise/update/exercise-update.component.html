@@ -1,56 +1,61 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
+<div class="exercise-form-container">
+  <div class="exercise-form">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-exercise-heading" data-cy="ExerciseCreateUpdateHeading">Create or edit a Exercise</h2>
+      <h2 class="exercise-form-heading" id="jhi-exercise-heading" data-cy="ExerciseCreateUpdateHeading">Create or Edit a Exercise</h2>
 
-      <div>
+      <div class="form-body">
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_name">Name</label>
-          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
-          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+        <div class="form-group row mb-3">
+          <label class="col-form-label col-sm-3" for="field_name">Name:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+            <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+            </div>
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            name="description"
-            id="field_description"
-            data-cy="description"
-            formControlName="description"
-          />
+        <div class="form-group row mb-3">
+          <label class="col-form-label col-sm-3" for="field_description">Description:</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              name="description"
+              id="field_description"
+              data-cy="description"
+              formControlName="description"
+            />
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_reps">Reps</label>
-          <input type="number" class="form-control" name="reps" id="field_reps" data-cy="reps" formControlName="reps" />
+        <div class="form-group row mb-3">
+          <label class="col-form-label col-sm-3" for="field_reps">Reps:</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" name="reps" id="field_reps" data-cy="reps" formControlName="reps" />
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_sets">Sets</label>
-          <input type="number" class="form-control" name="sets" id="field_sets" data-cy="sets" formControlName="sets" />
+        <div class="form-group row mb-3">
+          <label class="col-form-label col-sm-3" for="field_sets">Sets:</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" name="sets" id="field_sets" data-cy="sets" formControlName="sets" />
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_muscleGroup">Muscle Group</label>
-          <select class="form-control" name="muscleGroup" formControlName="muscleGroup" id="field_muscleGroup" data-cy="muscleGroup">
-            <option [ngValue]="null"></option>
-            <option *ngFor="let muscleGroupEnum of muscleGroupEnumValues" [value]="muscleGroupEnum">{{ muscleGroupEnum }}</option>
-          </select>
+        <div class="form-group row mb-3">
+          <label class="col-form-label col-sm-3" for="field_muscleGroup">Muscle Group:</label>
+          <div class="col-sm-9">
+            <select class="form-control" name="muscleGroup" formControlName="muscleGroup" id="field_muscleGroup" data-cy="muscleGroup">
+              <option [ngValue]="null"></option>
+              <option *ngFor="let muscleGroupEnum of muscleGroupEnumValues" [value]="muscleGroupEnum">{{ muscleGroupEnum }}</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <div>
+      <div class="form-footer">
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
         </button>

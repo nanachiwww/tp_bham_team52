@@ -26,14 +26,25 @@
             <column name="intensity_level" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="exercises_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="user_profile_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+    </changeSet>
+
+    <changeSet id="20240303180337-1-relations" author="jhipster">
+
+        <createTable tableName="rel_workout__exercises">
+            <column name="exercises_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="workout_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="workout_id, exercises_id" tableName="rel_workout__exercises"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

@@ -14,7 +14,7 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type ExerciseFormGroupInput = IExercise | PartialWithRequiredKeyOf<NewExercise>;
 
-type ExerciseFormDefaults = Pick<NewExercise, 'id'>;
+type ExerciseFormDefaults = Pick<NewExercise, 'id' | 'workouts'>;
 
 type ExerciseFormGroupContent = {
   id: FormControl<IExercise['id'] | NewExercise['id']>;
@@ -23,6 +23,7 @@ type ExerciseFormGroupContent = {
   reps: FormControl<IExercise['reps']>;
   sets: FormControl<IExercise['sets']>;
   muscleGroup: FormControl<IExercise['muscleGroup']>;
+  workouts: FormControl<IExercise['workouts']>;
 };
 
 export type ExerciseFormGroup = FormGroup<ExerciseFormGroupContent>;
@@ -49,6 +50,7 @@ export class ExerciseFormService {
       reps: new FormControl(exerciseRawValue.reps),
       sets: new FormControl(exerciseRawValue.sets),
       muscleGroup: new FormControl(exerciseRawValue.muscleGroup),
+      workouts: new FormControl(exerciseRawValue.workouts ?? []),
     });
   }
 
@@ -69,6 +71,7 @@ export class ExerciseFormService {
   private getFormDefaults(): ExerciseFormDefaults {
     return {
       id: null,
+      workouts: [],
     };
   }
 }

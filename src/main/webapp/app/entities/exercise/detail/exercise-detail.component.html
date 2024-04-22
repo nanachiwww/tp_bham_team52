@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
+<div class="exercise-details-container">
+  <div class="exercise-details">
     <div *ngIf="exercise">
-      <h2 data-cy="exerciseDetailsHeading"><span>Exercise</span></h2>
+      <h2 class="exercise-details-heading" data-cy="exerciseDetailsHeading">Exercise Details</h2>
 
       <hr />
 
@@ -9,40 +9,38 @@
 
       <jhi-alert></jhi-alert>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span>ID</span></dt>
-        <dd>
-          <span>{{ exercise.id }}</span>
-        </dd>
-        <dt><span>Name</span></dt>
-        <dd>
-          <span>{{ exercise.name }}</span>
-        </dd>
-        <dt><span>Description</span></dt>
-        <dd>
-          <span>{{ exercise.description }}</span>
-        </dd>
-        <dt><span>Reps</span></dt>
-        <dd>
-          <span>{{ exercise.reps }}</span>
-        </dd>
-        <dt><span>Sets</span></dt>
-        <dd>
-          <span>{{ exercise.sets }}</span>
-        </dd>
-        <dt><span>Muscle Group</span></dt>
-        <dd>
-          <span>{{ exercise.muscleGroup }}</span>
-        </dd>
+      <dl class="exercise-details-list">
+        <div class="exercise-details-item">
+          <dt class="exercise-details-label">Name:</dt>
+          <dd class="exercise-details-value">{{ exercise.name }}</dd>
+        </div>
+        <div class="exercise-details-item">
+          <dt class="exercise-details-label">Description:</dt>
+          <dd class="exercise-details-value">{{ exercise.description }}</dd>
+        </div>
+        <div class="exercise-details-item">
+          <dt class="exercise-details-label">Reps:</dt>
+          <dd class="exercise-details-value">{{ exercise.reps }}</dd>
+        </div>
+        <div class="exercise-details-item">
+          <dt class="exercise-details-label">Sets:</dt>
+          <dd class="exercise-details-value">{{ exercise.sets }}</dd>
+        </div>
+        <div class="exercise-details-item">
+          <dt class="exercise-details-label">Muscle Group:</dt>
+          <dd class="exercise-details-value">{{ exercise.muscleGroup }}</dd>
+        </div>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
-      </button>
+      <div class="exercise-details-buttons">
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
 
-      <button type="button" [routerLink]="['/exercise', exercise.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
-      </button>
+        <button type="button" [routerLink]="['/exercise', exercise.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>

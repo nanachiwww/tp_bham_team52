@@ -8,7 +8,7 @@ export interface IWorkout {
   description?: string | null;
   duration?: number | null;
   intensityLevel?: IntensityLevelEnum | null;
-  exercises?: Pick<IExercise, 'id'> | null;
+  exercises?: Pick<IExercise, 'id' | 'name'>[] | null;
   userProfile?: Pick<IUserProfile, 'id'> | null;
 }
 

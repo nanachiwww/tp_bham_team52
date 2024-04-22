@@ -12,6 +12,7 @@ import { MuscleGroupEnum } from 'app/entities/enumerations/muscle-group-enum.mod
 @Component({
   selector: 'jhi-exercise-update',
   templateUrl: './exercise-update.component.html',
+  styleUrls: ['./exercise-update.component.scss'],
 })
 export class ExerciseUpdateComponent implements OnInit {
   isSaving = false;
