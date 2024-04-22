@@ -9,7 +9,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +39,7 @@ public class MoodTrackerResource {
 
     private final MoodTrackerRepository moodTrackerRepository;
 
+    @Autowired
     public MoodTrackerResource(MoodTrackerRepository moodTrackerRepository) {
         this.moodTrackerRepository = moodTrackerRepository;
     }
@@ -167,6 +171,16 @@ public class MoodTrackerResource {
         log.debug("REST request to get MoodTracker : {}", id);
         Optional<MoodTracker> moodTracker = moodTrackerRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(moodTracker);
+    }
+
+    @GetMapping("/mood-trackers/latest")
+    public List<MoodTracker> getLatestMoodTrackers() {
+        return moodTrackerRepository.findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "id"))).getContent();
+    }
+
+    @GetMapping("/stress-trackers/latest")
+    public List<MoodTracker> getLatestStressEntries() {
+        return moodTrackerRepository.findAll(PageRequest.of(0, 7, Sort.by(Sort.Direction.DESC, "id"))).getContent();
     }
 
     /**

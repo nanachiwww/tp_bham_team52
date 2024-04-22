@@ -70,6 +70,9 @@ export class MoodTrackerService {
   }
 
   getMoodTrackerIdentifier(moodTracker: Pick<IMoodTracker, 'id'>): number {
+    if (moodTracker.id === null || moodTracker.id === undefined) {
+      throw new Error('Mood tracker id is null or undefined');
+    }
     return moodTracker.id;
   }
 

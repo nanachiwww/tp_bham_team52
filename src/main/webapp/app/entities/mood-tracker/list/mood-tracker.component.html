@@ -4,12 +4,7 @@
       <h2>Mood Patterns</h2>
       <p>How are you feeling today?</p>
       <div class="mood-buttons">
-        <button
-          *ngFor="let mood of moods; let i = index"
-          (click)="recordMood(mood, i)"
-          [ngClass]="{ selected: selectedMoodIndex === i }"
-          class="mood-button"
-        >
+        <button *ngFor="let mood of moods" (click)="recordMood(mood.mood)">
           {{ mood.emoji }}
         </button>
       </div>
@@ -21,6 +16,7 @@
       <h2>Stress Level</h2>
       <p>What is your stress level now?</p>
       <input type="range" min="1" max="10" [(ngModel)]="currentStressLevel" />
+      <button (click)="updateStressLevel()">Update</button>
       <canvas id="stressChart"></canvas>
     </section>
 
@@ -80,7 +76,7 @@
           <th scope="col" jhiSortBy="id">
             <div class="d-flex">
               <span>ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
+              <fa-icon class="p-1" icon="sort"></fa-icon>987
             </div>
           </th>
           <th scope="col" jhiSortBy="date">

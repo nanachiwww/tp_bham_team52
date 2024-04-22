@@ -6,6 +6,7 @@ import { finalize, map } from 'rxjs/operators';
 
 import { MoodTrackerFormService, MoodTrackerFormGroup } from './mood-tracker-form.service';
 import { IMoodTracker } from '../mood-tracker.model';
+import { NewMoodTracker } from '../mood-tracker.model';
 import { MoodTrackerService } from '../service/mood-tracker.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
@@ -71,10 +72,16 @@ export class MoodTrackerUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const moodTracker = this.moodTrackerFormService.getMoodTracker(this.editForm);
-    if (moodTracker.id !== null) {
-      this.subscribeToSaveResponse(this.moodTrackerService.update(moodTracker));
+
+    if (moodTracker.id === null) {
+      const newMoodTracker: NewMoodTracker = {
+        ...moodTracker,
+        id: null,
+      };
+
+      this.subscribeToSaveResponse(this.moodTrackerService.create(newMoodTracker));
     } else {
-      this.subscribeToSaveResponse(this.moodTrackerService.create(moodTracker));
+      this.subscribeToSaveResponse(this.moodTrackerService.update(moodTracker));
     }
   }
 

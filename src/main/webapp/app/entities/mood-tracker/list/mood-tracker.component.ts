@@ -1,16 +1,21 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
-
+import dayjs from 'dayjs/esm';
 import { IMoodTracker } from '../mood-tracker.model';
-import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
+import { NewMoodTracker } from '../mood-tracker.model';
+import { ASC, DEFAULT_SORT_DATA, DESC, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, MoodTrackerService } from '../service/mood-tracker.service';
 import { MoodTrackerDeleteDialogComponent } from '../delete/mood-tracker-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { SortService } from 'app/shared/sort/sort.service';
+import { Mood } from '../../enumerations/mood.model';
+import { HttpClient } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
+
+Chart.register(...registerables);
 
 interface ChartData {
   labels: string[];
@@ -35,47 +40,43 @@ export class MoodTrackerComponent implements OnInit, AfterViewInit {
   isLoading = false;
   predicate = 'id';
   ascending = true;
+
+  // Define the five moods with emojis
   moods = [
-    { mood: 'VERY SAD', emoji: '☹' },
+    { mood: 'VERY_SAD', emoji: '☹' },
     { mood: 'SAD', emoji: '😔' },
     { mood: 'NEUTRAL', emoji: '😐' },
     { mood: 'HAPPY', emoji: '😊' },
-    { mood: 'VERY HAPPY', emoji: '😄' },
+    { mood: 'VERY_HAPPY', emoji: '😄' },
   ];
+
   selectedMoodIndex: number | null = null;
-  currentStressLevel = 5;
-  moodChartData: ChartData = {
-    labels: ['', 'Neutral', 'Very Happy', 'Happy', 'Very Sad', 'Sad', ''],
+
+  moodChartData = {
+    labels: ['Very Sad', 'Sad', 'Neutral', 'Happy', 'Very Happy'],
     datasets: [
       {
-        data: [0, 3, 5, 4, 1, 2, 0],
-        backgroundColor: [
-          'rgba(0, 0, 0, 0)',
-          '#00FFFF', // Neutral
-          '#ADFF2F', // Happy
-          '#FFD700', // Very Happy
-          '#DC143C', // Very Sad
-          '#FFA07A', // Sad
-          'rgba(0, 0, 0, 0)',
-        ],
+        label: 'Mood Counts',
+        data: [0, 0, 0, 0, 0],
+        backgroundColor: ['#DC143C', '#FFA07A', '#00FFFF', '#ADFF2F', '#FFD700'],
       },
     ],
   };
-  stressChartData: ChartData = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+
+  stressChartData = {
+    labels: [] as string[],
     datasets: [
       {
         label: 'Stress Level',
-        data: [3, 4, 6, 4, 5, 7, 4], // Example data
+        data: [] as number[],
         fill: false,
         borderColor: '#007bff',
       },
     ],
   };
-  mindfulnessActivities = [{ name: 'Guided meditation' }, { name: 'Breathing Exercises' }, { name: 'Mindfulness Tips' }];
 
   constructor(
-    protected moodTrackerService: MoodTrackerService,
+    private http: HttpClient,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected sortService: SortService,
@@ -83,118 +84,173 @@ export class MoodTrackerComponent implements OnInit, AfterViewInit {
     protected modalService: NgbModal
   ) {}
 
-  trackId = (_index: number, item: IMoodTracker): number => this.moodTrackerService.getMoodTrackerIdentifier(item);
+  trackId = (_index: number, item: IMoodTracker): number => {
+    return item.id ?? -1; // Fallback to a default value
+  };
 
   ngAfterViewInit(): void {
     this.renderMoodChart();
     this.renderStressChart();
   }
 
+  moodChart!: Chart;
+  stressChart!: Chart;
+  // Render mood chart based on moodChartData
   renderMoodChart(): void {
-    const moodChartCanvas = document.getElementById('moodChartCanvas') as HTMLCanvasElement;
+    const moodChartCanvas = document.getElementById('moodChart') as HTMLCanvasElement;
     if (moodChartCanvas) {
-      const moodChartCtx = moodChartCanvas.getContext('2d');
-      if (moodChartCtx) {
-        const moodChart = new Chart(moodChartCtx, {
-          type: 'bar',
-          data: this.moodChartData,
-          options: {
-            scales: {
-              y: {
-                beginAtZero: false,
-                min: 1,
-                max: 5,
-                ticks: {
-                  stepSize: 1,
-                },
-                title: {
-                  display: true,
-                  text: 'Mood Level',
+      this.moodChart = new Chart(moodChartCanvas, {
+        type: 'bar',
+        data: this.moodChartData,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 1,
+              },
+              title: {
+                display: true,
+                text: 'Mood Counts',
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: true,
+            },
+            tooltip: {
+              callbacks: {
+                title: tooltipItems => {
+                  return `Mood: ${tooltipItems[0].label}`;
                 },
               },
             },
           },
-        });
-      } else {
-        console.error('Could not get 2D context from canvas');
-      }
-    } else {
-      console.error('Could not find canvas element');
+        },
+      });
     }
   }
 
   renderStressChart(): void {
-    new Chart('stressChart', {
-      type: 'line',
-      data: this.stressChartData,
-      options: {
-        // Configuration options as needed
+    const stressChartCanvas = document.getElementById('stressChart') as HTMLCanvasElement;
+    if (stressChartCanvas) {
+      this.stressChart = new Chart(stressChartCanvas, {
+        type: 'line',
+        data: this.stressChartData,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              min: 0,
+              max: 10,
+              ticks: {
+                stepSize: 1,
+              },
+            },
+          },
+        },
+      });
+    }
+  }
+
+  // Record mood based on user input
+  recordMood(mood: string): void {
+    const newMoodTracker: NewMoodTracker = {
+      id: null,
+      date: dayjs(),
+      mood: mood as Mood,
+    };
+
+    this.http.post<NewMoodTracker>('/api/mood-trackers', newMoodTracker).subscribe({
+      next: () => {
+        console.log('Mood tracker created successfully');
+        this.fetchMoodChartData(); // Refresh data after creation
+      },
+      error: err => {
+        console.error('Error creating mood tracker', err);
       },
     });
+  }
+
+  // Fetch mood data and update the chart
+  fetchMoodChartData(): void {
+    this.http.get<IMoodTracker[]>('/api/mood-trackers/latest').subscribe(
+      data => {
+        console.log('Fetched mood trackers:', data);
+        this.moodTrackers = data;
+        const moodCounts = [0, 0, 0, 0, 0];
+        const validMoods: Mood[] = [Mood.VERY_SAD, Mood.SAD, Mood.NEUTRAL, Mood.HAPPY, Mood.VERY_HAPPY];
+
+        this.moodTrackers.forEach(tracker => {
+          const moodIndex = validMoods.indexOf(tracker.mood as Mood);
+          if (moodIndex >= 0) {
+            moodCounts[moodIndex]++;
+          }
+        });
+
+        this.moodChartData.datasets[0].data = moodCounts;
+        this.moodChart.update(); // Update the chart with new data
+      },
+      error => {
+        console.error('Error fetching mood trackers', error); // Handle errors
+      }
+    );
+  }
+
+  fetchStressChartData(): void {
+    this.http.get<IMoodTracker[]>('/api/stress-trackers/latest').subscribe(
+      data => {
+        console.log('Fetched stress trackers:', data);
+
+        const labels = data.map(tracker => dayjs(tracker.date).format('MM/DD'));
+        const stressLevels = data.map(tracker => tracker.stressLevel || 0);
+
+        this.stressChartData.labels = labels;
+        this.stressChartData.datasets[0].data = stressLevels;
+
+        if (this.stressChart) {
+          this.stressChart.update();
+        }
+      },
+      error => {
+        console.error('Error fetching stress data', error);
+      }
+    );
+  }
+
+  updateStressLevel(): void {
+    const stressData = [...this.stressChartData.datasets[0].data];
+    const stressLabels = [...this.stressChartData.labels];
+
+    const newLabel = dayjs().format('MM/DD');
+    stressData.push(this.currentStressLevel);
+    stressLabels.push(newLabel);
+
+    if (stressData.length > 14) {
+      stressData.shift();
+      stressLabels.shift();
+    }
+    this.stressChartData.datasets[0].data = stressData;
+    this.stressChartData.labels = stressLabels;
+
+    if (this.stressChart) {
+      this.stressChart.update();
+    }
   }
 
   ngOnInit(): void {
     this.load();
     this.fetchMoodChartData();
     this.fetchStressChartData();
-    this.fetchUserProgressData();
   }
 
-  // Methods to handle mood recording, stress tracking, and mindfulness activities
-  recordMood(mood: any, index: number): void {
-    this.selectedMoodIndex = index;
-    // Logic to handle mood recording
-  }
+  currentStressLevel = 5; // Example initialization
 
-  adjustStressLevel(): void {
-    // Logic to handle stress level adjustment
-  }
+  mindfulnessActivities = [{ name: 'Meditation' }, { name: 'Breathing Exercises' }, { name: 'Mindfulness Tips' }];
 
   startActivity(activity: any): void {
-    // Logic to start selected mindfulness activity
-  }
-
-  // Method to fetch and process mood data (simplified)
-  fetchMoodChartData(): void {
-    const moodChartCanvas = document.getElementById('moodChart') as HTMLCanvasElement;
-    const moodChart = new Chart(moodChartCanvas, {
-      type: 'bar',
-      data: this.moodChartData,
-      options: {
-        scales: {
-          y: {
-            beginAtZero: false,
-            min: 0,
-            max: 5,
-            ticks: {
-              stepSize: 1,
-              callback: (val, index) => {
-                return index % 6 === 0 ? '' : val;
-              },
-            },
-          },
-          x: {
-            display: false,
-          },
-        },
-        plugins: {
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            callbacks: {
-              title: function (tooltipItems) {
-                return `${tooltipItems[0].label}`;
-              },
-            },
-          },
-        },
-      },
-    });
-  }
-
-  fetchStressChartData(): void {
-    this.stressChartData.datasets[0].data = [3, 4, 6, 4, 5, 7, 4]; // Example dynamic data
+    console.log('Starting activity:', activity.name); // Add desired behavior
   }
 
   userProgressData = {
@@ -268,12 +324,21 @@ export class MoodTrackerComponent implements OnInit, AfterViewInit {
     return data ?? [];
   }
 
-  protected queryBackend(predicate?: string, ascending?: boolean): Observable<EntityArrayResponseType> {
+  protected queryBackend(predicate?: string, ascending?: boolean): Observable<HttpResponse<IMoodTracker[]>> {
     this.isLoading = true;
     const queryObject = {
       sort: this.getSortQueryParam(predicate, ascending),
     };
-    return this.moodTrackerService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+
+    return this.http
+      .get<IMoodTracker[]>('/api/mood-trackers', {
+        params: queryObject,
+        observe: 'response', // This ensures we get a full HttpResponse
+      })
+      .pipe(
+        tap(() => (this.isLoading = false)),
+        filter(response => !!response.body) // Ensure the response has a body
+      );
   }
 
   protected handleNavigation(predicate?: string, ascending?: boolean): void {
