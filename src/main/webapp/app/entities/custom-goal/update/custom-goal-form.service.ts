@@ -25,6 +25,14 @@ type CustomGoalFormGroupContent = {
 };
 
 export type CustomGoalFormGroup = FormGroup<CustomGoalFormGroupContent>;
+export class CustomGoalsService {
+  customGoalsValue1: ICustomGoal[] = [];
+  customGoalsValue2: ICustomGoal[] = [];
+  customGoalsValue3: ICustomGoal[] = [];
+  customGoalsValue4: ICustomGoal[] = [];
+
+  constructor() {}
+}
 
 @Injectable({ providedIn: 'root' })
 export class CustomGoalFormService {

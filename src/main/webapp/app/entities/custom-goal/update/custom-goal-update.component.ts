@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
-import { CustomGoalFormService, CustomGoalFormGroup } from './custom-goal-form.service';
+import { CustomGoalFormService, CustomGoalFormGroup, CustomGoalsService } from './custom-goal-form.service';
 import { ICustomGoal } from '../custom-goal.model';
 import { CustomGoalService } from '../service/custom-goal.service';
 import { IUserProfile } from 'app/entities/user-profile/user-profile.model';
@@ -19,10 +19,7 @@ import { IMoodTracker } from '../../mood-tracker/mood-tracker.model';
 })
 export class CustomGoalUpdateComponent implements OnInit {
   isSaving = false;
-  customGoalsValue1: ICustomGoal[] = [];
-  customGoalsValue2: ICustomGoal[] = [];
-  customGoalsValue3: ICustomGoal[] = [];
-  customGoalsValue4: ICustomGoal[] = [];
+
   customGoal: ICustomGoal | null = null;
   moodTracker: IMoodTracker | null = null;
   moodValues = Object.keys(Mood);
@@ -36,7 +33,8 @@ export class CustomGoalUpdateComponent implements OnInit {
     protected customGoalFormService: CustomGoalFormService,
     protected userProfileService: UserProfileService,
     protected activatedRoute: ActivatedRoute,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private differentgoalsService: CustomGoalsService
   ) {}
 
   getSelectedValue(): string {
@@ -53,10 +51,6 @@ export class CustomGoalUpdateComponent implements OnInit {
       }
 
       this.loadRelationshipsOptions();
-      this.customGoalsValue1 = [];
-      this.customGoalsValue2 = [];
-      this.customGoalsValue3 = [];
-      this.customGoalsValue4 = [];
     });
   }
 
@@ -67,22 +61,11 @@ export class CustomGoalUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const customGoal = this.customGoalFormService.getCustomGoal(this.editForm);
+
     if (customGoal.id !== null) {
       this.subscribeToSaveResponse(this.customGoalService.update(customGoal));
     } else {
       this.subscribeToSaveResponse(this.customGoalService.create(customGoal));
-    }
-    const selectedValue = this.sharedDataService.getSelectedValue();
-    if (selectedValue === 'Value1') {
-      this.customGoalsValue1.push(<ICustomGoal>customGoal);
-    } else if (selectedValue === 'Value2') {
-      this.customGoalsValue2.push(<ICustomGoal>customGoal);
-    } else if (selectedValue === 'Value3') {
-      this.customGoalsValue3.push(<ICustomGoal>customGoal);
-    } else if (selectedValue === 'Value4') {
-      this.customGoalsValue4.push(<ICustomGoal>customGoal);
-    } else {
-      console.error('Custom goal is null or undefined.');
     }
   }
 
@@ -90,15 +73,17 @@ export class CustomGoalUpdateComponent implements OnInit {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: response => {
         const customGoal = response.body;
-        const selectedValue = this.getSelectedValue();
+        const selectedValue = this.sharedDataService.getSelectedValue();
         if (selectedValue === 'Value1') {
-          this.customGoalsValue1.push(<ICustomGoal>customGoal);
+          this.differentgoalsService.customGoalsValue1.push(<ICustomGoal>customGoal);
         } else if (selectedValue === 'Value2') {
-          this.customGoalsValue2.push(<ICustomGoal>customGoal);
+          this.differentgoalsService.customGoalsValue2.push(<ICustomGoal>customGoal);
         } else if (selectedValue === 'Value3') {
-          this.customGoalsValue3.push(<ICustomGoal>customGoal);
+          this.differentgoalsService.customGoalsValue3.push(<ICustomGoal>customGoal);
         } else if (selectedValue === 'Value4') {
-          this.customGoalsValue4.push(<ICustomGoal>customGoal);
+          this.differentgoalsService.customGoalsValue4.push(<ICustomGoal>customGoal);
+        } else {
+          console.error('Custom goal is null or undefined.');
         }
         this.onSaveSuccess();
       },

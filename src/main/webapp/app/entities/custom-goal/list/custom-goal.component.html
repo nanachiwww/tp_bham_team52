@@ -37,7 +37,7 @@
 </div>
 
 <div>
-  <h2>Your goal(s)</h2>
+  <h2>Sleeping goal(s)</h2>
   <h2 id="page-heading" data-cy="CustomGoalHeading">
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
@@ -54,7 +54,104 @@
     <span>No Custom Goals found</span>
   </div>
   <div class="container d-flex flex-wrap" *ngIf="customGoals && customGoals.length > 0">
-    <div class="card custom-rounded1 mx-2 mb-2" *ngFor="let customGoal of customGoals; trackBy: trackId" data-cy="entityTable">
+    <div
+      class="card custom-rounded1 mx-2 mb-2"
+      *ngFor="let customGoal of differentGoalsService.customGoalsValue1; trackBy: trackId"
+      data-cy="entityTable"
+    >
+      <div class="card-body">
+        <h5 class="card-title">{{ customGoal.name }}</h5>
+        <p class="card-text">{{ customGoal.description }}</p>
+
+        <a [routerLink]="['/custom-goal', customGoal.id, 'view']" class="btn custom-button-class1">View</a>
+        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" class="btn custom-button-class2">Edit</a>
+        <button (click)="delete(customGoal)" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+  <h2>Calorie intake goal(s)</h2>
+  <h2 id="page-heading2" data-cy="CustomGoalHeading">
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+    </div>
+  </h2>
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+  <div class="alert alert-warning" id="no-result2" *ngIf="customGoals?.length === 0">
+    <span>No Custom Goals found</span>
+  </div>
+  <div class="container d-flex flex-wrap" *ngIf="customGoals && customGoals.length > 0">
+    <div
+      class="card custom-rounded1 mx-2 mb-2"
+      *ngFor="let customGoal of differentGoalsService.customGoalsValue2; trackBy: trackId"
+      data-cy="entityTable"
+    >
+      <div class="card-body">
+        <h5 class="card-title">{{ customGoal.name }}</h5>
+        <p class="card-text">{{ customGoal.description }}</p>
+
+        <a [routerLink]="['/custom-goal', customGoal.id, 'view']" class="btn custom-button-class1">View</a>
+        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" class="btn custom-button-class2">Edit</a>
+        <button (click)="delete(customGoal)" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+  <h2>Mood goal(s)</h2>
+  <h2 id="page-heading3" data-cy="CustomGoalHeading">
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+    </div>
+  </h2>
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+  <div class="alert alert-warning" id="no-result3" *ngIf="customGoals?.length === 0">
+    <span>No Custom Goals found</span>
+  </div>
+  <div class="container d-flex flex-wrap" *ngIf="customGoals && customGoals.length > 0">
+    <div
+      class="card custom-rounded1 mx-2 mb-2"
+      *ngFor="let customGoal of differentGoalsService.customGoalsValue3; trackBy: trackId"
+      data-cy="entityTable"
+    >
+      <div class="card-body">
+        <h5 class="card-title">{{ customGoal.name }}</h5>
+        <p class="card-text">{{ customGoal.description }}</p>
+
+        <a [routerLink]="['/custom-goal', customGoal.id, 'view']" class="btn custom-button-class1">View</a>
+        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" class="btn custom-button-class2">Edit</a>
+        <button (click)="delete(customGoal)" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+  <h2>Custom goal(s)</h2>
+  <h2 id="page-heading4" data-cy="CustomGoalHeading">
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+    </div>
+  </h2>
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+  <div class="alert alert-warning" id="no-result4" *ngIf="customGoals?.length === 0">
+    <span>No Custom Goals found</span>
+  </div>
+  <div class="container d-flex flex-wrap" *ngIf="customGoals && customGoals.length > 0">
+    <div
+      class="card custom-rounded1 mx-2 mb-2"
+      *ngFor="let customGoal of differentGoalsService.customGoalsValue4; trackBy: trackId"
+      data-cy="entityTable"
+    >
       <div class="card-body">
         <h5 class="card-title">{{ customGoal.name }}</h5>
         <p class="card-text">{{ customGoal.description }}</p>
