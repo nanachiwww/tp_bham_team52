@@ -2,32 +2,32 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  color: black; /* Add text color if needed */
+  color: black;
 }
 
 .mood-patterns,
 .stress-level,
-.mindfulness-practice,
-.progress-tracker {
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid black; /* Add a black border */
+.mindfulness-tip,
+.mindfulness-practice-navigation {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
 }
 
-.mood-button,
+.moods,
+.update,
+.get,
 .mindfulness-button {
   padding: 10px;
   margin: 5px;
-  border: 1px solid black; /* Add a black border */
-  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover,
   &.selected {
-    background-color: #007bff;
-    color: #ffffff;
+    background-color: rgba(0, 123, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
   }
 }
 
@@ -58,5 +58,3 @@ input[type='range'] {
     border-radius: 50%;
   }
 }
-
-/* Add more CSS for layout, colors, fonts, and other interactive elements */

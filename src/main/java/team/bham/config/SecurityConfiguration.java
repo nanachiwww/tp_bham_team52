@@ -62,6 +62,8 @@ public class SecurityConfiguration {
             .headers()
                 .contentSecurityPolicy(jHipsterProperties.getSecurity().getContentSecurityPolicy())
             .and()
+                .contentSecurityPolicy("default-src 'self'; frame-src 'self' https://www.youtube.com; script-src 'self'; style-src 'self' 'unsafe-inline';")
+            .and()
                 .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
             .and()
                 .permissionsPolicy().policy("camera=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), sync-xhr=()")

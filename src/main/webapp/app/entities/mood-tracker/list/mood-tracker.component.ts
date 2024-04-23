@@ -14,6 +14,7 @@ import { SortService } from 'app/shared/sort/sort.service';
 import { Mood } from '../../enumerations/mood.model';
 import { HttpClient } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http';
+import { MindfulnessPracticeService } from '../../mindfulness-practice/service/mindfulness-practice.service';
 
 Chart.register(...registerables);
 
@@ -75,8 +76,34 @@ export class MoodTrackerComponent implements OnInit, AfterViewInit {
     ],
   };
 
+  mindfulnessTips: string[] = [
+    'Get a massage.',
+    'Plant flowers.',
+    'Do yoga.',
+    'Take a hike in the woods.',
+    'Go fishing.',
+    'Sit by a roaring fire.',
+    'Curl up with a good book.',
+    'Eat lunch outside.',
+    'Take a pottery class.',
+    'Treat yourself to a pedicure or manicure.',
+    'Walk the dog.',
+    'Knit or crochet.',
+    'Join a book club with friends.',
+    'Savor a cup of tea.',
+    'Do a hands-on craft (woodworking or painting).',
+    'Go camping under the stars.',
+    'Write in your journal.',
+    'Watch the sunrise or sunset.',
+    'Go for a swim.',
+    'Listen to classical music.',
+  ];
+
+  selectedMindfulnessTip: string | null = null;
+
   constructor(
     private http: HttpClient,
+    protected moodTrackerService: MoodTrackerService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected sortService: SortService,
@@ -87,6 +114,13 @@ export class MoodTrackerComponent implements OnInit, AfterViewInit {
   trackId = (_index: number, item: IMoodTracker): number => {
     return item.id ?? -1; // Fallback to a default value
   };
+
+  ngOnInit(): void {
+    this.load();
+    this.fetchMoodChartData();
+    this.pickRandomTip();
+    this.loadStressData();
+  }
 
   ngAfterViewInit(): void {
     this.renderMoodChart();
@@ -190,35 +224,33 @@ export class MoodTrackerComponent implements OnInit, AfterViewInit {
         });
 
         this.moodChartData.datasets[0].data = moodCounts;
-        this.moodChart.update(); // Update the chart with new data
+        this.moodChart.update();
       },
       error => {
-        console.error('Error fetching mood trackers', error); // Handle errors
+        console.error('Error fetching mood trackers', error);
       }
     );
   }
 
-  fetchStressChartData(): void {
-    this.http.get<IMoodTracker[]>('/api/stress-trackers/latest').subscribe(
-      data => {
-        console.log('Fetched stress trackers:', data);
-
-        const labels = data.map(tracker => dayjs(tracker.date).format('MM/DD'));
-        const stressLevels = data.map(tracker => tracker.stressLevel || 0);
-
-        this.stressChartData.labels = labels;
-        this.stressChartData.datasets[0].data = stressLevels;
-
-        if (this.stressChart) {
-          this.stressChart.update();
-        }
-      },
-      error => {
-        console.error('Error fetching stress data', error);
-      }
-    );
+  storeStressData(): void {
+    const stressData = {
+      labels: this.stressChartData.labels,
+      data: this.stressChartData.datasets[0].data,
+    };
+    localStorage.setItem('stressData', JSON.stringify(stressData));
   }
 
+  // Load stress data from localStorage
+  loadStressData(): void {
+    const storedStressData = localStorage.getItem('stressData');
+    if (storedStressData) {
+      const parsedData = JSON.parse(storedStressData);
+      this.stressChartData.labels = parsedData.labels;
+      this.stressChartData.datasets[0].data = parsedData.data;
+    }
+  }
+
+  // Update stress level and store data
   updateStressLevel(): void {
     const stressData = [...this.stressChartData.datasets[0].data];
     const stressLabels = [...this.stressChartData.labels];
@@ -231,35 +263,31 @@ export class MoodTrackerComponent implements OnInit, AfterViewInit {
       stressData.shift();
       stressLabels.shift();
     }
+
     this.stressChartData.datasets[0].data = stressData;
     this.stressChartData.labels = stressLabels;
+
+    this.storeStressData();
 
     if (this.stressChart) {
       this.stressChart.update();
     }
   }
 
-  ngOnInit(): void {
-    this.load();
-    this.fetchMoodChartData();
-    this.fetchStressChartData();
+  pickRandomTip(): void {
+    const randomIndex = Math.floor(Math.random() * this.mindfulnessTips.length);
+    this.selectedMindfulnessTip = this.mindfulnessTips[randomIndex];
   }
 
   currentStressLevel = 5; // Example initialization
 
-  mindfulnessActivities = [{ name: 'Meditation' }, { name: 'Breathing Exercises' }, { name: 'Mindfulness Tips' }];
-
-  startActivity(activity: any): void {
-    console.log('Starting activity:', activity.name); // Add desired behavior
-  }
-
   userProgressData = {
     goal: 'Complete daily mindfulness exercises',
-    progress: 75, // Representing 75% progress
+    progress: 75,
   };
 
   fetchUserProgressData(): void {
-    this.userProgressData.progress = 75; // Example dynamic update
+    this.userProgressData.progress = 75;
   }
 
   byteSize(base64String: string): string {
@@ -296,6 +324,11 @@ export class MoodTrackerComponent implements OnInit, AfterViewInit {
 
   navigateToWithComponentValues(): void {
     this.handleNavigation(this.predicate, this.ascending);
+  }
+
+  navigateToMindfulness(activityType: string): void {
+    // Navigate to the Mindfulness Practice section with a query parameter
+    this.router.navigate(['/mindfulness-practice'], { queryParams: { type: activityType } });
   }
 
   protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {

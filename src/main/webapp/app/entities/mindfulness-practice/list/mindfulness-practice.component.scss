@@ -1,0 +1,55 @@
+.timer-container {
+  background-color: #ffffff4c;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+select {
+  background-color: #ffffff4c;
+  border-radius: 16px;
+  padding: 5px;
+  margin: 10px 0;
+}
+
+.progress-bar-container {
+  background-color: #e0e0e0;
+  height: 20px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.progress-bar {
+  background-color: #4caf50;
+  height: 100%;
+  width: 0;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  transition: width 0.5s;
+}
+
+.breathing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin: 20px 0;
+}
+
+.breathing-circle {
+  background-color: rgba(70, 171, 34, 0.85);
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  animation: breathingAnimation 5s infinite;
+}
+
+@keyframes breathingAnimation {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(2);
+  }
+}

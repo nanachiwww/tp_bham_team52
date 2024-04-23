@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
-import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
+import { combineLatest, filter, Observable, switchMap, tap, timer, Subscription, takeWhile } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IMindfulnessPractice } from '../mindfulness-practice.model';
@@ -9,10 +9,12 @@ import { EntityArrayResponseType, MindfulnessPracticeService } from '../service/
 import { MindfulnessPracticeDeleteDialogComponent } from '../delete/mindfulness-practice-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { SortService } from 'app/shared/sort/sort.service';
+import { MindfulnessTipService } from '../../mindfulness-tip/service/mindfulness-tip.service';
 
 @Component({
   selector: 'jhi-mindfulness-practice',
   templateUrl: './mindfulness-practice.component.html',
+  styleUrls: ['./mindfulness-practice.component.scss'],
 })
 export class MindfulnessPracticeComponent implements OnInit {
   mindfulnessPractices?: IMindfulnessPractice[];
@@ -20,9 +22,17 @@ export class MindfulnessPracticeComponent implements OnInit {
 
   predicate = 'id';
   ascending = true;
+  currentPractice: string | null = null;
+  availableDurations = Array.from({ length: 12 }, (_, i) => (i + 1) * 10);
+  selectedDuration = 10;
+  countdown = 0;
+  progress = 0;
+  timerSubscription?: Subscription;
+  numberOfBreaths = 5;
 
   constructor(
     protected mindfulnessPracticeService: MindfulnessPracticeService,
+    private mindfulnessTipService: MindfulnessTipService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected sortService: SortService,
@@ -33,7 +43,28 @@ export class MindfulnessPracticeComponent implements OnInit {
   trackId = (_index: number, item: IMindfulnessPractice): number => this.mindfulnessPracticeService.getMindfulnessPracticeIdentifier(item);
 
   ngOnInit(): void {
-    this.load();
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.currentPractice = params['type'];
+    });
+    this.countdown = this.selectedDuration;
+  }
+
+  startTimer(): void {
+    this.countdown = this.selectedDuration;
+    this.progress = 100;
+
+    this.timerSubscription?.unsubscribe();
+
+    const countdownTimer = timer(0, 60000).pipe(takeWhile(() => this.countdown > 0));
+
+    this.timerSubscription = countdownTimer.subscribe(() => {
+      this.countdown--; // Decrease countdown
+      this.progress = (this.countdown / this.selectedDuration) * 100;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.timerSubscription?.unsubscribe();
   }
 
   byteSize(base64String: string): string {
