@@ -75,6 +75,7 @@ public class CacheConfiguration {
             createCache(cm, team.bham.domain.CustomGoal.class.getName());
             createCache(cm, team.bham.domain.CompareResult.class.getName());
             createCache(cm, team.bham.domain.Dashboard.class.getName());
+            createCache(cm, team.bham.domain.Workout.class.getName() + ".exercises");
             // jhipster-needle-ehcache-add-entry
         };
     }

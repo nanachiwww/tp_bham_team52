@@ -8,7 +8,7 @@ import { EntityArrayResponseType, CustomGoalService } from '../service/custom-go
 import { CustomGoalDeleteDialogComponent } from '../delete/custom-goal-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 import { SharedDataService } from 'app/shared/data/shared-data.service';
-
+import { CustomGoalsService } from '../update/custom-goal-form.service';
 @Component({
   selector: 'jhi-custom-goal',
   templateUrl: './custom-goal.component.html',
@@ -16,7 +16,7 @@ import { SharedDataService } from 'app/shared/data/shared-data.service';
 })
 export class CustomGoalComponent implements OnInit {
   customGoals?: ICustomGoal[];
-  customGoalsValue1?: ICustomGoal[];
+
   isLoading = false;
 
   predicate = 'id';
@@ -28,7 +28,8 @@ export class CustomGoalComponent implements OnInit {
     public router: Router,
     protected sortService: SortService,
     protected modalService: NgbModal,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    protected differentGoalsService: CustomGoalsService
   ) {}
   updateSelectedValue(value: string): void {
     this.sharedDataService.setSelectedValue(value);

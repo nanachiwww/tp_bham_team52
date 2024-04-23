@@ -70,4 +70,8 @@ export class ExerciseService {
     }
     return exerciseCollection;
   }
+
+  addExerciseToWorkout(workoutId: number, exerciseId: number): Observable<HttpResponse<IExercise>> {
+    return this.http.post<IExercise>(`api/workouts/${workoutId}/exercises`, exerciseId, { observe: 'response' });
+  }
 }

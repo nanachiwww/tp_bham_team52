@@ -1,9 +1,9 @@
-.workout-details-container {
+.exercise-details-container {
   display: flex;
   justify-content: center;
 }
 
-.workout-details {
+.exercise-details {
   max-width: 600px;
   width: 100%;
   padding: 20px;
@@ -12,30 +12,30 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.workout-details-heading {
+.exercise-details-heading {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-.workout-details-list {
+.exercise-details-list {
   margin-bottom: 20px;
 }
 
-.workout-details-item {
+.exercise-details-item {
   display: flex;
   margin-bottom: 10px;
 }
 
-.workout-details-label {
+.exercise-details-label {
   font-weight: bold;
   width: 150px;
 }
 
-.workout-details-value {
+.exercise-details-value {
   margin-left: 10px;
 }
 
-.workout-details-buttons {
+.exercise-details-buttons {
   display: flex;
   justify-content: space-between;
 }

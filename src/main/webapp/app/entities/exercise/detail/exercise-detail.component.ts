@@ -6,6 +6,7 @@ import { IExercise } from '../exercise.model';
 @Component({
   selector: 'jhi-exercise-detail',
   templateUrl: './exercise-detail.component.html',
+  styleUrls: ['./exercise-detail.component.scss'],
 })
 export class ExerciseDetailComponent implements OnInit {
   exercise: IExercise | null = null;

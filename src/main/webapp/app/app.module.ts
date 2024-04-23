@@ -28,6 +28,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { NextButtonComponent } from './layouts/next-button/next-button.component';
 import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CustomGoalsService } from './entities/custom-goal/update/custom-goal-form.service';
 @NgModule({
   imports: [
     BrowserModule,
@@ -46,6 +47,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     { provide: LOCALE_ID, useValue: 'en' },
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
+    CustomGoalsService,
   ],
   declarations: [
     MainComponent,

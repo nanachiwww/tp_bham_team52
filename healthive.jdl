@@ -162,7 +162,6 @@ relationship OneToMany {
 }
 
 relationship ManyToOne {
-    Workout{exercises} to Exercise{workout},
     MindfulnessPractice to MindfulnessTip{practice},
 }
 
@@ -173,5 +172,5 @@ relationship OneToOne {
 
 relationship ManyToMany {
     Item{energyIntakeResults} to EnergyIntakeResult{items}
+    Workout{exercises(name)} to Exercise{workouts(name)}
 }
-

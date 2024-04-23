@@ -55,12 +55,12 @@ describe('Workout Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Exercise query and add missing value', () => {
       const workout: IWorkout = { id: 456 };
-      const exercises: IExercise = { id: 44002 };
+      const exercises: IExercise[] = [{ id: 44002 }];
       workout.exercises = exercises;
 
       const exerciseCollection: IExercise[] = [{ id: 59196 }];
       jest.spyOn(exerciseService, 'query').mockReturnValue(of(new HttpResponse({ body: exerciseCollection })));
-      const additionalExercises = [exercises];
+      const additionalExercises = [...exercises];
       const expectedCollection: IExercise[] = [...additionalExercises, ...exerciseCollection];
       jest.spyOn(exerciseService, 'addExerciseToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -100,7 +100,7 @@ describe('Workout Management Update Component', () => {
     it('Should update editForm', () => {
       const workout: IWorkout = { id: 456 };
       const exercises: IExercise = { id: 34605 };
-      workout.exercises = exercises;
+      workout.exercises = [exercises];
       const userProfile: IUserProfile = { id: 64320 };
       workout.userProfile = userProfile;
 

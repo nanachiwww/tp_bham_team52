@@ -18,7 +18,7 @@ export class CustomGoalService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(customGoal: NewCustomGoal): Observable<EntityResponseType> {
+  create(customGoal: Omit<ICustomGoal, 'id'> & { id: null }): Observable<EntityResponseType> {
     return this.http.post<ICustomGoal>(this.resourceUrl, customGoal, { observe: 'response' });
   }
 
@@ -47,7 +47,7 @@ export class CustomGoalService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getCustomGoalIdentifier(customGoal: Pick<ICustomGoal, 'id'>): number {
+  getCustomGoalIdentifier(customGoal: PartialUpdateCustomGoal): number {
     return customGoal.id;
   }
 

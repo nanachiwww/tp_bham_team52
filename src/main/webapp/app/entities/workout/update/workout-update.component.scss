@@ -1,0 +1,46 @@
+.workout-form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.workout-form {
+  max-width: 600px;
+  width: 100%;
+}
+
+.workout-form-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-body {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.exercise-selection {
+  position: relative;
+}
+
+#exercise-search {
+  margin-bottom: 10px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

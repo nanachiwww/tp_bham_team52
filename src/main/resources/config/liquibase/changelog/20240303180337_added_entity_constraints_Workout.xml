@@ -8,9 +8,15 @@
     -->
     <changeSet id="20240303180337-2" author="jhipster">
 
+        <addForeignKeyConstraint baseColumnNames="workout_id"
+                                 baseTableName="rel_workout__exercises"
+                                 constraintName="fk_rel_workout__exercises__workout_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workout"/>
+
         <addForeignKeyConstraint baseColumnNames="exercises_id"
-                                 baseTableName="workout"
-                                 constraintName="fk_workout__exercises_id"
+                                 baseTableName="rel_workout__exercises"
+                                 constraintName="fk_rel_workout__exercises__exercises_id"
                                  referencedColumnNames="id"
                                  referencedTableName="exercise"/>
 
