@@ -395,6 +395,7 @@ input[type='text']:focus {
 }
 
 .carousel {
+  margin-top: 24px;
   position: relative;
   max-width: 600px; /* Adjust based on your requirement */
   margin: auto;
@@ -403,8 +404,9 @@ input[type='text']:focus {
 
 .carousel-container {
   display: flex;
-  width: 300%; /* Adjust based on the number of slides you have */
+  min-width: 100%; /* Ensures the container at least fills the carousel */
   transition: 0.5s ease-in-out;
+  justify-content: flex-start; /* Aligns items to the start */
 }
 
 .carousel-slide {
@@ -429,6 +431,7 @@ input[type='text']:focus {
   text-decoration: none;
   padding: 16px;
   background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 .carousel-control.prev {
@@ -445,12 +448,19 @@ input[type='text']:focus {
 }
 
 .carousel-supplement-item {
+  width: 460px;
   background-color: white;
   padding: 12px;
   border-radius: 16px;
-  width: inherit;
-  margin-top: 24px;
-  height: 300px;
+  margin: 0 10px; /* Adds horizontal space between items */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto; /* Adjust based on content or set a fixed height */
+}
+
+.carousel-img {
+  border-radius: 16px;
 }
 .row {
   display: flex;
@@ -458,4 +468,17 @@ input[type='text']:focus {
   align-items: start; /* Aligns items to the start of the flex container */
   flex-wrap: wrap;
   flex-direction: row;
+}
+
+h3 {
+  font-size: 32px;
+  font-weight: 400;
+  color: white;
+  margin-left: 10px;
+  display: inline-block;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  //add shadow to the text
+  text-shadow: 2px 2px 4px #000000;
 }

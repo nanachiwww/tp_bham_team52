@@ -32,6 +32,7 @@ export class MedicineComponent implements OnInit {
   searchTerm: string = '';
   private overallChart?: Chart;
   private specificChart?: Chart;
+  notes: string = '';
   types = ['SUPPLEMENT', 'PRESCRIPTION', 'OTHER'];
 
   showSecondPart() {

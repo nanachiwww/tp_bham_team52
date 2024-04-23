@@ -156,22 +156,30 @@
           </div>
         </div>
       </div>
-
+      <h3>Suggested</h3>
       <div class="carousel">
         <div class="carousel-container">
           <div class="carousel-supplement-item">
             <p>Description for slidefsdfd 1.</p>
+            <img class="carousel-img" src="https://via.placeholder.com/150" />
           </div>
           <div class="carousel-supplement-item">
             <p>Description for slidefsdfd 2.</p>
+            <img class="carousel-img" src="https://via.placeholder.com/150" />
           </div>
           <div class="carousel-supplement-item">
             <p>Description for slidefsdfd 3.</p>
+            <img class="carousel-img" src="https://via.placeholder.com/150" />
           </div>
         </div>
 
         <a class="carousel-control prev" (click)="moveSlide(-1)">&#10094;</a>
         <a class="carousel-control next" (click)="moveSlide(1)">&#10095;</a>
+      </div>
+
+      <div class="notes-section">
+        <h3>Notes</h3>
+        <textarea [(ngModel)]="notes" class="form-control" placeholder="Add notes"></textarea>
       </div>
 
       <div class="d-flex justify-content-center">
