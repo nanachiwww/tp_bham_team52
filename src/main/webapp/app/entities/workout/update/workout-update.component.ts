@@ -12,7 +12,6 @@ import { ExerciseService } from 'app/entities/exercise/service/exercise.service'
 import { IUserProfile } from 'app/entities/user-profile/user-profile.model';
 import { UserProfileService } from 'app/entities/user-profile/service/user-profile.service';
 import { IntensityLevelEnum } from 'app/entities/enumerations/intensity-level-enum.model';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'jhi-workout-update',
@@ -38,8 +37,7 @@ export class WorkoutUpdateComponent implements OnInit {
     protected workoutFormService: WorkoutFormService,
     protected exerciseService: ExerciseService,
     protected userProfileService: UserProfileService,
-    protected activatedRoute: ActivatedRoute,
-    private http: HttpClient
+    protected activatedRoute: ActivatedRoute
   ) {}
 
   compareExercise = (o1: IExercise | null, o2: IExercise | null): boolean => this.exerciseService.compareExercise(o1, o2);
@@ -93,36 +91,13 @@ export class WorkoutUpdateComponent implements OnInit {
   }
 
   save(): void {
-    const workout = this.createFromForm();
-    if (workout.id !== undefined) {
+    this.isSaving = true;
+    const workout = this.workoutFormService.getWorkout(this.editForm);
+    if (workout.id !== null) {
       this.subscribeToSaveResponse(this.workoutService.update(workout));
-      this.addExercisesToWorkout(
-        workout.id,
-        workout.exercises?.map((exercise: IExercise) => exercise.id)
-      ).subscribe();
     } else {
-      const newWorkout = {
-        ...workout,
-        id: null,
-      };
-      this.subscribeToSaveResponse(this.workoutService.create(newWorkout));
+      this.subscribeToSaveResponse(this.workoutService.create(workout));
     }
-  }
-
-  createFromForm(): IWorkout {
-    return {
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      description: this.editForm.get(['description'])!.value,
-      duration: this.editForm.get(['duration'])!.value,
-      intensityLevel: this.editForm.get(['intensityLevel'])!.value,
-      exercises: this.editForm.get(['exercises'])!.value,
-      userProfile: this.editForm.get(['userProfile'])!.value,
-    };
-  }
-
-  addExercisesToWorkout(workoutId: number, exerciseIds: number[] | undefined): Observable<HttpResponse<IWorkout>> {
-    return this.http.post<IWorkout>(`api/workouts/{id}/exercises`, exerciseIds, { observe: 'response' });
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IWorkout>>): void {
