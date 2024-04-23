@@ -44,7 +44,7 @@ export class MoodTrackerComponent implements OnInit, AfterViewInit {
 
   // Define the five moods with emojis
   moods = [
-    { mood: 'VERY_SAD', emoji: '☹' },
+    { mood: 'VERY_SAD', emoji: '😞' },
     { mood: 'SAD', emoji: '😔' },
     { mood: 'NEUTRAL', emoji: '😐' },
     { mood: 'HAPPY', emoji: '😊' },
