@@ -19,6 +19,15 @@
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="true" [ngSwitch]="account !== null">
       <ul class="navbar-nav ms-auto">
+        <li>
+          <!-- Dark Mode Toggle -->
+          <label class="ui-switch ml-3">
+            <input type="checkbox" (change)="toggleDarkMode()" />
+            <div class="slider">
+              <div class="circle"></div>
+            </div>
+          </label>
+        </li>
         <li
           *jhiHasAnyAuthority="'ROLE_ADMIN'"
           ngbDropdown
