@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { VERSION } from 'app/app.constants';
@@ -25,7 +25,8 @@ export class NavbarComponent implements OnInit {
     private loginService: LoginService,
     private accountService: AccountService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2
   ) {
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.renderer.addClass(document.body, 'light-mode');
     this.entitiesNavbarItems = EntityNavbarItems;
     this.profileService.getProfileInfo().subscribe(profileInfo => {
       this.inProduction = profileInfo.inProduction;
@@ -60,5 +62,15 @@ export class NavbarComponent implements OnInit {
 
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
+  toggleDarkMode() {
+    const body = document.body;
+    const isDarkMode = body.classList.toggle('dark-mode');
+    if (isDarkMode) {
+      this.renderer.removeClass(body, 'light-mode');
+    } else {
+      this.renderer.addClass(body, 'light-mode');
+    }
   }
 }

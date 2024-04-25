@@ -33,104 +33,106 @@
     <section class="mindfulness-tip">
       <h2>Mindfulness Tips</h2>
       <div *ngIf="selectedMindfulnessTip">
-        <p>{{ selectedMindfulnessTip }}</p>
+        <p>{{ ' ' + selectedMindfulnessTip }}</p>
       </div>
       <button class="get" (click)="pickRandomTip()">Get Another Tip</button>
     </section>
   </div>
 
   <section class="d-flex justify-content-center">
-    <button type="button" class="btn btn-outline-secondary" routerLink="/custom-goal">Track Goals <i class="fa fa-arrow-right"></i></button>
+    <button type="button" class="btn-outline-secondary" routerLink="/custom-goal">Track Goals <i class="fa fa-arrow-right"></i></button>
   </section>
 
+  <!--
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning warning-box" id="no-result" *ngIf="moodTrackers?.length === 0">
-    <span>No Mood Trackers found</span>
-  </div>
+    <div class="alert alert-warning warning-box" id="no-result" *ngIf="moodTrackers?.length === 0">
+      <span>No Mood Trackers found</span>
+    </div>
 
-  <div class="table-responsive table-entities" id="entities" *ngIf="moodTrackers && moodTrackers.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
-            <div class="d-flex">
-              <span>ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>987
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="date">
-            <div class="d-flex">
-              <span>Date</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="mood">
-            <div class="d-flex">
-              <span>Mood</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="note">
-            <div class="d-flex">
-              <span>Note</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="userProfile.id">
-            <div class="d-flex">
-              <span>User Profile</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let moodTracker of moodTrackers; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/mood-tracker', moodTracker.id, 'view']">{{ moodTracker.id }}</a>
-          </td>
-          <td>{{ moodTracker.date | formatMediumDate }}</td>
-          <td>{{ moodTracker.mood }}</td>
-          <td>{{ moodTracker.note }}</td>
-          <td>
-            <div *ngIf="moodTracker.userProfile">
-              <a [routerLink]="['/user-profile', moodTracker.userProfile.id, 'view']">{{ moodTracker.userProfile.id }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/mood-tracker', moodTracker.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">View</span>
-              </button>
+    <div class="table-responsive table-entities" id="entities" *ngIf="moodTrackers && moodTrackers.length > 0">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>987
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="date">
+              <div class="d-flex">
+                <span>Date</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mood">
+              <div class="d-flex">
+                <span>Mood</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="note">
+              <div class="d-flex">
+                <span>Note</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userProfile.id">
+              <div class="d-flex">
+                <span>User Profile</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let moodTracker of moodTrackers; trackBy: trackId" data-cy="entityTable">
+            <td>
+              <a [routerLink]="['/mood-tracker', moodTracker.id, 'view']">{{ moodTracker.id }}</a>
+            </td>
+            <td>{{ moodTracker.date | formatMediumDate }}</td>
+            <td>{{ moodTracker.mood }}</td>
+            <td>{{ moodTracker.note }}</td>
+            <td>
+              <div *ngIf="moodTracker.userProfile">
+                <a [routerLink]="['/user-profile', moodTracker.userProfile.id, 'view']">{{ moodTracker.userProfile.id }}</a>
+              </div>
+            </td>
+            <td class="text-end">
+              <div class="btn-group">
+                <button
+                  type="submit"
+                  [routerLink]="['/mood-tracker', moodTracker.id, 'view']"
+                  class="btn btn-info btn-sm"
+                  data-cy="entityDetailsButton"
+                >
+                  <fa-icon icon="eye"></fa-icon>
+                  <span class="d-none d-md-inline">View</span>
+                </button>
 
-              <button
-                type="submit"
-                [routerLink]="['/mood-tracker', moodTracker.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Edit</span>
-              </button>
+                <button
+                  type="submit"
+                  [routerLink]="['/mood-tracker', moodTracker.id, 'edit']"
+                  class="btn btn-primary btn-sm"
+                  data-cy="entityEditButton"
+                >
+                  <fa-icon icon="pencil-alt"></fa-icon>
+                  <span class="d-none d-md-inline">Edit</span>
+                </button>
 
-              <button type="submit" (click)="delete(moodTracker)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                <button type="submit" (click)="delete(moodTracker)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <fa-icon icon="times"></fa-icon>
+                  <span class="d-none d-md-inline">Delete</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    -->
 </div>
