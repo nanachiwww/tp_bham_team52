@@ -91,10 +91,10 @@
           <fa-icon icon="plus"></fa-icon>
           <span>Add Item </span>
         </button>
-        <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity refresh-day" (click)="load()">
+        <!-- <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity refresh-day" (click)="load()">
           <fa-icon icon="sync"></fa-icon>
           <span>Refresh</span>
-        </button>
+        </button> -->
         <button
           id="jh-create-entity"
           data-cy="entityCreateButton"
@@ -121,7 +121,7 @@
               </label>
             </div>
             <div>
-              <canvas #lineChart id="overall-chart"></canvas>
+              <canvas class="chart" #lineChart id="overall-chart"></canvas>
             </div>
             <div>
               <input
@@ -133,9 +133,9 @@
               />
             </div>
 
-            <div>
-              <canvas #lineChart id="specific-chart"></canvas>
-            </div>
+            <!-- <div>
+              <canvas class="chart" #lineChart id="specific-chart"></canvas>
+            </div> -->
           </div>
           <div class="share-section">
             Share your progress with your doctor
@@ -159,17 +159,10 @@
       <h3>Suggested</h3>
       <div class="carousel">
         <div class="carousel-container">
-          <div class="carousel-supplement-item">
-            <p>Description for slidefsdfd 1.</p>
-            <img class="carousel-img" src="https://via.placeholder.com/150" />
-          </div>
-          <div class="carousel-supplement-item">
-            <p>Description for slidefsdfd 2.</p>
-            <img class="carousel-img" src="https://via.placeholder.com/150" />
-          </div>
-          <div class="carousel-supplement-item">
-            <p>Description for slidefsdfd 3.</p>
-            <img class="carousel-img" src="https://via.placeholder.com/150" />
+          <div *ngFor="let item of carouselItems; let i = index" class="carousel-supplement-item">
+            <p>{{ item.title }}</p>
+            <p>{{ item.description }}</p>
+            <img class="carousel-img" [src]="item.imageUrl" />
           </div>
         </div>
 
@@ -179,7 +172,7 @@
 
       <div class="notes-section">
         <h3>Notes</h3>
-        <textarea [(ngModel)]="notes" class="form-control" placeholder="Add notes"></textarea>
+        <textarea [(ngModel)]="notes" class="form-control text-section" placeholder="Add notes"></textarea>
       </div>
 
       <div class="d-flex justify-content-center">

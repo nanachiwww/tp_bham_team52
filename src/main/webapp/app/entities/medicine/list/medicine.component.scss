@@ -144,6 +144,7 @@ input[type='text']:focus {
   white-space: nowrap;
   overflow: hidden;
   border-right: 6px solid white; /* Mimics the cursor at the end of the typing */
+  max-width: 500px; /* Adjust based on the actual text width */
   animation: typing 4s steps(37, end), blink-caret 0.75s step-end infinite;
 }
 
@@ -152,7 +153,7 @@ input[type='text']:focus {
     width: 0;
   }
   to {
-    width: 100%;
+    width: 100%; /* This now refers to 100% of max-width, not the parent container */
   }
 }
 
@@ -227,7 +228,7 @@ input[type='text']:focus {
 }
 
 .create-medicine {
-  width: 33.3333333%;
+  width: 50%;
   border-radius: 16px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -257,7 +258,7 @@ input[type='text']:focus {
   background-color: #28a745;
   color: white;
   border-width: 0px;
-  width: 33.3333333%;
+  width: 50%;
   border-radius: 16px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -397,7 +398,7 @@ input[type='text']:focus {
 .carousel {
   margin-top: 24px;
   position: relative;
-  max-width: 600px; /* Adjust based on your requirement */
+  max-width: 800px; /* Adjust based on your requirement */
   margin: auto;
   overflow: hidden;
 }
@@ -448,19 +449,19 @@ input[type='text']:focus {
 }
 
 .carousel-supplement-item {
-  width: 460px;
+  width: 500px;
   background-color: white;
   padding: 12px;
   border-radius: 16px;
   margin: 0 10px; /* Adds horizontal space between items */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto; /* Adjust based on content or set a fixed height */
 }
 
 .carousel-img {
   border-radius: 16px;
+  // center the image
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .row {
   display: flex;
@@ -481,4 +482,15 @@ h3 {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   //add shadow to the text
   text-shadow: 2px 2px 4px #000000;
+}
+
+.text-section {
+  height: 400px;
+}
+
+.chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
 }

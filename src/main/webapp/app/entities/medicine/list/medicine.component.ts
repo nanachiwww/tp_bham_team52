@@ -12,7 +12,7 @@ import { Chart, registerables } from 'chart.js';
 import { Dayjs } from 'dayjs'; // Ensure Dayjs is correctly imported
 import dayjs from 'dayjs'; // Import dayjs directly
 import { ChangeDetectorRef } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'jhi-medicine',
   templateUrl: './medicine.component.html',
@@ -34,6 +34,69 @@ export class MedicineComponent implements OnInit {
   private specificChart?: Chart;
   notes: string = '';
   types = ['SUPPLEMENT', 'PRESCRIPTION', 'OTHER'];
+
+  carouselItems = [
+    {
+      id: 1,
+      title: 'Vitamin D',
+      description: 'Supplement for bone health and immune function',
+      imageUrl: '/assets/images/vitamin-d.jpg',
+    },
+    {
+      id: 2,
+      title: 'Ibuprofen',
+      description: 'Pain reliever and anti-inflammatory medication',
+      imageUrl: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 3,
+      title: 'Amoxicillin',
+      description: 'Antibiotic used to treat various bacterial infections',
+      imageUrl: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 4,
+      title: 'Metformin',
+      description: 'Medication used to treat type 2 diabetes',
+      imageUrl: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 5,
+      title: 'Omega-3 Fatty Acids',
+      description: 'Supplement for heart health and cholesterol management',
+      imageUrl: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 6,
+      title: 'Lisinopril',
+      description: 'Medication for treating hypertension',
+      imageUrl: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 7,
+      title: 'Simvastatin',
+      description: 'Medication used to control high cholesterol',
+      imageUrl: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 8,
+      title: 'Aspirin',
+      description: 'Used to reduce pain, fever, and inflammation',
+      imageUrl: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 9,
+      title: 'Calcium',
+      description: 'Supplement for bone health and nerve function',
+      imageUrl: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 10,
+      title: 'Probiotic',
+      description: 'Supplement to support digestive and immune health',
+      imageUrl: 'https://via.placeholder.com/150',
+    },
+  ];
 
   showSecondPart() {
     this.isSecondPartVisible = true;
@@ -58,6 +121,7 @@ export class MedicineComponent implements OnInit {
   ];
 
   constructor(
+    private http: HttpClient,
     private cdr: ChangeDetectorRef,
     protected medicineService: MedicineService,
     protected activatedRoute: ActivatedRoute,
@@ -66,6 +130,14 @@ export class MedicineComponent implements OnInit {
     protected modalService: NgbModal
   ) {
     Chart.register(...registerables);
+  }
+
+  saveNotes() {
+    const userId = 1; // Replace with actual user ID
+    this.http.post('/api/users/' + userId + '/notes', { notes: this.notes }).subscribe({
+      next: response => console.log('Notes saved successfully', response),
+      error: error => console.error('Error saving notes', error),
+    });
   }
 
   filterItemsByToday() {
