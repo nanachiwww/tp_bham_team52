@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import team.bham.config.Constants;
 import team.bham.domain.Authority;
 import team.bham.domain.User;
+import team.bham.domain.UserProfile;
 import team.bham.repository.AuthorityRepository;
+import team.bham.repository.UserProfileRepository;
 import team.bham.repository.UserRepository;
 import team.bham.security.AuthoritiesConstants;
 import team.bham.security.SecurityUtils;
@@ -41,16 +43,20 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
+    private final UserProfileRepository userProfileRepository;
+
     public UserService(
         UserRepository userRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
-        CacheManager cacheManager
+        CacheManager cacheManager,
+        UserProfileRepository userProfileRepository
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.userProfileRepository = userProfileRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -132,6 +138,13 @@ public class UserService {
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
+
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUsername(userDTO.getLogin().toLowerCase());
+        userProfile.setEmail(userDTO.getEmail().toLowerCase());
+        userProfile.setPassword(passwordEncoder.encode(RandomUtil.generatePassword()));
+        userProfileRepository.save(userProfile);
+        log.debug("Created userprofile for User: {}", userProfile);
         return newUser;
     }
 
@@ -177,6 +190,12 @@ public class UserService {
         userRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
+
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUsername(userDTO.getLogin().toLowerCase());
+        userProfileRepository.save(userProfile);
+        log.debug("Created userprofile for User: {}", userProfile);
+
         return user;
     }
 
