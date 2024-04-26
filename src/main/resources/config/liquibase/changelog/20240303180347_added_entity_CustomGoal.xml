@@ -49,4 +49,10 @@
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>
+
+    <changeSet id="20240425-1-data" author="jhipster" context="faker">
+        <addColumn tableName="custom_goal">
+            <column name="type" type="varchar(2)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

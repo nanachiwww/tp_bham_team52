@@ -64,7 +64,9 @@
         <p class="card-text">{{ customGoal.description }}</p>
 
         <a [routerLink]="['/custom-goal', customGoal.id, 'view']" class="btn custom-button-class1">View</a>
-        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" class="btn custom-button-class2">Edit</a>
+        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" (click)="updateSelectedValue('Value1')" class="btn custom-button-class2"
+          >Edit</a
+        >
         <button (click)="delete(customGoal)" class="btn btn-danger">Delete</button>
       </div>
     </div>
@@ -95,12 +97,14 @@
         <p class="card-text">{{ customGoal.description }}</p>
 
         <a [routerLink]="['/custom-goal', customGoal.id, 'view']" class="btn custom-button-class1">View</a>
-        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" class="btn custom-button-class2">Edit</a>
+        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" (click)="updateSelectedValue('Value2')" class="btn custom-button-class2"
+          >Edit</a
+        >
         <button (click)="delete(customGoal)" class="btn btn-danger">Delete</button>
       </div>
     </div>
   </div>
-  <h2>Mood goal(s)</h2>
+  <h2>Mood</h2>
   <h2 id="page-heading3" data-cy="CustomGoalHeading">
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
@@ -126,7 +130,9 @@
         <p class="card-text">{{ customGoal.description }}</p>
 
         <a [routerLink]="['/custom-goal', customGoal.id, 'view']" class="btn custom-button-class1">View</a>
-        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" class="btn custom-button-class2">Edit</a>
+        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" (click)="updateSelectedValue('Value3')" class="btn custom-button-class2"
+          >Edit</a
+        >
         <button (click)="delete(customGoal)" class="btn btn-danger">Delete</button>
       </div>
     </div>
@@ -157,7 +163,9 @@
         <p class="card-text">{{ customGoal.description }}</p>
 
         <a [routerLink]="['/custom-goal', customGoal.id, 'view']" class="btn custom-button-class1">View</a>
-        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" class="btn custom-button-class2">Edit</a>
+        <a [routerLink]="['/custom-goal', customGoal.id, 'edit']" (click)="updateSelectedValue('Value4')" class="btn custom-button-class2"
+          >Edit</a
+        >
         <button (click)="delete(customGoal)" class="btn btn-danger">Delete</button>
       </div>
     </div>

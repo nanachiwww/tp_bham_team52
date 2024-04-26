@@ -83,8 +83,23 @@ export class CustomGoalComponent implements OnInit {
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
+    this.differentGoalsService = new CustomGoalsService();
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
     this.customGoals = this.refineData(dataFromBody);
+    this.customGoals.forEach(e => {
+      if (e.type === '1') {
+        this.differentGoalsService.customGoalsValue1.push(e);
+      }
+      if (e.type === '2') {
+        this.differentGoalsService.customGoalsValue2.push(e);
+      }
+      if (e.type === '3') {
+        this.differentGoalsService.customGoalsValue3.push(e);
+      }
+      if (e.type === '4') {
+        this.differentGoalsService.customGoalsValue4.push(e);
+      }
+    });
   }
 
   protected refineData(data: ICustomGoal[]): ICustomGoal[] {

@@ -50,6 +50,9 @@ public class CustomGoal implements Serializable {
     )
     private UserProfile userProfile;
 
+    @Column(name = "type")
+    private String type;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -104,6 +107,19 @@ public class CustomGoal implements Serializable {
         return this;
     }
 
+    public String getType() {
+        return this.type;
+    }
+
+    public CustomGoal type(String type) {
+        this.setType(type);
+        return this;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -130,6 +146,7 @@ public class CustomGoal implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", type='" + getType() + "'" +
             "}";
     }
 }
