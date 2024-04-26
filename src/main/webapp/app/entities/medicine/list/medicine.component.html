@@ -115,7 +115,7 @@
         <div class="second-section">
           <div>
             <div class="filters">
-              <label *ngFor="let filter of filters; let i = index">
+              <label *ngFor="let filter of filters; let i = index" class="standard-subtitle-text">
                 <input type="checkbox" [(ngModel)]="filter.checked" (change)="updateVisibleItems()" [id]="filter.id" />
                 {{ filter.name }}
               </label>
@@ -137,32 +137,19 @@
               <canvas class="chart" #lineChart id="specific-chart"></canvas>
             </div> -->
           </div>
-          <div class="share-section">
-            Share your progress with your doctor
-            <div class="social-icons">
-              Facebook
-              <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.jhipster.tech" target="_blank">
-                <fa-icon icon="facebook"></fa-icon>
-              </a>
-              Twitter
-              <a href="https://twitter.com/intent/tweet?url=https://www.jhipster.tech" target="_blank">
-                <fa-icon icon="twitter"></fa-icon>
-              </a>
-              LinkedIn
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.jhipster.tech" target="_blank">
-                <fa-icon icon="linkedin"></fa-icon>
-              </a>
-            </div>
-          </div>
         </div>
       </div>
-      <h3>Suggested</h3>
+      <div class="suggested-box">
+        <h3 style="text-align: center">Suggested</h3>
+      </div>
       <div class="carousel">
         <div class="carousel-container">
           <div *ngFor="let item of carouselItems; let i = index" class="carousel-supplement-item">
-            <p>{{ item.title }}</p>
-            <p>{{ item.description }}</p>
-            <img class="carousel-img" [src]="item.imageUrl" />
+            <div class="carousel-text-container">
+              <p class="black-text carousel-item-text">{{ item.title }}</p>
+              <p class="black-text carousel-item-text">{{ item.description }}</p>
+            </div>
+            <img class="carousel-img" [src]="item.imageUrl" alt="supplement image" />
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 <div>
   <div class="container text-center">
-    <h1>Sleeping Time!</h1>
+    <h1 class="standard-text">Sleeping Time!</h1>
     <div class="button-group">
       <div *ngIf="play">
         <button class="btn btn-play" (click)="startRecording()">
@@ -18,20 +18,20 @@
       </div>
       <div *ngIf="!play">
         <button class="btn btn-stop" (click)="stopRecording()">
-          <i class="fa"
-            ><svg version="1.1" viewBox="0 0 512 512" height="500" width="500" xmlns="http://www.w3.org/2000/svg">
+          <i class="fa">
+            <svg version="1.1" viewBox="0 0 512 512" height="500" width="500" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="255.77" cy="256.2" rx="256.31" ry="255.94" style="fill-rule: evenodd; fill: #099" />
               <rect x="89.851" y="89.708" width="330.97" height="333.58" style="fill: #e6e6e6; stroke-width: 1.3439" /></svg
           ></i>
         </button>
-        <h2>Sleep duration</h2>
+        <h2 class="standard-subtitle-text">Sleep duration</h2>
         <br />
-        <div class="timer">{{ timeing }}</div>
+        <div class="timer standard-subtitle-text">{{ timeing }}</div>
       </div>
     </div>
   </div>
   <h2 id="page-heading" data-cy="SleepRecordHeading">
-    <span>Sleep Records</span>
+    <span class="standard-text">Sleep Records</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
