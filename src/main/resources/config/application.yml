@@ -200,8 +200,8 @@ jhipster:
     license: unlicensed
     license-url:
   security:
-    
-    ==============
+    content-security-policy: "frame-ancestors 'self';block-all-mixed-content;script-src 'self' 'report-sample' 'unsafe-inline' https://m.youtube.com https://www.youtube.com;style-src 'self' 'report-sample' 'unsafe-inline' fonts.googleapis.com;object-src 'none';child-src 'self' www.youtube.com;base-uri 'self';form-action 'self';worker-src 'self';"
+# ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
 # to have type-safe configuration, like in the JHipsterProperties above
@@ -211,3 +211,4 @@ jhipster:
 # ===================================================================
 
 # application:
+
