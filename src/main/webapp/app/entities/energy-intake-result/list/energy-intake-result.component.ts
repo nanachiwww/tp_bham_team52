@@ -9,21 +9,37 @@ import { EntityArrayResponseType, EnergyIntakeResultService } from '../service/e
 import { EnergyIntakeResultDeleteDialogComponent } from '../delete/energy-intake-result-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 import { IMedicine } from '../../medicine/medicine.model';
+import dayjs from 'dayjs/esm';
 
 @Component({
   selector: 'jhi-energy-intake-result',
   templateUrl: './energy-intake-result.component.html',
+  styleUrls: ['./energy-intake-result.component.scss'],
 })
 export class EnergyIntakeResultComponent implements OnInit {
-  breakfast: IEnergyIntakeResult[] = [];
-  lunch: IEnergyIntakeResult[] = [];
-  dinner: IEnergyIntakeResult[] = [];
+  // breakfast: IEnergyIntakeResult[] = [];
+  // lunch: IEnergyIntakeResult[] = [];
+  // dinner: IEnergyIntakeResult[] = [];
 
-  energyIntakeResults?: IEnergyIntakeResult[];
+  energyIntakeResults?: any[];
   isLoading = false;
 
   predicate = 'id';
   ascending = true;
+
+  arr = {
+    id: null,
+    breakfast_name: '',
+    breakfast_name2: '',
+    breakfast_name3: '',
+    lunch_name1: '',
+    lunch_name2: '',
+    lunch_name3: '',
+    dinner_name1: '',
+    dinner_name2: '',
+    dinner_name3: '',
+  };
+  tableData: any = [];
 
   constructor(
     protected energyIntakeResultService: EnergyIntakeResultService,
@@ -119,5 +135,84 @@ export class EnergyIntakeResultComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+  submit(): void {
+    let params: any = {
+      id: this.arr.id,
+      breakfast: this.arr.breakfast_name + ',' + this.arr.breakfast_name2 + ',' + this.arr.breakfast_name3,
+      lunch: this.arr.lunch_name1 + ',' + this.arr.lunch_name2 + ',' + this.arr.lunch_name3,
+      dinner: this.arr.dinner_name1 + ',' + this.arr.dinner_name2 + ',' + this.arr.dinner_name3,
+      createTime: dayjs(new Date()),
+    };
+    if (this.arr.id == null) {
+      this.energyIntakeResultService.create(params).subscribe(res => {
+        this.load();
+        this.arr = {
+          id: null,
+          breakfast_name: '',
+          breakfast_name2: '',
+          breakfast_name3: '',
+          lunch_name1: '',
+          lunch_name2: '',
+          lunch_name3: '',
+          dinner_name1: '',
+          dinner_name2: '',
+          dinner_name3: '',
+        };
+      });
+    } else {
+      this.energyIntakeResultService.update(params).subscribe(res => {
+        this.load();
+        this.arr = {
+          id: null,
+          breakfast_name: '',
+          breakfast_name2: '',
+          breakfast_name3: '',
+          lunch_name1: '',
+          lunch_name2: '',
+          lunch_name3: '',
+          dinner_name1: '',
+          dinner_name2: '',
+          dinner_name3: '',
+        };
+      });
+    }
+
+    // this.router.navigateByUrl('./energy-intake-result', { skipLocationChange: true }).then(() => {
+    //     this.router.navigateByUrl('./energy-intake-result'); // 重新导航到当前页面路由
+    // });
+  }
+  setFormData(data: any): void {
+    let breakfast = data.breakfast.split(',');
+    let lunch = data.lunch.split(',');
+    let dinner = data.dinner.split(',');
+
+    this.arr.id = data.id;
+    this.arr.breakfast_name = breakfast[0];
+    this.arr.breakfast_name2 = breakfast[1];
+    this.arr.breakfast_name3 = breakfast[2];
+
+    this.arr.lunch_name1 = lunch[0];
+    this.arr.lunch_name2 = lunch[1];
+    this.arr.lunch_name3 = lunch[2];
+
+    this.arr.dinner_name1 = dinner[0];
+    this.arr.dinner_name2 = dinner[1];
+    this.arr.dinner_name3 = dinner[2];
+  }
+  deleteData(data: IEnergyIntakeResult): void {
+    const modalRef = this.modalService.open(EnergyIntakeResultDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.energyIntakeResult = data;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed
+      .pipe(
+        filter(reason => reason === ITEM_DELETED_EVENT),
+        switchMap(() => this.loadFromBackendWithRouteInformations())
+      )
+      .subscribe({
+        next: (res: EntityArrayResponseType) => {
+          this.onResponseSuccess(res);
+        },
+      });
   }
 }

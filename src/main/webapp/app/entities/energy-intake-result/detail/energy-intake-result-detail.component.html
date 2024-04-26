@@ -10,11 +10,11 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span>ID</span></dt>
+        <!-- <dt><span>ID</span></dt>
         <dd>
           <span>{{ energyIntakeResult.id }}</span>
         </dd>
-        <dt><span>Goal Complete</span></dt>
+        <dt><span>lunch</span></dt>
         <dd>
           <span>{{ energyIntakeResult.goalComplete }}</span>
         </dd>
@@ -31,7 +31,7 @@
           <div *ngIf="energyIntakeResult.userProfile">
             <a [routerLink]="['/user-profile', energyIntakeResult.userProfile.id, 'view']">{{ energyIntakeResult.userProfile.id }}</a>
           </div>
-        </dd>
+        </dd> -->
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

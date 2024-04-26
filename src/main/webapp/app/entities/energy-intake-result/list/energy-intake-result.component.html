@@ -1,76 +1,115 @@
 <div>
   <div>
-    <h2 class="text-center standard-text">What did you eat today?</h2>
+    <h2 class="text-center">What did you eat today?</h2>
 
     <div class="d-flex justify-content-around">
       <!-- Breakfast Section -->
       <div class="category">
-        <h3 class="standard-subtitle-text" style="text-align: center">Breakfast</h3>
+        <h3>Breakfast</h3>
         <label class="form-label" for="breakfast_name"></label>
-        <input type="text" class="form-control" name="name" id="breakfast_name" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" [(ngModel)]="arr.breakfast_name" id="breakfast_name" data-cy="name" />
         <label class="form-label" for="breakfast_name2"></label>
-        <input type="text" class="form-control" name="name" id="breakfast_name2" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" [(ngModel)]="arr.breakfast_name2" id="breakfast_name2" data-cy="name" />
         <label class="form-label" for="breakfast_name3"></label>
-        <input type="text" class="form-control" name="name" id="breakfast_name3" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" [(ngModel)]="arr.breakfast_name3" id="breakfast_name3" data-cy="name" />
       </div>
 
       <!-- Lunch Section -->
       <div class="category">
-        <h3 class="standard-subtitle-text" style="text-align: center">Lunch</h3>
+        <h3>Lunch</h3>
         <label class="form-label" for="lunch_name1"></label>
-        <input type="text" class="form-control" name="name" id="lunch_name1" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="lunch_name1" data-cy="name" [(ngModel)]="arr.lunch_name1" />
 
         <label class="form-label" for="lunch_name2"></label>
-        <input type="text" class="form-control" name="name" id="lunch_name2" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="lunch_name2" data-cy="name" [(ngModel)]="arr.lunch_name2" />
 
         <label class="form-label" for="lunch_name3"></label>
-        <input type="text" class="form-control" name="name" id="lunch_name3" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="lunch_name3" data-cy="name" [(ngModel)]="arr.lunch_name3" />
       </div>
 
       <!-- Dinner Section -->
       <div class="category">
-        <h3 class="standard-subtitle-text" style="text-align: center">Dinner</h3>
+        <h3>Dinner</h3>
         <label class="form-label" for="dinner_name1"></label>
-        <input type="text" class="form-control" name="name" id="dinner_name1" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="dinner_name1" data-cy="name" [(ngModel)]="arr.dinner_name1" />
         <label class="form-label" for="dinner_name2"></label>
-        <input type="text" class="form-control" name="name" id="dinner_name2" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="dinner_name2" data-cy="name" [(ngModel)]="arr.dinner_name2" />
         <label class="form-label" for="dinner_name3"></label>
-        <input type="text" class="form-control" name="name" id="dinner_name3" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="dinner_name3" data-cy="name" [(ngModel)]="arr.dinner_name3" />
+      </div>
+    </div>
+    <br />
+    <h2>Diet List</h2>
+    <br />
+    <br />
+    <div class="table-div" *ngIf="energyIntakeResults">
+      <div class="table-card" *ngFor="let item of energyIntakeResults">
+        <div class="flex">
+          <div>Breakfast：</div>
+          <div>{{ item.breakfast }}</div>
+        </div>
+        <div class="flex">
+          <div>Lunch：</div>
+          <div>{{ item.lunch }}</div>
+        </div>
+        <div class="flex">
+          <div>Dinner：</div>
+          <div>{{ item.dinner }}</div>
+        </div>
+        <div class="flex">
+          <div>Time：</div>
+          <div>{{ item.createTime | formatMediumDate }}</div>
+        </div>
+        <div class="flex table-btn">
+          <button (click)="setFormData(item)" class="btn btn-primary jh-create-entity">Edit</button>
+          <button (click)="deleteData(item)" class="btn btn-danger">Delete</button>
+        </div>
       </div>
     </div>
     <br />
     <div class="d-flex justify-content-center button">
-      <button class="btn btn-primary" [routerLink]="['/energy-intake-result/new']">View dietary recommendation for you</button>
+      <button class="btn btn-primary" (click)="submit()">submit</button>
     </div>
-    <br />
-
-    <br />
+    <!-- <br />
     <div class="d-flex justify-content-around">
       <div class="category">
-        <h3 class="standard-subtitle-text" style="text-align: center">Your energy intake goal</h3>
+        <h3>Your energy intake goal</h3>
         <label class="form-label" for="dinner_name1"></label>
-        <input type="text" class="form-control" name="name" id="goal_complete_name1" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="goal_complete_name1" data-cy="name"
+          formControlName="name" />
         <label class="form-label" for="dinner_name2"></label>
-        <input type="text" class="form-control" name="name" id="goal_complete_name2" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="goal_complete_name2" data-cy="name"
+          formControlName="name" />
         <label class="form-label" for="dinner_name3"></label>
-        <input type="text" class="form-control" name="name" id="goal_complete_name3" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="goal_complete_name3" data-cy="name"
+          formControlName="name" />
       </div>
 
       <div class="category">
-        <h3 class="standard-subtitle-text" style="text-align: center">Your true energy intake</h3>
+        <h3>Your true energy intake</h3>
         <label class="form-label" for="dinner_name1"></label>
-        <input type="text" class="form-control" name="name" id="goal_complete_name4" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="goal_complete_name4" data-cy="name"
+          formControlName="name" />
         <label class="form-label" for="dinner_name2"></label>
-        <input type="text" class="form-control" name="name" id="goal_complete_name5" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="goal_complete_name5" data-cy="name"
+          formControlName="name" />
         <label class="form-label" for="dinner_name3"></label>
-        <input type="text" class="form-control" name="name" id="goal_complete_name6" data-cy="name" formControlName="name" />
+        <input type="text" class="form-control" name="name" id="goal_complete_name6" data-cy="name"
+          formControlName="name" />
       </div>
-    </div>
+    </div> -->
     <br />
     <div class="d-flex justify-content-center button">
-      <button class="btn btn-primary">submit</button>
+      <button class="btn btn-primary" routerLink="/recommendation">View dietary recommendation for you</button>
     </div>
-    <p class="standard-subtitle-text" style="text-align: center">Did you complete your energy intake goal?</p>
+    <br />
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-outline-secondary" routerLink="/medicine">
+        Track Supplement Usage <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+
+    <p style="font-size: 30px; text-align: center">Did you complete your energy intake goal?</p>
     <div class="d-flex justify-content-center button">
       <button class="btn btn-primary">Yes</button>
       <button class="btn btn-primary">No</button>
@@ -78,119 +117,5 @@
     <jhi-alert-error></jhi-alert-error>
 
     <jhi-alert></jhi-alert>
-
-    <!--<div>
-  <h2 id="page-heading" data-cy="EnergyIntakeResultHeading">
-    <span>Energy Intake Results</span>
-
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>Refresh list</span>
-      </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-energy-intake-result"
-        [routerLink]="['/energy-intake-result/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span> Create a new Energy Intake Result </span>
-      </button>
-    </div>
-  </h2>
-
-  <jhi-alert-error></jhi-alert-error>
-
-  <jhi-alert></jhi-alert>
-
-  <div class="alert alert-warning" id="no-result" *ngIf="energyIntakeResults?.length === 0">
-    <span>No Energy Intake Results found</span>
-  </div>
-
-  <div class="table-responsive table-entities" id="entities" *ngIf="energyIntakeResults && energyIntakeResults.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
-            <div class="d-flex">
-              <span>ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="goalComplete">
-            <div class="d-flex">
-              <span>Goal Complete</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="details">
-            <div class="d-flex">
-              <span>Details</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="date">
-            <div class="d-flex">
-              <span>Date</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="userProfile.id">
-            <div class="d-flex">
-              <span>User Profile</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let energyIntakeResult of energyIntakeResults; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/energy-intake-result', energyIntakeResult.id, 'view']">{{ energyIntakeResult.id }}</a>
-          </td>
-          <td>{{ energyIntakeResult.goalComplete }}</td>
-          <td>{{ energyIntakeResult.details }}</td>
-          <td>{{ energyIntakeResult.date | formatMediumDate }}</td>
-          <td>
-            <div *ngIf="energyIntakeResult.userProfile">
-              <a [routerLink]="['/user-profile', energyIntakeResult.userProfile.id, 'view']">{{ energyIntakeResult.userProfile.id }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/energy-intake-result', energyIntakeResult.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">View</span>
-              </button>
-
-              <button
-                type="submit"
-                [routerLink]="['/energy-intake-result', energyIntakeResult.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Edit</span>
-              </button>
-
-              <button type="submit" (click)="delete(energyIntakeResult)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div> -->
   </div>
 </div>

@@ -3,6 +3,7 @@
 .button {
   margin-bottom: 30px;
 }
+
 .food-container {
   display: flex;
   justify-content: space-around;
@@ -29,4 +30,34 @@
 .title {
   display: block;
   text-align: center;
+}
+
+.fake-td {
+  width: 20%;
+}
+.fake-tr {
+  margin-top: 0.5rem;
+}
+.table-div {
+  display: flex;
+  // justify-content: center;
+}
+.flex {
+  display: flex;
+}
+.table-card {
+  min-width: 200px;
+  // height: 100px;
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 10px;
+  margin-right: 0.5rem;
+}
+.table-btn {
+  margin-top: 1rem;
+  justify-content: space-around;
+}
+.edge-layout {
+  display: flex;
+  justify-content: space-between;
 }

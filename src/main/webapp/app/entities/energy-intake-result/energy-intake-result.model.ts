@@ -4,11 +4,11 @@ import { IItem } from 'app/entities/item/item.model';
 
 export interface IEnergyIntakeResult {
   id: number;
-  goalComplete?: boolean | null;
-  details?: string | null;
-  date?: dayjs.Dayjs | null;
-  userProfile?: Pick<IUserProfile, 'id'> | null;
-  items?: Pick<IItem, 'id'>[] | null;
+  lunch?: string | null;
+  dinner?: string | null;
+  breakfirst?: string | null;
+  createTime?: dayjs.Dayjs | null;
+  // items?: Pick<IItem, 'id'>[] | null;
 }
 
 export type NewEnergyIntakeResult = Omit<IEnergyIntakeResult, 'id'> & { id: null };

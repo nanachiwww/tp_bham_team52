@@ -12,8 +12,8 @@ import { IEnergyIntakeResult, NewEnergyIntakeResult } from '../energy-intake-res
 
 export type PartialUpdateEnergyIntakeResult = Partial<IEnergyIntakeResult> & Pick<IEnergyIntakeResult, 'id'>;
 
-type RestOf<T extends IEnergyIntakeResult | NewEnergyIntakeResult> = Omit<T, 'date'> & {
-  date?: string | null;
+type RestOf<T extends IEnergyIntakeResult | NewEnergyIntakeResult> = Omit<T, 'createTime'> & {
+  createTime?: string | null;
 };
 
 export type RestEnergyIntakeResult = RestOf<IEnergyIntakeResult>;
@@ -27,7 +27,7 @@ export type EntityArrayResponseType = HttpResponse<IEnergyIntakeResult[]>;
 
 @Injectable({ providedIn: 'root' })
 export class EnergyIntakeResultService {
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/energy-intake-results');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/diet_info');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -108,14 +108,14 @@ export class EnergyIntakeResultService {
   ): RestOf<T> {
     return {
       ...energyIntakeResult,
-      date: energyIntakeResult.date?.format(DATE_FORMAT) ?? null,
+      createTime: energyIntakeResult.createTime?.format(DATE_FORMAT) ?? null,
     };
   }
 
   protected convertDateFromServer(restEnergyIntakeResult: RestEnergyIntakeResult): IEnergyIntakeResult {
     return {
       ...restEnergyIntakeResult,
-      date: restEnergyIntakeResult.date ? dayjs(restEnergyIntakeResult.date) : undefined,
+      createTime: restEnergyIntakeResult.createTime ? dayjs(restEnergyIntakeResult.createTime) : undefined,
     };
   }
 
