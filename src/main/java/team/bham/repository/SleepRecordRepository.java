@@ -9,4 +9,4 @@ import team.bham.domain.SleepRecord;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface SleepRecordRepository extends JpaRepository<SleepRecord, Long> {}
+public interface SleepRecordRepository extends JpaRepository<SleepRecord, Long>, JpaSpecificationExecutor<SleepRecord> {}
