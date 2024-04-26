@@ -1,11 +1,11 @@
 <div>
   <div>
-    <h2 class="text-center">What did you eat today?</h2>
+    <h2 class="text-center standard-text">What did you eat today?</h2>
 
     <div class="d-flex justify-content-around">
       <!-- Breakfast Section -->
       <div class="category">
-        <h3>Breakfast</h3>
+        <h3 class="standard-subtitle-text" style="text-align: center">Breakfast</h3>
         <label class="form-label" for="breakfast_name"></label>
         <input type="text" class="form-control" name="name" id="breakfast_name" data-cy="name" formControlName="name" />
         <label class="form-label" for="breakfast_name2"></label>
@@ -16,7 +16,7 @@
 
       <!-- Lunch Section -->
       <div class="category">
-        <h3>Lunch</h3>
+        <h3 class="standard-subtitle-text" style="text-align: center">Lunch</h3>
         <label class="form-label" for="lunch_name1"></label>
         <input type="text" class="form-control" name="name" id="lunch_name1" data-cy="name" formControlName="name" />
 
@@ -29,7 +29,7 @@
 
       <!-- Dinner Section -->
       <div class="category">
-        <h3>Dinner</h3>
+        <h3 class="standard-subtitle-text" style="text-align: center">Dinner</h3>
         <label class="form-label" for="dinner_name1"></label>
         <input type="text" class="form-control" name="name" id="dinner_name1" data-cy="name" formControlName="name" />
         <label class="form-label" for="dinner_name2"></label>
@@ -43,15 +43,11 @@
       <button class="btn btn-primary" [routerLink]="['/energy-intake-result/new']">View dietary recommendation for you</button>
     </div>
     <br />
-    <div class="d-flex justify-content-center">
-      <button type="button" class="btn btn-outline-secondary" routerLink="/medicine">
-        Track Supplement Usage <i class="fa fa-arrow-right"></i>
-      </button>
-    </div>
+
     <br />
     <div class="d-flex justify-content-around">
       <div class="category">
-        <h3>Your energy intake goal</h3>
+        <h3 class="standard-subtitle-text" style="text-align: center">Your energy intake goal</h3>
         <label class="form-label" for="dinner_name1"></label>
         <input type="text" class="form-control" name="name" id="goal_complete_name1" data-cy="name" formControlName="name" />
         <label class="form-label" for="dinner_name2"></label>
@@ -61,7 +57,7 @@
       </div>
 
       <div class="category">
-        <h3>Your true energy intake</h3>
+        <h3 class="standard-subtitle-text" style="text-align: center">Your true energy intake</h3>
         <label class="form-label" for="dinner_name1"></label>
         <input type="text" class="form-control" name="name" id="goal_complete_name4" data-cy="name" formControlName="name" />
         <label class="form-label" for="dinner_name2"></label>
@@ -74,7 +70,7 @@
     <div class="d-flex justify-content-center button">
       <button class="btn btn-primary">submit</button>
     </div>
-    <p style="font-size: 30px; text-align: center">Did you complete your energy intake goal?</p>
+    <p class="standard-subtitle-text" style="text-align: center">Did you complete your energy intake goal?</p>
     <div class="d-flex justify-content-center button">
       <button class="btn btn-primary">Yes</button>
       <button class="btn btn-primary">No</button>

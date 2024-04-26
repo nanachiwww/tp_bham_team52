@@ -280,8 +280,7 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
 .page {
   //center the content
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
   animation: fadeIn 2s ease-out;
 }
 

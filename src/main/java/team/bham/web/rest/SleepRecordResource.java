@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -170,6 +171,10 @@ public class SleepRecordResource {
         );
     }
 
+    static Specification<SleepRecord> isCurrentUser(UserProfile user) {
+        return (record, cq, cb) -> cb.equal(record.get("userProfile"), user);
+    }
+
     /**
      * {@code GET  /sleep-records} : get all the sleepRecords.
      *
@@ -177,8 +182,27 @@ public class SleepRecordResource {
      */
     @GetMapping("/sleep-records")
     public List<SleepRecord> getAllSleepRecords() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         log.debug("REST request to get all SleepRecords");
-        return sleepRecordRepository.findAll();
+        String name = auth.getName();
+        List<UserProfile> allusers = userProfileRepository.findAll();
+        UserProfile user = null;
+        log.debug("check a");
+        for (int i = 0; i < allusers.size(); i++) {
+            if (allusers.get(i).getUsername().equals(name)) {
+                user = allusers.get(i);
+            }
+        }
+        log.debug("check b");
+        if (user != null) {
+            log.debug("check c");
+            //Specification<SleepRecord> spec = isCurrentUser(user);
+        } else {
+            log.debug("no UserProfile match for: {}", name);
+            throw new BadRequestAlertException("no UserProfile match for authName", ENTITY_NAME, "namemismatch");
+        }
+        log.debug("check d");
+        return sleepRecordRepository.findAll(isCurrentUser(user));
     }
 
     /**

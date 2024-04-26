@@ -1,6 +1,6 @@
 <div>
   <div class="container text-center">
-    <h1>Sleeping Time!</h1>
+    <h1 class="standard-text">Sleeping Time!</h1>
     <div class="button-group">
       <div *ngIf="play">
         <button class="btn btn-play" (click)="startRecording()">
@@ -18,20 +18,20 @@
       </div>
       <div *ngIf="!play">
         <button class="btn btn-stop" (click)="stopRecording()">
-          <i class="fa"
-            ><svg version="1.1" viewBox="0 0 512 512" height="500" width="500" xmlns="http://www.w3.org/2000/svg">
+          <i class="fa">
+            <svg version="1.1" viewBox="0 0 512 512" height="500" width="500" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="255.77" cy="256.2" rx="256.31" ry="255.94" style="fill-rule: evenodd; fill: #099" />
               <rect x="89.851" y="89.708" width="330.97" height="333.58" style="fill: #e6e6e6; stroke-width: 1.3439" /></svg
           ></i>
         </button>
-        <h2>Sleep duration</h2>
+        <h2 class="standard-subtitle-text">Sleep duration</h2>
         <br />
-        <div class="timer">{{ timeing }}</div>
+        <div class="timer standard-subtitle-text">{{ timeing }}</div>
       </div>
     </div>
   </div>
   <h2 id="page-heading" data-cy="SleepRecordHeading">
-    <span>Sleep Records</span>
+    <span class="standard-text">Sleep Records</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
@@ -53,12 +53,6 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
-            <div class="d-flex">
-              <span>ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="startTime">
             <div class="d-flex">
               <span>Start Time</span>
@@ -77,56 +71,15 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="userProfile.id">
-            <div class="d-flex">
-              <span>User Profile</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
+
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let sleepRecord of sleepRecords; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/sleep-record', sleepRecord.id, 'view']">{{ sleepRecord.id }}</a>
-          </td>
           <td>{{ sleepRecord.startTime | formatMediumDatetime }}</td>
           <td>{{ sleepRecord.endTime | formatMediumDatetime }}</td>
           <td>{{ sleepRecord.rating }}</td>
-          <td>
-            <div *ngIf="sleepRecord.userProfile">
-              <a [routerLink]="['/user-profile', sleepRecord.userProfile.id, 'view']">{{ sleepRecord.userProfile.id }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/sleep-record', sleepRecord.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">View</span>
-              </button>
-
-              <button
-                type="submit"
-                [routerLink]="['/sleep-record', sleepRecord.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Edit</span>
-              </button>
-
-              <button type="submit" (click)="delete(sleepRecord)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Delete</span>
-              </button>
-            </div>
-          </td>
         </tr>
       </tbody>
     </table>

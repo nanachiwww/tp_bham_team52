@@ -16,8 +16,8 @@
     </section>
 
     <section class="stress-level">
-      <h2>Stress Level</h2>
-      <p>What is your stress level now?</p>
+      <h2 class="standard-text">Stress Level</h2>
+      <p class="standard-subtitle-text">What is your stress level now?</p>
       <input type="range" min="1" max="10" [(ngModel)]="currentStressLevel" />
       <button class="btn update" (click)="updateStressLevel()">Update</button>
       <canvas id="stressChart"></canvas>
@@ -31,7 +31,7 @@
     </section>
 
     <section class="mindfulness-tip">
-      <h2>Mindfulness Tips</h2>
+      <h2 class="standard-text">Mindfulness Tips</h2>
       <div *ngIf="selectedMindfulnessTip">
         <p>{{ selectedMindfulnessTip }}</p>
       </div>
