@@ -1,13 +1,13 @@
 <div>
   <h2 id="page-heading" data-cy="MoodTrackerHeading">
-    <span class="standard-text">Mental Health</span>
+    <span class="standard-text">How are you feeling today?</span>
   </h2>
   <div class="dashboard-container">
     <section class="mood-patterns">
       <h2 class="standard-text">Mood Patterns</h2>
-      <p class="standard-subtitle-text">How are you feeling today?</p>
+      <p class="standard-subtitle-text">What's your mood like today?</p>
       <div class="mood-buttons">
-        <button class="moods" *ngFor="let mood of moods" (click)="recordMood(mood.mood)">
+        <button class="btn btn-outline-secondary" *ngFor="let mood of moods" (click)="recordMood(mood.mood)">
           {{ mood.emoji }}
         </button>
       </div>
@@ -19,28 +19,30 @@
       <h2 class="standard-text">Stress Level</h2>
       <p class="standard-subtitle-text">What is your stress level now?</p>
       <input type="range" min="1" max="10" [(ngModel)]="currentStressLevel" />
-      <button class="update" (click)="updateStressLevel()">Update</button>
+      <button class="btn update" (click)="updateStressLevel()">Update</button>
       <canvas id="stressChart"></canvas>
     </section>
 
     <section class="mindfulness-practice-navigation">
       <h2 class="standard-text">Mindfulness Practice</h2>
       <p class="standard-subtitle-text">Choose a mindfulness practice:</p>
-      <button class="mindfulness-button" (click)="navigateToMindfulness('MEDITATION')">Meditation</button>
-      <button class="mindfulness-button" (click)="navigateToMindfulness('BREATHING_EXERCISES')">Breathing Exercises</button>
+      <button class="btn btn-outline-secondary" (click)="navigateToMindfulness('MEDITATION')">Meditation</button>
+      <button class="btn btn-outline-secondary" (click)="navigateToMindfulness('BREATHING_EXERCISES')">Breathing Exercises</button>
     </section>
 
     <section class="mindfulness-tip">
       <h2 class="standard-text">Mindfulness Tips</h2>
       <div *ngIf="selectedMindfulnessTip">
-        <p>{{ ' ' + selectedMindfulnessTip }}</p>
+        <p class="standard-subtitle-text">{{ selectedMindfulnessTip }}</p>
       </div>
-      <button class="get" (click)="pickRandomTip()">Get Another Tip</button>
+      <button class="btn mindfulness-button" (click)="pickRandomTip()">Get Another Tip</button>
     </section>
   </div>
 
   <section class="d-flex justify-content-center">
-    <button type="button" class="btn-outline-secondary" routerLink="/custom-goal">Track Goals <i class="fa fa-arrow-right"></i></button>
+    <button type="button" class="btn btn-outline-secondary next-page-btn" routerLink="/custom-goal">
+      Track Goals <i class="fa fa-arrow-right"></i>
+    </button>
   </section>
 
   <!--
