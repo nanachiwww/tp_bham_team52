@@ -25,11 +25,11 @@ export class EnergyIntakeResultUpdateComponent implements OnInit {
   constructor(
     protected energyIntakeResultService: EnergyIntakeResultService,
     protected energyIntakeResultFormService: EnergyIntakeResultFormService,
-    protected userProfileService: UserProfileService,
+    // protected userProfileService: UserProfileService,
     protected activatedRoute: ActivatedRoute
   ) {}
 
-  compareUserProfile = (o1: IUserProfile | null, o2: IUserProfile | null): boolean => this.userProfileService.compareUserProfile(o1, o2);
+  // compareUserProfile = (o1: IUserProfile | null, o2: IUserProfile | null): boolean => this.userProfileService.compareUserProfile(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ energyIntakeResult }) => {
@@ -38,7 +38,7 @@ export class EnergyIntakeResultUpdateComponent implements OnInit {
         this.updateForm(energyIntakeResult);
       }
 
-      this.loadRelationshipsOptions();
+      // this.loadRelationshipsOptions();
     });
   }
 
@@ -79,21 +79,21 @@ export class EnergyIntakeResultUpdateComponent implements OnInit {
     this.energyIntakeResult = energyIntakeResult;
     this.energyIntakeResultFormService.resetForm(this.editForm, energyIntakeResult);
 
-    this.userProfilesSharedCollection = this.userProfileService.addUserProfileToCollectionIfMissing<IUserProfile>(
-      this.userProfilesSharedCollection,
-      energyIntakeResult.userProfile
-    );
+    // this.userProfilesSharedCollection = this.userProfileService.addUserProfileToCollectionIfMissing<IUserProfile>(
+    //   this.userProfilesSharedCollection,
+    //   energyIntakeResult.userProfile
+    // );
   }
 
-  protected loadRelationshipsOptions(): void {
-    this.userProfileService
-      .query()
-      .pipe(map((res: HttpResponse<IUserProfile[]>) => res.body ?? []))
-      .pipe(
-        map((userProfiles: IUserProfile[]) =>
-          this.userProfileService.addUserProfileToCollectionIfMissing<IUserProfile>(userProfiles, this.energyIntakeResult?.userProfile)
-        )
-      )
-      .subscribe((userProfiles: IUserProfile[]) => (this.userProfilesSharedCollection = userProfiles));
-  }
+  //   protected loadRelationshipsOptions(): void {
+  //     this.userProfileService
+  //       .query()
+  //       .pipe(map((res: HttpResponse<IUserProfile[]>) => res.body ?? []))
+  //       .pipe(
+  //         map((userProfiles: IUserProfile[]) =>
+  //           this.userProfileService.addUserProfileToCollectionIfMissing<IUserProfile>(userProfiles, this.energyIntakeResult?.userProfile)
+  //         )
+  //       )
+  //       .subscribe((userProfiles: IUserProfile[]) => (this.userProfilesSharedCollection = userProfiles));
+  //   }
 }

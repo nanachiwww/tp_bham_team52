@@ -14,15 +14,15 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type EnergyIntakeResultFormGroupInput = IEnergyIntakeResult | PartialWithRequiredKeyOf<NewEnergyIntakeResult>;
 
-type EnergyIntakeResultFormDefaults = Pick<NewEnergyIntakeResult, 'id' | 'goalComplete' | 'items'>;
+type EnergyIntakeResultFormDefaults = Pick<NewEnergyIntakeResult, 'id' | 'lunch' | 'breakfirst' | 'dinner' | 'createTime'>;
 
 type EnergyIntakeResultFormGroupContent = {
   id: FormControl<IEnergyIntakeResult['id'] | NewEnergyIntakeResult['id']>;
-  goalComplete: FormControl<IEnergyIntakeResult['goalComplete']>;
-  details: FormControl<IEnergyIntakeResult['details']>;
-  date: FormControl<IEnergyIntakeResult['date']>;
-  userProfile: FormControl<IEnergyIntakeResult['userProfile']>;
-  items: FormControl<IEnergyIntakeResult['items']>;
+  lunch: FormControl<IEnergyIntakeResult['lunch']>;
+  breakfirst: FormControl<IEnergyIntakeResult['breakfirst']>;
+  createTime: FormControl<IEnergyIntakeResult['createTime']>;
+  dinner: FormControl<IEnergyIntakeResult['dinner']>;
+  // items: FormControl<IEnergyIntakeResult['items']>;
 };
 
 export type EnergyIntakeResultFormGroup = FormGroup<EnergyIntakeResultFormGroupContent>;
@@ -42,13 +42,17 @@ export class EnergyIntakeResultFormService {
           validators: [Validators.required],
         }
       ),
-      goalComplete: new FormControl(energyIntakeResultRawValue.goalComplete),
-      details: new FormControl(energyIntakeResultRawValue.details),
-      date: new FormControl(energyIntakeResultRawValue.date, {
-        validators: [Validators.required],
-      }),
-      userProfile: new FormControl(energyIntakeResultRawValue.userProfile),
-      items: new FormControl(energyIntakeResultRawValue.items ?? []),
+      lunch: new FormControl(energyIntakeResultRawValue.lunch),
+      breakfirst: new FormControl(energyIntakeResultRawValue.breakfirst),
+      dinner: new FormControl(energyIntakeResultRawValue.dinner),
+      createTime: new FormControl(energyIntakeResultRawValue.createTime),
+      // goalComplete: new FormControl(energyIntakeResultRawValue.goalComplete),
+      // details: new FormControl(energyIntakeResultRawValue.details),
+      // date: new FormControl(energyIntakeResultRawValue.date, {
+      //   validators: [Validators.required],
+      // }),
+      // userProfile: new FormControl(energyIntakeResultRawValue.userProfile),
+      // items: new FormControl(energyIntakeResultRawValue.items ?? []),
     });
   }
 
@@ -69,8 +73,10 @@ export class EnergyIntakeResultFormService {
   private getFormDefaults(): EnergyIntakeResultFormDefaults {
     return {
       id: null,
-      goalComplete: false,
-      items: [],
+      lunch: '',
+      breakfirst: '',
+      dinner: '',
+      createTime: null,
     };
   }
 }

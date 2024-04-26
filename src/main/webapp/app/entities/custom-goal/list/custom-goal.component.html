@@ -1,42 +1,44 @@
 <h2 class="container text-center">Setting your goal(s)!</h2>
 <div class="d-flex justify-content-around">
-  <div class="category">
-    <button
-      id="jh-create-entity-sleeping-time"
-      data-cy="entityCreateButton"
-      (click)="updateSelectedValue('Value1')"
-      [routerLink]="['/custom-goal/new']"
-    >
-      Sleep time
-    </button>
-    <button
-      id="jh-create-entity-calorie-intake"
-      data-cy="entityCreateButton"
-      (click)="updateSelectedValue('Value2')"
-      [routerLink]="['/custom-goal/new']"
-    >
-      Calorie intake goal for a day
-    </button>
-    <button
-      id="jh-create-entity-mood"
-      data-cy="entityCreateButton"
-      (click)="updateSelectedValue('Value3')"
-      [routerLink]="['/custom-goal/new']"
-    >
-      Today's mood
-    </button>
-    <button
-      id="jh-create-entity-custom-goal"
-      data-cy="entityCreateButton"
-      (click)="updateSelectedValue('Value4')"
-      [routerLink]="['/custom-goal/new']"
-    >
-      Custom goal
-    </button>
+  <div class="custom-goal">
+    <div class="category">
+      <button
+        id="jh-create-entity-sleeping-time"
+        data-cy="entityCreateButton"
+        (click)="updateSelectedValue('Value1')"
+        [routerLink]="['/custom-goal/new']"
+      >
+        Sleep time
+      </button>
+      <button
+        id="jh-create-entity-calorie-intake"
+        data-cy="entityCreateButton"
+        (click)="updateSelectedValue('Value2')"
+        [routerLink]="['/custom-goal/new']"
+      >
+        Calorie intake goal for a day
+      </button>
+      <button
+        id="jh-create-entity-mood"
+        data-cy="entityCreateButton"
+        (click)="updateSelectedValue('Value3')"
+        [routerLink]="['/custom-goal/new']"
+      >
+        Today's mood
+      </button>
+      <button
+        id="jh-create-entity-custom-goal"
+        data-cy="entityCreateButton"
+        (click)="updateSelectedValue('Value4')"
+        [routerLink]="['/custom-goal/new']"
+      >
+        Custom goal
+      </button>
+    </div>
   </div>
 </div>
-
-<div>
+<br />
+<div class="custom-goal2">
   <h2>Sleeping goal(s)</h2>
   <h2 id="page-heading" data-cy="CustomGoalHeading">
     <div class="d-flex justify-content-end">
@@ -49,7 +51,6 @@
 
   <jhi-alert-error></jhi-alert-error>
 
-  <jhi-alert></jhi-alert>
   <div class="alert alert-warning" id="no-result" *ngIf="customGoals?.length === 0">
     <span>No Custom Goals found</span>
   </div>
@@ -82,7 +83,6 @@
   </h2>
   <jhi-alert-error></jhi-alert-error>
 
-  <jhi-alert></jhi-alert>
   <div class="alert alert-warning" id="no-result2" *ngIf="customGoals?.length === 0">
     <span>No Custom Goals found</span>
   </div>
@@ -115,7 +115,6 @@
   </h2>
   <jhi-alert-error></jhi-alert-error>
 
-  <jhi-alert></jhi-alert>
   <div class="alert alert-warning" id="no-result3" *ngIf="customGoals?.length === 0">
     <span>No Custom Goals found</span>
   </div>
@@ -148,7 +147,6 @@
   </h2>
   <jhi-alert-error></jhi-alert-error>
 
-  <jhi-alert></jhi-alert>
   <div class="alert alert-warning" id="no-result4" *ngIf="customGoals?.length === 0">
     <span>No Custom Goals found</span>
   </div>

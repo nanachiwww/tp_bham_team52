@@ -16,6 +16,7 @@ import { IMoodTracker } from '../../mood-tracker/mood-tracker.model';
 @Component({
   selector: 'jhi-custom-goal-update',
   templateUrl: './custom-goal-update.component.html',
+  styleUrls: ['./custom-goal-update.component.scss'],
 })
 export class CustomGoalUpdateComponent implements OnInit {
   isSaving = false;

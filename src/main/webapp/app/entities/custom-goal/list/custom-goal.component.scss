@@ -29,8 +29,20 @@
   background-color: red;
   color: white;
 }
+.custom-goal {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  padding: 16px;
+
+  width: 2000px;
+}
 .card-body {
   text-align: center;
+}
+.custom-goal2 {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  padding: 16px;
 }
 
 /*.goal-container {
