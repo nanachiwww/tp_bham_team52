@@ -200,7 +200,7 @@ jhipster:
     license: unlicensed
     license-url:
   security:
-    content-security-policy: "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com data:"
+    content-security-policy: "frame-ancestors 'self';block-all-mixed-content;script-src 'self' 'report-sample' 'unsafe-inline' https://m.youtube.com https://www.youtube.com;style-src 'self' 'report-sample' 'unsafe-inline' fonts.googleapis.com;object-src 'none';child-src 'self' www.youtube.com;base-uri 'self';form-action 'self';worker-src 'self';"
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
@@ -211,3 +211,4 @@ jhipster:
 # ===================================================================
 
 # application:
+
