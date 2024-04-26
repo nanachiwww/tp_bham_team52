@@ -1,11 +1,11 @@
 <div>
   <h2 id="page-heading" data-cy="MoodTrackerHeading">
-    <span class="title">How are you feeling today?</span>
+    <span class="standard-text">How are you feeling today?</span>
   </h2>
   <div class="dashboard-container">
     <section class="mood-patterns">
-      <h2>Mood Patterns</h2>
-      <p>What's your mood like today?</p>
+      <h2 class="standard-text">Mood Patterns</h2>
+      <p class="standard-subtitle-text">What's your mood like today?</p>
       <div class="mood-buttons">
         <button class="btn btn-outline-secondary" *ngFor="let mood of moods" (click)="recordMood(mood.mood)">
           {{ mood.emoji }}
@@ -24,8 +24,8 @@
     </section>
 
     <section class="mindfulness-practice-navigation">
-      <h2>Mindfulness Practice</h2>
-      <p>Choose a mindfulness practice:</p>
+      <h2 class="standard-text">Mindfulness Practice</h2>
+      <p class="standard-subtitle-text">Choose a mindfulness practice:</p>
       <button class="btn btn-outline-secondary" (click)="navigateToMindfulness('MEDITATION')">Meditation</button>
       <button class="btn btn-outline-secondary" (click)="navigateToMindfulness('BREATHING_EXERCISES')">Breathing Exercises</button>
     </section>
@@ -33,7 +33,7 @@
     <section class="mindfulness-tip">
       <h2 class="standard-text">Mindfulness Tips</h2>
       <div *ngIf="selectedMindfulnessTip">
-        <p>{{ selectedMindfulnessTip }}</p>
+        <p class="standard-subtitle-text">{{ selectedMindfulnessTip }}</p>
       </div>
       <button class="btn mindfulness-button" (click)="pickRandomTip()">Get Another Tip</button>
     </section>
