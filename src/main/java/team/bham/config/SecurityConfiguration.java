@@ -62,7 +62,7 @@ public class SecurityConfiguration {
             .headers()
                 .contentSecurityPolicy(jHipsterProperties.getSecurity().getContentSecurityPolicy())
             .and()
-                .contentSecurityPolicy("frame-ancestors 'self';block-all-mixed-content;script-src 'self' 'report-sample' 'unsafe-inline' https://m.youtube.com https://www.youtube.com;style-src 'self' 'report-sample' 'unsafe-inline' fonts.googleapis.com;object-src 'none';child-src 'self' www.youtube.com;base-uri 'self';form-action 'self';worker-src 'self';")
+                .contentSecurityPolicy("default-src 'self'; frame-src 'self' https://www.youtube.com; script-src 'self'; style-src 'self' 'unsafe-inline';")
             .and()
                 .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
             .and()
