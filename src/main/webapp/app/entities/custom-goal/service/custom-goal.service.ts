@@ -22,6 +22,10 @@ export class CustomGoalService {
     return this.http.post<ICustomGoal>(this.resourceUrl, customGoal, { observe: 'response' });
   }
 
+  createCustomGoal(customGoal: ICustomGoal, category: string): Observable<HttpResponse<ICustomGoal>> {
+    return this.http.post<ICustomGoal>(`${this.resourceUrl}/${category}`, customGoal, { observe: 'response' });
+  }
+
   update(customGoal: ICustomGoal): Observable<EntityResponseType> {
     return this.http.put<ICustomGoal>(`${this.resourceUrl}/${this.getCustomGoalIdentifier(customGoal)}`, customGoal, {
       observe: 'response',

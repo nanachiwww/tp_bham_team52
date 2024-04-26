@@ -4,7 +4,7 @@ export interface ICustomGoal {
   id: number;
   name?: string | null;
   description?: string | null;
-
+  type?: string | null;
   userProfile?: Pick<IUserProfile, 'id'> | null;
 }
 

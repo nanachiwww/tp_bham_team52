@@ -181,4 +181,19 @@ public class CustomGoalResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @PostMapping("/custom-goals/{category}")
+    public ResponseEntity<CustomGoal> createCustomGoalInCategory(@PathVariable String category, @Valid @RequestBody CustomGoal customGoal)
+        throws URISyntaxException {
+        log.debug("REST request to save CustomGoal in category {}: {}", category, customGoal);
+        if (customGoal.getId() != null) {
+            throw new BadRequestAlertException("A new customGoal cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+
+        CustomGoal result = customGoalRepository.save(customGoal);
+        return ResponseEntity
+            .created(new URI("/api/custom-goals/" + category + "/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
 }

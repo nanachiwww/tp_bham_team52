@@ -38,6 +38,7 @@ export class CustomGoalUpdateComponent implements OnInit {
   ) {}
 
   getSelectedValue(): string {
+    console.log(this.sharedDataService.getSelectedValue(), '测试');
     return this.sharedDataService.getSelectedValue();
   }
 
@@ -61,7 +62,16 @@ export class CustomGoalUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const customGoal = this.customGoalFormService.getCustomGoal(this.editForm);
-
+    const selectedValue = this.sharedDataService.getSelectedValue();
+    if (selectedValue === 'Value1') {
+      customGoal.type = '1';
+    } else if (selectedValue === 'Value2') {
+      customGoal.type = '2';
+    } else if (selectedValue === 'Value3') {
+      customGoal.type = '3';
+    } else if (selectedValue === 'Value4') {
+      customGoal.type = '4';
+    }
     if (customGoal.id !== null) {
       this.subscribeToSaveResponse(this.customGoalService.update(customGoal));
     } else {
@@ -72,7 +82,7 @@ export class CustomGoalUpdateComponent implements OnInit {
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ICustomGoal>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: response => {
-        const customGoal = response.body;
+        let customGoal = response.body;
         const selectedValue = this.sharedDataService.getSelectedValue();
         if (selectedValue === 'Value1') {
           this.differentgoalsService.customGoalsValue1.push(<ICustomGoal>customGoal);
@@ -106,7 +116,7 @@ export class CustomGoalUpdateComponent implements OnInit {
   protected updateForm(customGoal: ICustomGoal): void {
     this.customGoal = customGoal;
     this.customGoalFormService.resetForm(this.editForm, customGoal);
-    this.editForm.controls['name'].setValue('Sleeping Goal');
+    // this.editForm.controls['name'].setValue('Sleeping Goal');
     this.userProfilesSharedCollection = this.userProfileService.addUserProfileToCollectionIfMissing<IUserProfile>(
       this.userProfilesSharedCollection,
       customGoal.userProfile
