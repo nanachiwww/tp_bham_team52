@@ -1,11 +1,8 @@
-<div class="page">
+<div class="page" style="justify-content: center">
   <h2 id="page-heading" data-cy="DashboardHeading">
     <div class="dashboard-container">
       <div class="metric sleep-data">
-        <h2>Sleep Data</h2>
-        <p>Total Hours: {{ userMetrics.sleepData.totalHours }}</p>
-        <p>Sleep Quality: {{ userMetrics.sleepData.sleepQuality }}</p>
-        <canvas id="sleep-chart"></canvas>
+        <h2>Sleep Tracker</h2>
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/sleep-record">
             Track Sleep <i class="fa fa-arrow-right"></i>
@@ -13,10 +10,7 @@
         </div>
       </div>
       <div class="metric dietary-data">
-        <h2>Dietary Data</h2>
-        <p>Calories Consumed: {{ userMetrics.dietaryData.caloriesConsumed }}</p>
-        <p>Calories Goal: {{ userMetrics.dietaryData.caloriesGoal }}</p>
-        <canvas id="calorie-chart"></canvas>
+        <h2>Dietary Tracker</h2>
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/energy-intake-result">
             Track Diet <i class="fa fa-arrow-right"></i>
@@ -24,9 +18,7 @@
         </div>
       </div>
       <div class="metric workout-data">
-        <h2>Workout Data</h2>
-        <p>Activities Completed: {{ userMetrics.workoutData.activitiesCompleted }}</p>
-        <p>Goal Activities: {{ userMetrics.workoutData.goalActivities }}</p>
+        <h2>Workout Tracker</h2>
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/workout">
             Track Workouts <i class="fa fa-arrow-right"></i>
@@ -34,10 +26,7 @@
         </div>
       </div>
       <div class="metric mental-health-data">
-        <h2>Mental Health Data</h2>
-        <p>Mood: {{ userMetrics.mentalHealthData.mood }}</p>
-        <p>Stress Level: {{ userMetrics.mentalHealthData.stressLevel }}</p>
-        <canvas id="mood-chart"></canvas>
+        <h2>Mental Health Tracker</h2>
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/mood-tracker">
             Track Mood <i class="fa fa-arrow-right"></i>
@@ -45,9 +34,7 @@
         </div>
       </div>
       <div class="metric goal-tracking-data">
-        <h2>Goal Tracking</h2>
-        <p>Goals Set: {{ userMetrics.goalTrackingData.goalsSet }}</p>
-        <p>Goals Achieved: {{ userMetrics.goalTrackingData.goalsAchieved }}</p>
+        <h2>Goal Tracker</h2>
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/custom-goal">
             Track Goals <i class="fa fa-arrow-right"></i>
@@ -55,8 +42,7 @@
         </div>
       </div>
       <div class="metric medication-data">
-        <h2>Medication</h2>
-        <p>Supplements Taken Today: {{ userMetrics.medicationData.supplementsTaken }}</p>
+        <h2>Medication Tracker</h2>
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-outline-secondary dashboard-btn" routerLink="/medicine">
             Track Supplements<i class="fa fa-arrow-right"></i>
